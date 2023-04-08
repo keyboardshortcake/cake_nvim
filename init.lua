@@ -10,6 +10,7 @@ require("plugins.project")
 require("plugins.undotree")
 require("plugins.lsp")
 require("plugins.illuminate")
+require("plugins.neo-tree")
 -- require("plugins.nvim-tree")
 
 
