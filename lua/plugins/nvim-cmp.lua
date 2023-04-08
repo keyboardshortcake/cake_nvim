@@ -15,6 +15,8 @@ local t = function(str)
     return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
 
+setfenv
+
 local cmp = require('cmp')
 cmp.setup {
     -- snippet = {
@@ -39,13 +41,13 @@ cmp.setup {
                     fallback()
                 end
             end,
-            s = function(fallback)
-                if vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
-                    vim.api.nvim_feedkeys(t("<Plug>(ultisnips_jump_forward)"), 'm', true)
-                else
-                    fallback()
-                end
-            end
+            -- s = function(fallback)
+            --     if vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
+            --         vim.api.nvim_feedkeys(t("<Plug>(ultisnips_jump_forward)"), 'm', true)
+            --     else
+            --         fallback()
+            --     end
+            -- end
         }),
         ["<S-Tab>"] = cmp.mapping({
             c = function()
@@ -64,13 +66,13 @@ cmp.setup {
                     fallback()
                 end
             end,
-            s = function(fallback)
-                if vim.fn["UltiSnips#CanJumpBackwards"]() == 1 then
-                    return vim.api.nvim_feedkeys( t("<Plug>(ultisnips_jump_backward)"), 'm', true)
-                else
-                    fallback()
-                end
-            end
+            -- s = function(fallback)
+            --     if vim.fn["UltiSnips#CanJumpBackwards"]() == 1 then
+            --         return vim.api.nvim_feedkeys( t("<Plug>(ultisnips_jump_backward)"), 'm', true)
+            --     else
+            --         fallback()
+            --     end
+            -- end
         }),
         ['<Down>'] = cmp.mapping(cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }), {'i'}),
         ['<Up>'] = cmp.mapping(cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }), {'i'}),
