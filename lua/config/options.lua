@@ -42,3 +42,4 @@ vim.opt.iskeyword:append("-,_")                   -- treats words with `-`, or `
 vim.opt.formatoptions:remove({ "c", "r", "o" }) -- This is a sequence of letters which describes how automatic formatting is to be done
 vim.opt.linebreak = true
 vim.opt.relativenumber = true
+vim.opt.modifiable = true                   -- trying to fix this huge error that pops up everytime i install a plugin

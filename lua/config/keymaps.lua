@@ -90,3 +90,6 @@ keymap("n", "<leader>fc", ":Telescope advanced_git_search search_log_content_fil
 
 -- Open lazygit
 keymap("n", "<leader>gg", "<cmd>:LazyGit<cr>", opts)
+
+-- toggle gitblame
+keymap("n", "<leader>GB", "<cmd>:GitBlameToggle<cr>", opts)

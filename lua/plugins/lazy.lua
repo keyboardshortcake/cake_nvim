@@ -120,6 +120,12 @@ require("lazy").setup({
     'sam4llis/nvim-lua-gf'
   },
   {
+    "tpope/vim-fugitive"
+  },
+  {
+    "tpope/vim-rhubarb"
+  },
+  {
     {
       "aaronhallaert/advanced-git-search.nvim",
       config = function()
@@ -177,6 +183,9 @@ require("lazy").setup({
   },
   {
     'mbbill/undotree'
+  },
+  {
+    "f-person/git-blame.nvim"
   },
   -- {
   --   'VonHeikemen/lsp-zero.nvim',
