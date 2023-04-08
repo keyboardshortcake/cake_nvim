@@ -86,7 +86,7 @@ keymap("v", ">", ">gv", opts)
 
 -- To search git commits! But ... I think there's another option called
 -- search_log_content_files, not sure what the difference is yet
-keymap("n", "<leader>fc", ":Telescope advanced_git_search search_log_content<cr>", opts)
+keymap("n", "<leader>fc", ":Telescope advanced_git_search search_log_content_file<cr>", opts)
 
 -- Open lazygit
 keymap("n", "<leader>gg", "<cmd>:LazyGit<cr>", opts)
