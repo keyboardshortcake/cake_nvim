@@ -152,6 +152,18 @@ require("lazy").setup({
     'MunifTanjim/nui.nvim'
   },
   {
+    "glepnir/lspsaga.nvim", -- not sure what this does, is it a sidebar thing for outlining the file?
+    event = "LspAttach",
+    config = function()
+      require("lspsaga").setup({})
+    end,
+    dependencies = {
+      {"nvim-tree/nvim-web-devicons"},
+      --Please make sure you install markdown and markdown_inline parser
+      {"nvim-treesitter/nvim-treesitter"}
+    }
+  },
+  {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v2.x",
     requires = {
