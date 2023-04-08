@@ -18,7 +18,7 @@ require("lazy").setup({
 	{
 		'nvim-telescope/telescope.nvim', tag = '0.1.1',
 		-- or                              , branch = '0.1.1',
-		dependencies = { 
+		dependencies = {
       'nvim-lua/plenary.nvim'
     },
 --     config = function()
@@ -86,7 +86,7 @@ require("lazy").setup({
     end
   },
   {
-    'akinsho/bufferline.nvim', 
+    'akinsho/bufferline.nvim',
     version = "v3.*",
     dependencies = 'nvim-tree/nvim-web-devicons'
   },
@@ -119,14 +119,14 @@ require("lazy").setup({
   {
     'sam4llis/nvim-lua-gf'
   },
-  { 
+  {
     {
       "aaronhallaert/advanced-git-search.nvim",
       config = function()
         require("telescope").load_extension("advanced_git_search")
       end,
       requires = {
-        "nvim-telescope/telescope.nvim",   
+        "nvim-telescope/telescope.nvim",
         -- to show diff splits and open commits in browser
         "tpope/vim-fugitive",
       },
@@ -148,7 +148,7 @@ require("lazy").setup({
   {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v2.x",
-    requires = { 
+    requires = {
       "nvim-lua/plenary.nvim",
       "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
       "MunifTanjim/nui.nvim",
