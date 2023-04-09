@@ -1,5 +1,5 @@
 -- plugins
-require("plugins.lazy") -- this is the plugin to install all the others
+require("plugins.lazy")
 require("plugins.telescope")
 require("plugins.trouble")
 require("plugins.bufferline")
@@ -12,9 +12,8 @@ require("plugins.lsp")
 require("plugins.illuminate")
 require("plugins.neo-tree")
 require("plugins.nvim-cmp")
--- require("plugins.lspsaga")
+require("plugins.lspsaga")
 -- require("plugins.nvim-tree")
-
 
 -- configs
 require("config.options")
