@@ -236,6 +236,9 @@ require("lazy").setup({
   --   }
   -- },
   {
+    "SirVer/ultisnips"
+  },
+  {
 	  'VonHeikemen/lsp-zero.nvim',
 	  -- branch = 'v1.x',
     branch = 'v2.x',
