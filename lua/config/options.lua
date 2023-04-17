@@ -44,3 +44,4 @@ vim.opt.formatoptions:remove({ "c", "r", "o" }) -- This is a sequence of letters
 vim.opt.linebreak = true
 vim.opt.relativenumber = true
 vim.opt.modifiable = true                   -- trying to fix this huge error that pops up everytime i install a plugin
+-- vim.opt.completeopt = {'menu', 'menuone', 'noselect'} -- for nvim-cmp? per https://vonheikemen.github.io/devlog/tools/setup-nvim-lspconfig-plus-nvim-cmp/

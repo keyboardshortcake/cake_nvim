@@ -12,6 +12,7 @@ require("plugins.lsp")
 require("plugins.illuminate")
 require("plugins.neo-tree")
 require("plugins.nvim-cmp")
+-- require("plugins.nvim-cmp2")
 require("plugins.lspsaga")
 -- require("plugins.nvim-tree")
 

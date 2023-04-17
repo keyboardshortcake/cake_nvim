@@ -235,22 +235,9 @@ require("lazy").setup({
   --     {'L3MON4D3/LuaSnip'},     -- Required
   --   }
   -- },
-  {
-    "honza/vim-snippets"
-  },
-  {
-    "SirVer/ultisnips",
-    -- 'SirVer/ultisnips',
-    requires = {{'honza/vim-snippets', rtp = '.'}},
-    -- config = function()
-    --   vim.g.UltiSnipsExpandTrigger = '<Plug>(ultisnips_expand)'
-    --   vim.g.UltiSnipsJumpForwardTrigger = '<Plug>(ultisnips_jump_forward)'
-    --   vim.g.UltiSnipsJumpBackwardTrigger = '<Plug>(ultisnips_jump_backward)'
-    --   vim.g.UltiSnipsListSnippets = '<c-x><c-s>'
-    --   vim.g.UltiSnipsRemoveSelectModeMappings = 0
-    --   require('nvim-cmp').setup()
-    -- end,
-  },
+  -- {
+  --   "SirVer/ultisnips"
+  -- },
   {
 	  'VonHeikemen/lsp-zero.nvim',
 	  -- branch = 'v1.x',

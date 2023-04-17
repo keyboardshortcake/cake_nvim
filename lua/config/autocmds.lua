@@ -57,3 +57,7 @@ vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
     end
   end,
 })
+
+
+-- force shift tab to act right
+-- vim.api.nvim_set_keymap('i', '<S-Tab>', '<C-d>', { noremap = true, silent = true })
