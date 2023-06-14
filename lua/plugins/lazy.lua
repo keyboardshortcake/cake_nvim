@@ -17,7 +17,7 @@ require("lazy").setup({
 	-- init.lua:
 	{
 		'nvim-telescope/telescope.nvim', tag = '0.1.1',
-		-- or                              , branch = '0.1.1',
+		-- or                              , branch = '0.1.1',plug
 		dependencies = {
       'nvim-lua/plenary.nvim'
     },
@@ -145,9 +145,9 @@ require("lazy").setup({
     "windwp/nvim-autopairs",
     config = function() require("nvim-autopairs").setup {} end
   },
-  {
-    'RRethy/vim-illuminate'
-  },
+  -- {
+  --   'RRethy/vim-illuminate'
+  -- },
   {
     'MunifTanjim/nui.nvim'
   },

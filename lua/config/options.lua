@@ -42,6 +42,26 @@ vim.opt.whichwrap:append("<,>,[,],h,l")         -- keys allowed to move to the p
 vim.opt.iskeyword:append("-,_")                   -- treats words with `-`, or `_` as single words
 vim.opt.formatoptions:remove({ "c", "r", "o" }) -- This is a sequence of letters which describes how automatic formatting is to be done
 vim.opt.linebreak = true
-vim.opt.relativenumber = true
+-- vim.opt.relativenumber = true
 vim.opt.modifiable = true                   -- trying to fix this huge error that pops up everytime i install a plugin
+vim.opt.mousemodel= "extend"
+
 -- vim.opt.completeopt = {'menu', 'menuone', 'noselect'} -- for nvim-cmp? per https://vonheikemen.github.io/devlog/tools/setup-nvim-lspconfig-plus-nvim-cmp/
+-- 						*default-mouse* *disable-mouse*
+-- By default the mouse is enabled, and <RightMouse> opens a |popup-menu| with
+-- standard actions ("Cut", "Copy", "Paste", …). Mouse is NOT enabled in
+-- |command-mode| or the |more-prompt|, so you can temporarily disable it just by
+-- typing ":".
+--
+-- If you don't like this you can disable the mouse in your |config| using any of
+-- the following:
+-- - Disable mouse completely by unsetting the 'mouse' option: >
+--   set mouse=
+-- - Pressing <RightMouse> extends selection instead of showing popup-menu: >
+--   set mousemodel=extend
+-- - Pressing <A-LeftMouse> releases mouse until the cursor moves:  >
+--   nnoremap <A-LeftMouse> <Cmd>
+--     \ set mouse=<Bar>
+--     \ echo 'mouse OFF until next cursor-move'<Bar>
+--     \ autocmd CursorMoved * ++once set mouse&<Bar>
+--     \ echo 'mouse ON'<CR>
