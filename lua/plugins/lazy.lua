@@ -27,6 +27,7 @@ require("lazy").setup({
 	},
   {'ryanoasis/vim-devicons'},
   {'nvim-tree/nvim-web-devicons'},
+  {'fcpg/vim-osc52'},
 	{
 		'nvim-treesitter/nvim-treesitter',
 		run = ':TSUpdate'
