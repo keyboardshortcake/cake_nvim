@@ -27,7 +27,10 @@ require("lazy").setup({
 	},
   {'ryanoasis/vim-devicons'},
   {'nvim-tree/nvim-web-devicons'},
+  -- not working
   {'fcpg/vim-osc52'},
+  -- trying this clipboard instead
+  {'ojroques/vim-oscyank'},
 	{
 		'nvim-treesitter/nvim-treesitter',
 		run = ':TSUpdate'
