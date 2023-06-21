@@ -58,6 +58,22 @@ vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
   end,
 })
 
+-- vim.api.nvim_create_autocmd("TextYankPost", "*", [[
+--     if v:event.operator == 'y' and v:event.regname == '+' then
+--         vim.fn.execute('OSCYankRegister +')
+--     end
+-- ]])
+--
+vim.api.nvim_create_autocmd({ "TextYankPost"}, {
+  callback = function()
+    vim.cmd([[
+      if v:event.operator == 'y' and v:event.regname == '+' then
+          vim.fn.execute('OSCYankRegister +')
+      end
+    ]])
+  end,
+})
+
 
 -- force shift tab to act right
 -- vim.api.nvim_set_keymap('i', '<S-Tab>', '<C-d>', { noremap = true, silent = true })

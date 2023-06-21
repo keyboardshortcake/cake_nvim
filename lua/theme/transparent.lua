@@ -5,6 +5,22 @@ require("transparent").setup({
     'Conditional', 'Repeat', 'Operator', 'Structure', 'LineNr', 'NonText',
     'SignColumn', 'CursorLineNr', 'EndOfBuffer',
   },
-  extra_groups = {}, -- table: additional groups that should be cleared
+  extra_groups = {
+    "NvimTreeNormal",
+    "NormalFloat",
+    "NvimTreeNormalNC",
+    "NvimTreeWinSeparator",
+    "TelescopeNormal",
+    "TelescopeBorder",
+    "WhichKeyFloat",
+  }, -- table: additional groups that should be cleared
   exclude_groups = {}, -- table: groups you don't want to clear
 })
+
+
+vim.g.transparent_groups = vim.list_extend(
+  vim.g.transparent_groups or {},
+  vim.tbl_map(function(v)
+    return v.hl_group
+  end, vim.tbl_values(require('bufferline.config').highlights))
+)
