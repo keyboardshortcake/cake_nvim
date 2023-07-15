@@ -219,6 +219,9 @@ require("lazy").setup({
   {
     "f-person/git-blame.nvim"
   },
+  {
+    "roxma/vim-tmux-clipboard"
+  },
   -- {
   --   'VonHeikemen/lsp-zero.nvim',
   --   branch = 'v2.x',
