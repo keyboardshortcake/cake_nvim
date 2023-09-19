@@ -222,6 +222,15 @@ require("lazy").setup({
   {
     "roxma/vim-tmux-clipboard"
   },
+  {
+    'christoomey/vim-tmux-navigator',
+  },
+  -- { 
+  --   'dundalek/lazy-lsp.nvim', 
+  --   requires = { 
+  --     'neovim/nvim-lspconfig' 
+  --   } 
+  -- },
   -- {
   --   'VonHeikemen/lsp-zero.nvim',
   --   branch = 'v2.x',

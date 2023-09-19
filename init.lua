@@ -22,5 +22,6 @@ require("config.keymaps")
 
 -- themes
 require("theme.tokyonight") -- I like the tokyonight-night theme best (different from regular tokyonight)
+-- require("lazy-lsp").setup {}
 -- require("theme.transparent")
 -- require("theme.rose-pine")
