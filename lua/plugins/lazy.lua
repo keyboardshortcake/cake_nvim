@@ -89,6 +89,7 @@ require("lazy").setup({
     end
   },
   { 'rose-pine/neovim', name = 'rose-pine' },
+  { 'wincent/vim-clipper' },
   -- {
   --   "nvim-tree/nvim-tree.lua",
   --   version = "*",
