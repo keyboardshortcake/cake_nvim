@@ -184,3 +184,6 @@ keymap("n","<leader>o", "<cmd>Lspsaga outline<CR>")
 -- Floating terminal
 -- keymap({"n", "t"}, "<A-d>", "<cmd>Lspsaga term_toggle<CR>")
 --
+
+-- this is for oil.nvim
+vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })

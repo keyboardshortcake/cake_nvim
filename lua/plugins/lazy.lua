@@ -26,6 +26,38 @@ require("lazy").setup({
 --     end,
 	},
   {'ryanoasis/vim-devicons'},
+  {
+    'stevearc/oil.nvim',
+    opts = {},
+    -- Optional dependencies
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+  },
+  {
+    'nvim-orgmode/orgmode',
+    dependencies = {
+      { 'nvim-treesitter/nvim-treesitter', lazy = true },
+    },
+    event = 'VeryLazy',
+    config = function()
+      -- Load treesitter grammar for org
+      require('orgmode').setup_ts_grammar()
+
+      -- Setup treesitter
+      require('nvim-treesitter.configs').setup({
+        highlight = {
+          enable = true,
+          additional_vim_regex_highlighting = { 'org' },
+        },
+        ensure_installed = { 'org' },
+      })
+
+      -- Setup orgmode
+      require('orgmode').setup({
+        org_agenda_files = '~/orgfiles/**/*',
+        org_default_notes_file = '~/orgfiles/refile.org',
+      })
+    end,
+  },
   {'nvim-tree/nvim-web-devicons'},
   -- not working
   {'fcpg/vim-osc52'},
@@ -36,6 +68,26 @@ require("lazy").setup({
 		run = ':TSUpdate'
   },
   { 'folke/tokyonight.nvim' },
+  { 'rcarriga/nvim-notify' },
+  {
+    "amitds1997/remote-nvim.nvim",
+    version = "*", -- This keeps it pinned to semantic releases
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+      "rcarriga/nvim-notify",
+      -- This would be an optional dependency eventually
+      "nvim-telescope/telescope.nvim",
+    },
+    config = true, -- This calls the default setup(); make sure to call it
+  },
+  {
+    'chipsenkbeil/distant.nvim', 
+    branch = 'v0.3',
+    config = function()
+      require('distant'):setup()
+    end
+  },
   { 'rose-pine/neovim', name = 'rose-pine' },
   -- {
   --   "nvim-tree/nvim-tree.lua",

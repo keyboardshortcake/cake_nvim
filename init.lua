@@ -14,6 +14,7 @@ require("plugins.neo-tree")
 require("plugins.nvim-cmp")
 -- require("plugins.nvim-cmp2")
 require("plugins.lspsaga")
+require("plugins.oil")
 -- require("plugins.nvim-tree")
 
 -- configs
@@ -25,3 +26,4 @@ require("theme.tokyonight") -- I like the tokyonight-night theme best (different
 -- require("lazy-lsp").setup {}
 -- require("theme.transparent")
 -- require("theme.rose-pine")
+-- require("oil").setup()
