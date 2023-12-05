@@ -13,8 +13,7 @@ lsp.configure('lua_ls', {
 
 lsp.on_attach(function(client, bufnr)
   lsp.default_keymaps({
-    buffer = bufnr,
-    preserve_mappings = false
+    buffer = bufnr, preserve_mappings = false
   })
   -- lsp.default_keymaps({buffer = bufnr})
 end)
@@ -54,6 +53,23 @@ cmp.setup({
   }
 })
 
+-- this is to git rid of the inline error things if I set virtual_text to false
+-- testing from https://github.com/samhh/dotfiles/blob/99e67298fbcb61d7398ad1850f3c2df31d90bd0d/home/.config/nvim/plugin/lsp.lua#L120
+-- via https://www.reddit.com/r/neovim/comments/og1cdv/comment/hi3muw7/?utm_source=reddit&utm_medium=web2x&context=3
+local function setup_diags()
+  vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+    vim.lsp.diagnostic.on_publish_diagnostics,
+    {
+      virtual_text = true,
+      signs = true,
+      update_in_insert = false,
+      underline = true,
+    }
+  )
+end
+setup_diags()
+
+--
 
 
 

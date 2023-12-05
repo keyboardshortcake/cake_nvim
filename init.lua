@@ -15,6 +15,7 @@ require("plugins.nvim-cmp")
 -- require("plugins.nvim-cmp2")
 require("plugins.lspsaga")
 require("plugins.oil")
+require("plugins.org-bullets")
 -- require("plugins.nvim-tree")
 
 -- configs

@@ -26,6 +26,7 @@ require("lazy").setup({
 --     end,
 	},
   {'ryanoasis/vim-devicons'},
+  {'akinsho/org-bullets.nvim'},
   {
     'stevearc/oil.nvim',
     opts = {},
@@ -90,6 +91,7 @@ require("lazy").setup({
   },
   { 'rose-pine/neovim', name = 'rose-pine' },
   { 'wincent/vim-clipper' },
+  { 'mbbill/undotree' },
   -- {
   --   "nvim-tree/nvim-tree.lua",
   --   version = "*",

@@ -3,6 +3,10 @@ local keymap = vim.keymap.set
 -- Silent keymap option
 local opts = { silent = true }
 
+-- this lets me see my diagnostics errors/etc or "virtual_text" in a popup as well
+-- ref: https://www.reddit.com/r/neovim/comments/og1cdv/neovim_lsp_how_do_you_get_diagnostic_mesages_to/
+vim.api.nvim_set_keymap('n', '<space>y', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+
 --Remap space as leader key
 keymap("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
@@ -187,3 +191,6 @@ keymap("n","<leader>o", "<cmd>Lspsaga outline<CR>")
 
 -- this is for oil.nvim
 vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+
+-- 
+vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)

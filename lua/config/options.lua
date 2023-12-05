@@ -23,8 +23,8 @@ vim.opt.undofile = true                         -- enable persistent undo
 vim.opt.updatetime = 300                        -- faster completion (4000ms default)
 vim.opt.writebackup = false                     -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
 vim.opt.expandtab = true                        -- convert tabs to spaces
-vim.opt.shiftwidth = 2                          -- the number of spaces inserted for each indentation
-vim.opt.tabstop = 2                             -- insert 2 spaces for a tab
+vim.opt.shiftwidth = 4                          -- the number of spaces inserted for each indentation
+vim.opt.tabstop = 4                             -- insert 2 spaces for a tab
 vim.opt.cursorline = true                       -- highlight the current line
 vim.opt.number = true                           -- set numbered lines
 vim.opt.laststatus = 2                          -- only the last window will always have a status line
@@ -44,6 +44,7 @@ vim.opt.formatoptions:remove({ "c", "r", "o" }) -- This is a sequence of letters
 vim.opt.linebreak = true
 vim.opt.relativenumber = true
 vim.opt.modifiable = true                   -- trying to fix this huge error that pops up everytime i install a plugin
+vim.g.undotree_SetFocusWhenToggle = 1           -- focus undotree when i toggle it open
 -- vim.opt.mousemodel= "extend"                 -- This kills the right click menu
 
 -- vim.opt.completeopt = {'menu', 'menuone', 'noselect'} -- for nvim-cmp? per https://vonheikemen.github.io/devlog/tools/setup-nvim-lspconfig-plus-nvim-cmp/
