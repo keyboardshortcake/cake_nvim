@@ -89,6 +89,9 @@ require("lazy").setup({
       require('distant'):setup()
     end
   },
+  {
+      'maksimr/vim-jsbeautify',
+  },
   { 'rose-pine/neovim', name = 'rose-pine' },
   { 'wincent/vim-clipper' },
   { 'mbbill/undotree' },
