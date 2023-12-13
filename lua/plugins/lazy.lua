@@ -26,6 +26,7 @@ require("lazy").setup({
 --     end,
 	},
   {'ryanoasis/vim-devicons'},
+  {'sbdchd/neoformat'},
   {'akinsho/org-bullets.nvim'},
   {
     'stevearc/oil.nvim',
@@ -89,9 +90,9 @@ require("lazy").setup({
       require('distant'):setup()
     end
   },
-  {
-      'maksimr/vim-jsbeautify',
-  },
+  -- {
+  --     'maksimr/vim-jsbeautify',
+  -- },
   { 'rose-pine/neovim', name = 'rose-pine' },
   { 'wincent/vim-clipper' },
   { 'mbbill/undotree' },
