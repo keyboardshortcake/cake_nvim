@@ -2,6 +2,8 @@ require("mason-lspconfig").setup {
   ensure_installed = {
     'tsserver',
     'eslint',
+    -- 'eslint-lsp',
+    -- 'eslint_d',
     "cssls",
     "html",
     "jsonls",
@@ -15,3 +17,11 @@ require("mason-lspconfig").setup {
   },
   automatic_installation = true,
 }
+
+-- return {
+--     'williamboman/mason.nvim',
+--     opts = function()
+--     end,
+--     config = function(_, opts)
+--     end
+-- }

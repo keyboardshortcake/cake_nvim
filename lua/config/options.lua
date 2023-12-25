@@ -67,3 +67,5 @@ vim.g.undotree_SetFocusWhenToggle = 1           -- focus undotree when i toggle 
 --     \ autocmd CursorMoved * ++once set mouse&<Bar>
 --     \ echo 'mouse ON'<CR>
 --     
+
+-- could also set settings with vim.cmd like this vim.cmd("set undofile = true")

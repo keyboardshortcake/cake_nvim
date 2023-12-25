@@ -1,30 +1,20 @@
--- plugins
-require("plugins.lazy")
-require("plugins.telescope")
-require("plugins.trouble")
-require("plugins.bufferline")
-require("plugins.alpha")
-
--- were these missing? Lets add and see what happens
-require("plugins.project")
-require("plugins.undotree")
-require("plugins.lsp")
-require("plugins.illuminate")
-require("plugins.neo-tree")
-require("plugins.nvim-cmp")
--- require("plugins.nvim-cmp2")
-require("plugins.lspsaga")
-require("plugins.oil")
-require("plugins.org-bullets")
--- require("plugins.nvim-tree")
-
--- configs
+-- configs -- this should be loaded before lazy.nvim
 require("config.options")
 require("config.keymaps")
+require("config.autocmds")
 
--- themes
-require("theme.tokyonight") -- I like the tokyonight-night theme best (different from regular tokyonight)
--- require("lazy-lsp").setup {}
--- require("theme.transparent")
--- require("theme.rose-pine")
--- require("oil").setup()
+-- plugins
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+
+require("lazy").setup("plugins")

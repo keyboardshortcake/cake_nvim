@@ -5,8 +5,8 @@
 -- 
 -- lazy-lsp.setup {}
 
-require("lazy-lsp").setup({
-  excluded_servers = {
-    "ccls", "zk", "sqls"
-  },
-})
+-- require("lazy-lsp").setup({
+--   excluded_servers = {
+--     "ccls", "zk", "sqls"
+--   },
+-- })

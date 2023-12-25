@@ -30,11 +30,11 @@ vim.api.nvim_create_autocmd({ "CmdWinEnter" }, {
   end,
 })
 
-vim.api.nvim_create_autocmd({ "TextYankPost" }, {
-  callback = function()
-    vim.highlight.on_yank({ higroup = "Visual", timeout = 200 })
-  end,
-})
+-- vim.api.nvim_create_autocmd({ "TextYankPost" }, {
+--   callback = function()
+--     vim.highlight.on_yank({ higroup = "Visual", timeout = 200 })
+--   end,
+-- })
 
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {
   pattern = { "*.java" },
@@ -43,20 +43,20 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
   end,
 })
 
-vim.api.nvim_create_autocmd({ "VimEnter" }, {
-  callback = function()
-    vim.cmd("hi link illuminatedWord LspReferenceText")
-  end,
-})
-
-vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
-  callback = function()
-  local line_count = vim.api.nvim_buf_line_count(0)
-    if line_count >= 5000 then
-      vim.cmd("IlluminatePauseBuf")
-    end
-  end,
-})
+-- vim.api.nvim_create_autocmd({ "VimEnter" }, {
+--   callback = function()
+--     vim.cmd("hi link illuminatedWord LspReferenceText")
+--   end,
+-- })
+--
+-- vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
+--   callback = function()
+--   local line_count = vim.api.nvim_buf_line_count(0)
+--     if line_count >= 5000 then
+--       vim.cmd("IlluminatePauseBuf")
+--     end
+--   end,
+-- })
 
 -- vim.api.nvim_create_autocmd("TextYankPost", "*", [[
 --     if v:event.operator == 'y' and v:event.regname == '+' then
@@ -64,15 +64,15 @@ vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
 --     end
 -- ]])
 --
-vim.api.nvim_create_autocmd({ "TextYankPost"}, {
-  callback = function()
-    vim.cmd([[
-      if v:event.operator == 'y' and v:event.regname == '+' then
-          vim.fn.execute('OSCYankRegister +')
-      end
-    ]])
-  end,
-})
+-- vim.api.nvim_create_autocmd({ "TextYankPost"}, {
+--   callback = function()
+--     vim.cmd([[
+--       if v:event.operator == 'y' and v:event.regname == '+' then
+--           vim.fn.execute('OSCYankRegister +')
+--       end
+--     ]])
+--   end,
+-- })
 
 
 -- force shift tab to act right
