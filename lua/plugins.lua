@@ -2,6 +2,8 @@ return {
   {'ryanoasis/vim-devicons'},
   {'sbdchd/neoformat'},
   {'akinsho/org-bullets.nvim', config = true},
+  { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+                    {'L2MON4D3/LuaSnip'},
   -- {
   --     "williamboman/mason.nvim",
   --     opts = function(_, opts)

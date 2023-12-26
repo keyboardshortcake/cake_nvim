@@ -4,7 +4,8 @@ return {
     -- or                              , branch = '0.1.1',plug
     dependencies = {
         'nvim-lua/plenary.nvim',
-        { 'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }, -- don't need, just for fun
+        -- { 'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }, -- don't need, just for fun
+        { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
         { "aaronhallaert/advanced-git-search.nvim" }, -- don't need
         "tpope/vim-fugitive", -- advanced_git_search uses this
     },

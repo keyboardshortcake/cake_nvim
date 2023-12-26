@@ -50,9 +50,11 @@ keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)
 -- keymap("n", "<leader>k", ":NvimTreeFocus<CR>", opts)
 
 --NeoTree or neo-tree or neo tree
-keymap("n", "<leader>e", ":NeoTreeRevealToggle<CR>", opts)
+-- keymap("n", "<leader>e", ":NeoTreeRevealToggle<CR>", opts)
+keymap("n", "<leader>e", ":Neotree reveal toggle<CR>", opts)
 -- keymap("n", "<leader>k", ":NeoTreeFocusToggle<CR>", opts)
-keymap("n", "<leader>k", ":NeoTreeFocus<CR>", opts)
+-- keymap("n", "<leader>k", ":NeoTreeFocus<CR>", opts)
+keymap("n", "<leader>k", ":Neotree focus<CR>", opts)
 
 -- Trouble
 keymap("n", "<leader>xx", "<cmd>TroubleToggle<cr>", opts)
