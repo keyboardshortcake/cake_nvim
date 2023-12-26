@@ -3,11 +3,29 @@ return {
     tag = '0.1.1',
     -- or                              , branch = '0.1.1',plug
     dependencies = {
+--         dependencies = {
+--     { 
+--         "nvim-telescope/telescope-live-grep-args.nvim" ,
+--         -- This will not install any breaking changes.
+--         -- For major updates, this must be adjusted manually.
+--         version = "^1.0.0",
+--     },
+--   },
+--   config = function()
+--     require("telescope").load_extension("live_grep_args")
+--   end
+-- }
         'nvim-lua/plenary.nvim',
         -- { 'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }, -- don't need, just for fun
         { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
         { "aaronhallaert/advanced-git-search.nvim" }, -- don't need
         "tpope/vim-fugitive", -- advanced_git_search uses this
+        {
+            "nvim-telescope/telescope-live-grep-args.nvim",
+            -- This will not install any breaking changes.
+            -- For major updates, this must be adjusted manually.
+            version = "^1.0.0",
+        },
     },
     opts = function()
         local status_ok, telescope = pcall(require, "telescope")
@@ -17,6 +35,7 @@ return {
 
         telescope.load_extension "fzf"
         telescope.load_extension "advanced_git_search"
+        telescope.load_extension("live_grep_args")
 
         local actions = require "telescope.actions"
 
@@ -25,7 +44,8 @@ return {
                 -- prompt_prefix = " ",
                 -- selection_caret = " ",
                 path_display = { "smart" },
-                file_ignore_patterns = { ".git/", "node_modules" },
+                -- file_ignore_patterns = { ".git/", "node_modules" },
+                file_ignore_patterns = { ".git/" },
                 mappings = {
                     i = {
                         -- ["<Down>"] = actions.cycle_history_next,

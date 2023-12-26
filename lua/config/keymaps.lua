@@ -60,7 +60,7 @@ keymap("n", "<leader>k", ":Neotree focus<CR>", opts)
 keymap("n", "<leader>xx", "<cmd>TroubleToggle<cr>", opts)
 
 -- Normal vim shortcuts
-keymap("n", "<leader>q", "<cmd>:Bdelete<cr>", opts) -- this one doesn't work properly, works with lowercase :bdelete ... sort of, look into it
+keymap("n", "<leader>bd", "<cmd>:Bdelete<cr>", opts) -- this one doesn't work properly, works with lowercase :bdelete ... sort of, look into it
 -- go to previous open file (also called the 'alternate-file')
 keymap("n", "<leader>j", "<C-^>", opts)
 
