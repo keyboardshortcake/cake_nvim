@@ -73,9 +73,18 @@ return {
             -- Setup language servers.
             local lspconfig = require('lspconfig')
             -- lspconfig.pyright.setup {}
-            lspconfig.lua_ls.setup {}
+            lspconfig.lua_ls.setup {
+                settings = {
+                    Lua = {
+                        diagnostics = {
+                            globals = { 'vim' }
+                        }
+                    }
+                }
+            }
             lspconfig.angularls.setup {}
-            lspconfig.quick_lint_js.setup {}
+            lspconfig.quick_lint_js.setup {
+            }
             lspconfig.tsserver.setup {
                   filetypes = { "typescript", "typescriptreact", "typescript.tsx", "ts", "typescript.ts", "component.ts" },
                   -- handlers = {
