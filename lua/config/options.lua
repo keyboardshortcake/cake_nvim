@@ -45,6 +45,8 @@ vim.opt.linebreak = true
 vim.opt.relativenumber = true
 vim.opt.modifiable = true                   -- trying to fix this huge error that pops up everytime i install a plugin
 vim.g.undotree_SetFocusWhenToggle = 1           -- focus undotree when i toggle it open
+-- vim.o.eol = "unix"                              -- Ensure that files are saved with a newline at the end. (set eol=unix)
+vim.opt.fixeol = false                      -- Don't try to fix the EOL for files. Just let them remain however I found them. Equivalent to `set nofixeol` in Vimscript
 -- vim.opt.mousemodel= "extend"                 -- This kills the right click menu
 
 -- vim.opt.completeopt = {'menu', 'menuone', 'noselect'} -- for nvim-cmp? per https://vonheikemen.github.io/devlog/tools/setup-nvim-lspconfig-plus-nvim-cmp/
