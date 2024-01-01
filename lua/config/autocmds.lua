@@ -43,27 +43,27 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
   end,
 })
 
--- vim.api.nvim_create_autocmd({ "VimEnter" }, {
---   callback = function()
---     vim.cmd("hi link illuminatedWord LspReferenceText")
---   end,
--- })
---
--- vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
---   callback = function()
---   local line_count = vim.api.nvim_buf_line_count(0)
---     if line_count >= 5000 then
---       vim.cmd("IlluminatePauseBuf")
---     end
---   end,
--- })
+vim.api.nvim_create_autocmd({ "VimEnter" }, {
+  callback = function()
+    vim.cmd("hi link illuminatedWord LspReferenceText")
+  end,
+})
+
+vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
+  callback = function()
+  local line_count = vim.api.nvim_buf_line_count(0)
+    if line_count >= 5000 then
+      vim.cmd("IlluminatePauseBuf")
+    end
+  end,
+})
 
 -- vim.api.nvim_create_autocmd("TextYankPost", "*", [[
 --     if v:event.operator == 'y' and v:event.regname == '+' then
 --         vim.fn.execute('OSCYankRegister +')
 --     end
 -- ]])
---
+
 -- vim.api.nvim_create_autocmd({ "TextYankPost"}, {
 --   callback = function()
 --     vim.cmd([[
@@ -76,4 +76,19 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 
 
 -- force shift tab to act right
--- vim.api.nvim_set_keymap('i', '<S-Tab>', '<C-d>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', '<S-Tab>', '<C-d>', { noremap = true, silent = true })
+local ag = vim.api.nvim_create_augroup
+local au = vim.api.nvim_create_autocmd
+
+-- GROUPS:
+local disable_node_modules_eslint_group =
+	ag("DisableNodeModulesEslint", { clear = true })
+
+-- AUTO-COMMANDS:
+au({ "BufNewFile", "BufRead" }, {
+	pattern = { "**/node_modules/**", "node_modules", "/node_modules/*" },
+	callback = function()
+		vim.diagnostic.disable(0)
+	end,
+	group = disable_node_modules_eslint_group,
+})

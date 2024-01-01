@@ -1,41 +1,60 @@
 return {
     'nvim-telescope/telescope.nvim',
-    tag = '0.1.1',
+    -- tag = '0.1.1',
     -- or                              , branch = '0.1.1',plug
     dependencies = {
---         dependencies = {
---     { 
---         "nvim-telescope/telescope-live-grep-args.nvim" ,
---         -- This will not install any breaking changes.
---         -- For major updates, this must be adjusted manually.
---         version = "^1.0.0",
---     },
---   },
---   config = function()
---     require("telescope").load_extension("live_grep_args")
---   end
--- }
-        'nvim-lua/plenary.nvim',
+        { 'nvim-lua/plenary.nvim' },
+        { "debugloop/telescope-undo.nvim" },
+        -- {'junegunn/fzf'},
         -- { 'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }, -- don't need, just for fun
-        { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
-        { "aaronhallaert/advanced-git-search.nvim" }, -- don't need
-        "tpope/vim-fugitive", -- advanced_git_search uses this
+        -- { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+        { 'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' },
+        -- { "aaronhallaert/advanced-git-search.nvim" }, -- don't need
+        {
+            "aaronhallaert/advanced-git-search.nvim",
+            config = function()
+                --require("telescope").load_extension("advanced_git_search")
+            end,
+            dependencies = {
+                "nvim-telescope/telescope.nvim",
+                -- to show diff splits and open commits in browser
+                "tpope/vim-fugitive",
+                -- to open commits in browser with fugitive
+                "tpope/vim-rhubarb",
+                -- optional: to replace the diff from fugitive with diffview.nvim
+                -- (fugitive is still needed to open in browser)
+                -- "sindrets/diffview.nvim",
+            },
+            -- requires = {
+            --   "nvim-telescope/telescope.nvim",
+            --   -- to show diff splits and open commits in browser
+            --   "tpope/vim-fugitive",
+            -- },
+        },
+        { "tpope/vim-fugitive" }, -- advanced_git_search uses this
         {
             "nvim-telescope/telescope-live-grep-args.nvim",
             -- This will not install any breaking changes.
             -- For major updates, this must be adjusted manually.
             version = "^1.0.0",
         },
+        { 'nvim-telescope/telescope-node-modules.nvim' },
+        -- { "wesleimp/telescope-windowizer.nvim" },
+        "tsakirist/telescope-lazy.nvim",
     },
     opts = function()
         local status_ok, telescope = pcall(require, "telescope")
         if not status_ok then
-          return
+            return
         end
 
         telescope.load_extension "fzf"
         telescope.load_extension "advanced_git_search"
-        telescope.load_extension("live_grep_args")
+        telescope.load_extension "live_grep_args"
+        telescope.load_extension "node_modules"
+        telescope.load_extension "undo"
+        telescope.load_extension "lazy"
+        -- telescope.load_extension "windowizer"
 
         local actions = require "telescope.actions"
 
@@ -49,14 +68,17 @@ return {
                 mappings = {
                     i = {
                         -- ["<Down>"] = actions.cycle_history_next,
-                        ["<Down>"] = actions.move_selection_next,
+                        -- ["<Down>"] = actions.move_selection_next,
                         -- ["<Up>"] = actions.cycle_history_prev,
-                        ["<Up>"] = actions.move_selection_previous,
+                        -- ["<Up>"] = actions.move_selection_previous,
                         ["<C-j>"] = actions.move_selection_next,
                         ["<C-k>"] = actions.move_selection_previous,
                     },
                 },
                 extensions = {
+                    -- windowizer = {
+                    --     find_cmd = "fd" -- find command. Available options [ find | fd | rg ] (defaults to "fd")
+                    -- },
                     fzf = {
                         fuzzy = true,                   -- false will only do exact matching
                         override_generic_sorter = true, -- override the generic sorter
@@ -90,10 +112,31 @@ return {
                             },
 
                         }
-                    }
+                    },
+                    undo = {
+                        -- opts = {
+                        --     extensions = {
+                        --         undo = {
+                        --             side_by_side = true,
+                        --             layout_strategy = "vertical",
+                        --             layout_config = {
+                        --                 preview_height = 0.8,
+                        --             },
+                        --         },
+                        --     },
+                        -- }
+                    },
                 },
             }
         }
-    -- },
-    end
+    end,
+    -- // interestingly, my mappsings shortcut (and probably that whole return block) doesn't work with this active
+    -- config = function(_, opts)
+    --     local telescope = require('telescope')
+    --
+    --     telescope.load_extension "fzf"
+    --     telescope.load_extension "advanced_git_search"
+    --     telescope.load_extension("live_grep_args")
+    --     telescope.load_extension("node_modules")
+    -- end
 }

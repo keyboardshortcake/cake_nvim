@@ -5,7 +5,7 @@ lsp.configure('lua_ls', {
     settings = {
         Lua = {
             diagnostics = {
-                 globals = { 'vim' }
+                globals = { 'vim' }
             }
         }
     }
@@ -44,16 +44,16 @@ lsp.configure('lua_ls', {
 -- }
 
 lsp.on_attach(function(client, bufnr)
-  -- lsp.default_keymaps({
-  --   buffer = bufnr, preserve_mappings = false
-  -- })
-  -- lsp.default_keymaps({buffer = bufnr})
+    -- lsp.default_keymaps({
+    --   buffer = bufnr, preserve_mappings = false
+    -- })
+    -- lsp.default_keymaps({buffer = bufnr})
 end)
 
 -- -- When you don't have mason.nvim installed
 -- -- You'll need to list the servers installed in your system
 -- lsp.setup_servers({
---   'tsserver', 
+--   'tsserver',
 --   'eslint',
 --   "cssls",
 --   "html",
@@ -163,35 +163,35 @@ end)
 -- 	},
 -- })
 local servers = {
-  -- "sumneko_lua",
-  "cssls",
-  "html",
-  "tsserver",
-  "pyright",
-  "bashls",
-  "jsonls",
-  "yamlls",
-  "eslint", -- added new eslint server, hopefully
-  "angularls", -- hopefully added angular server? yikes I don't know what hte correct name is
+    -- "sumneko_lua",
+    "cssls",
+    "html",
+    "tsserver",
+    "pyright",
+    "bashls",
+    "jsonls",
+    "yamlls",
+    "eslint",  -- added new eslint server, hopefully
+    "angularls", -- hopefully added angular server? yikes I don't know what hte correct name is
 }
 
 local function filter(arr, fn)
-  if type(arr) ~= "table" then
-    return arr
-  end
-
-  local filtered = {}
-  for k, v in pairs(arr) do
-    if fn(v, k, arr) then
-      table.insert(filtered, v)
+    if type(arr) ~= "table" then
+        return arr
     end
-  end
 
-  return filtered
+    local filtered = {}
+    for k, v in pairs(arr) do
+        if fn(v, k, arr) then
+            table.insert(filtered, v)
+        end
+    end
+
+    return filtered
 end
 --
 local function filterReactDTS(value)
-  return string.match(value.uri, '%.d.ts') == nil
+    return string.match(value.uri, '%.d.ts') == nil
 end
 
 -- local function filter(arr, fn)
@@ -210,7 +210,7 @@ end
 -- end
 
 local function isNotDeclarationFile(value)
-  return string.match(value.filename, '%.d.ts') == nil
+    return string.match(value.filename, '%.d.ts') == nil
 end
 
 -- local function on_list(options)
@@ -245,11 +245,11 @@ end
 
 require("mason").setup({})
 require("mason-lspconfig").setup({
-  ensure_installed = servers,
-  automatic_installation = true,
-  handlers = {
-    -- lsp.default_setup,
-    tsserver = function()
+    ensure_installed = servers,
+    automatic_installation = true,
+    handlers = {
+        -- lsp.default_setup,
+        tsserver = function()
             require('lspconfig').tsserver.setup {
                 -- handlers = {
                 --     ['textDocument/definition'] = function(err, result, method, ...)
@@ -282,31 +282,31 @@ require("mason-lspconfig").setup({
                     end
                 },
             }
-      -- require('lspconfig').tsserver.setup({
-      --   filetypes = { "typescript", "typescriptreact", "typescript.tsx", "ts", "typescript.ts", "component.ts" },
-      --   handlers = {
-      --     ['textDocument/definition'] = function(err, result, method, ...)
-      --       if vim.tbl_islist(result) and #result > 0 then
-      --         local filtered_result = filter(result, isNotDeclarationFile)
-      --         return vim.lsp.handlers['textDocument/definition'](err, filtered_result, method, ...)
-      --       end
-      --
-      --       vim.lsp.handlers['textDocument/definition'](err, result, method, ...)
-      --     end
-      --   },
-      --   settings = {
-      --     typescript = {
-      --       format = {
-      --         semicolons = 'insert',
-      --       },
-      --     },
-      --     completions = {
-      --       completeFunctionCalls = true
-      --     },
-      --   },
-      -- })
-    end,
-  }
+            -- require('lspconfig').tsserver.setup({
+            --   filetypes = { "typescript", "typescriptreact", "typescript.tsx", "ts", "typescript.ts", "component.ts" },
+            --   handlers = {
+            --     ['textDocument/definition'] = function(err, result, method, ...)
+            --       if vim.tbl_islist(result) and #result > 0 then
+            --         local filtered_result = filter(result, isNotDeclarationFile)
+            --         return vim.lsp.handlers['textDocument/definition'](err, filtered_result, method, ...)
+            --       end
+            --
+            --       vim.lsp.handlers['textDocument/definition'](err, result, method, ...)
+            --     end
+            --   },
+            --   settings = {
+            --     typescript = {
+            --       format = {
+            --         semicolons = 'insert',
+            --       },
+            --     },
+            --     completions = {
+            --       completeFunctionCalls = true
+            --     },
+            --   },
+            -- })
+        end,
+    }
 })
 
 -- require("mason").setup({})
@@ -365,26 +365,26 @@ local cmp = require('cmp')
 local cmp_action = require('lsp-zero').cmp_action()
 
 cmp.setup({
-  mapping = {
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-f>'] = cmp_action.luasnip_jump_forward(),
-    ['<C-b>'] = cmp_action.luasnip_jump_backward(),
-  }
+    mapping = {
+        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<C-f>'] = cmp_action.luasnip_jump_forward(),
+        ['<C-b>'] = cmp_action.luasnip_jump_backward(),
+    }
 })
 
 -- this is to git rid of the inline error things if I set virtual_text to false
 -- testing from https://github.com/samhh/dotfiles/blob/99e67298fbcb61d7398ad1850f3c2df31d90bd0d/home/.config/nvim/plugin/lsp.lua#L120
 -- via https://www.reddit.com/r/neovim/comments/og1cdv/comment/hi3muw7/?utm_source=reddit&utm_medium=web2x&context=3
 local function setup_diags()
-  vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-    vim.lsp.diagnostic.on_publish_diagnostics,
-    {
-      virtual_text = true,
-      signs = true,
-      update_in_insert = false,
-      underline = true,
-    }
-  )
+    vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+        vim.lsp.diagnostic.on_publish_diagnostics,
+        {
+            virtual_text = true,
+            signs = true,
+            update_in_insert = false,
+            underline = true,
+        }
+    )
 end
 setup_diags()
 
@@ -437,14 +437,14 @@ setup_diags()
 --     on_attach = require("user.lsp.handlers").on_attach,
 --     capabilities = require("user.lsp.handlers").capabilities,
 --   }
---  
+--
 --   server = vim.split(server, "@")[1]
---  
+--
 --   local require_ok, conf_opts = pcall(require, "user.lsp.settings." .. server)
 --   if require_ok then
 --     opts = vim.tbl_deep_extend("force", conf_opts, opts)
 --   end
---  
+--
 --   lspconfig[server].setup(opts)
 -- end
 --

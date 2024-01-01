@@ -26,6 +26,17 @@ keymap("n", "<C-j>", "<C-w>j", opts)
 keymap("n", "<C-k>", "<C-w>k", opts)
 keymap("n", "<C-l>", "<C-w>l", opts)
 
+-- Tmux navigation
+-- -- -- Set the variable in Lua
+-- vim.g.tmux_navigator_no_mappings = 1
+--
+-- -- Define key mappings using Lua
+-- keymap('n', '<C-h>', ':<C-U>TmuxNavigateLeft<CR>', { noremap = true, silent = true })
+-- keymap('n', '<C-j>', ':<C-U>TmuxNavigateDown<CR>', { noremap = true, silent = true })
+-- keymap('n', '<C-k>', ':<C-U>TmuxNavigateUp<CR>', { noremap = true, silent = true })
+-- keymap('n', '<C-l>', ':<C-U>TmuxNavigateRight<CR>', { noremap = true, silent = true })
+-- keymap('n', '<silent>{Previous-Mapping}', ':<C-U>TmuxNavigatePrevious<CR>', { noremap = true, silent = true })
+
 -- Resize with arrows
 keymap("n", "<C-Up>", ":resize -2<CR>", opts)
 keymap("n", "<C-Down>", ":resize +2<CR>", opts)
@@ -37,6 +48,11 @@ keymap("n", "<leader>ff", ":Telescope find_files<CR>", opts)
 keymap("n", "<leader>ft", ":Telescope live_grep<CR>", opts)
 keymap("n", "<leader>fp", ":Telescope projects<CR>", opts)
 keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)
+keymap("n", "<leader>fo", ":Telescope oldfiles<CR>", opts)
+keymap("n", "<leader>cc", ":Telescope keymaps<CR>", opts)
+keymap("n", "<leader>fl", ":Telescope lazy<CR>", opts)
+keymap("n", "<leader>fn", ":Telescope node_modules list<CR>", opts)
+
 
 
 -- local builtin = require('telescope.builtin')
@@ -52,31 +68,25 @@ keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)
 --NeoTree or neo-tree or neo tree
 -- keymap("n", "<leader>e", ":NeoTreeRevealToggle<CR>", opts)
 keymap("n", "<leader>e", ":Neotree reveal toggle<CR>", opts)
--- keymap("n", "<leader>k", ":NeoTreeFocusToggle<CR>", opts)
--- keymap("n", "<leader>k", ":NeoTreeFocus<CR>", opts)
 keymap("n", "<leader>k", ":Neotree focus<CR>", opts)
 
 -- Trouble
 keymap("n", "<leader>xx", "<cmd>TroubleToggle<cr>", opts)
-
--- Normal vim shortcuts
-keymap("n", "<leader>bd", "<cmd>:Bdelete<cr>", opts) -- this one doesn't work properly, works with lowercase :bdelete ... sort of, look into it
--- go to previous open file (also called the 'alternate-file')
-keymap("n", "<leader>j", "<C-^>", opts)
 
 -- Comment
 keymap("n", "<leader>/", "<cmd>lua require('Comment.api').toggle.linewise.current()<CR>", opts)
 keymap("x", "<leader>/", '<ESC><CMD>lua require("Comment.api").toggle.linewise(vim.fn.visualmode())<CR>')
 
 -- Navigate buffers
+keymap("n", "<leader>j", "<C-^>", opts) -- go to previous open file (also called the 'alternate-file')
 keymap("n", "<S-l>", ":bnext<CR>", opts)
 keymap("n", "<S-h>", ":bprevious<CR>", opts)
+keymap("n", "<leader>q", "<cmd>:Bdelete<cr>", opts) -- this one doesn't work properly, works with lowercase :bdelete ... sort of, look into it
+-- :Bdelete is a more gentle buffer deletion command that keeps the buffer in memory if it's open in other windows, while :Bdelete! forcefully removes the buffer from memory, potentially closing other windows displaying the same buffer.
+-- keymap("n", "<leader>q", "<cmd>Bdelete!<CR>", opts)
 
 -- Clear highlights
 keymap("n", "<leader>h", "<cmd>nohlsearch<CR>", opts)
-
--- Close buffers
-keymap("n", "<S-q>", "<cmd>Bdelete!<CR>", opts)
 
 -- Better paste
 keymap("v", "p", '"_dP', opts)
@@ -92,7 +102,10 @@ keymap("v", ">", ">gv", opts)
 
 -- To search git commits! But ... I think there's another option called
 -- search_log_content_files, not sure what the difference is yet
-keymap("n", "<leader>fc", ":Telescope advanced_git_search search_log_content_file<cr>", opts)
+keymap("n", "<leader>tc", ":Telescope advanced_git_search search_log_content_file<cr>", opts)
+keymap("n", "<leader>tl", "V:AdvancedGitSearch diff_commit_line<CR>", opts)
+-- keymap("n", "<leader>lv", ":Telescope advanced_git_search diff_commit_line <cr>", opts)
+-- keymap("v", "<leader>tl", ':AdvancedGitSearch diff_commit_line<CR>', opts)
 
 -- Open lazygit
 keymap("n", "<leader>gg", "<cmd>:LazyGit<cr>", opts)
@@ -101,7 +114,7 @@ keymap("n", "<leader>gg", "<cmd>:LazyGit<cr>", opts)
 keymap("n", "<leader>GB", "<cmd>:GitBlameToggle<cr>", opts)
 
 
--- LSPSAGAAAAAAA (lspsaga) 
+-- LSPSAGAAAAAAA (lspsaga)
 -- LSP finder - Find the symbol's definition
 -- If there is no definition, it will instead be hidden
 -- When you use an action in finder like "open vsplit",
@@ -122,7 +135,7 @@ keymap("n", "<leader>GB", "<cmd>:GitBlameToggle<cr>", opts)
 -- It also supports open/vsplit/etc operations, do refer to "definition_action_keys"
 -- It also supports tagstack
 -- Use <C-t> to jump back
-keymap("n", "gp", "<cmd>Lspsaga peek_definition<CR>")
+-- keymap("n", "gp", "<cmd>Lspsaga peek_definition<CR>")
 
 -- Go to definition
 -- keymap("n","gd", "<cmd>Lspsaga goto_definition<CR>")
@@ -144,7 +157,7 @@ keymap("n", "gp", "<cmd>Lspsaga peek_definition<CR>")
 -- keymap("n", "<leader>sl", "<cmd>Lspsaga show_line_diagnostics<CR>")
 
 -- Show buffer diagnostics
-keymap("n", "<leader>sb", "<cmd>Lspsaga show_buf_diagnostics<CR>")
+-- keymap("n", "<leader>sb", "<cmd>Lspsaga show_buf_diagnostics<CR>")
 
 -- Show workspace diagnostics
 -- keymap("n", "<leader>sw", "<cmd>Lspsaga show_workspace_diagnostics<CR>")
@@ -166,7 +179,7 @@ keymap("n", "<leader>sb", "<cmd>Lspsaga show_buf_diagnostics<CR>")
 -- end)
 
 -- Toggle outline
-keymap("n","<leader>o", "<cmd>Lspsaga outline<CR>")
+-- keymap("n", "<leader>o", "<cmd>Lspsaga outline<CR>")
 
 -- Hover Doc
 -- If there is no hover doc,
@@ -194,5 +207,9 @@ keymap("n","<leader>o", "<cmd>Lspsaga outline<CR>")
 -- this is for oil.nvim
 vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
--- 
+--
 vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
+
+-- this stuff is in the nightly version of nvim as of today
+vim.keymap.set("n", '<leader>st', "<cmd>lua vim.lsp.inlay_hint.enable(0, true)<CR>")
+vim.keymap.set("n", '<leader>ht', "<cmd>lua vim.lsp.inlay_hint.enable(0, false)<CR>")
