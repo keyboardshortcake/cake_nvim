@@ -61,6 +61,6 @@ return {
     config = function(_, opts)
         -- vim.cmd('colorscheme tokyonight-storm')
         require('tokyonight').setup(opts)
-        vim.cmd('colorscheme tokyonight-storm')
+        vim.cmd('colorscheme tokyonight-night')
     end
 }

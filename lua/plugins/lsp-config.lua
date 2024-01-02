@@ -15,7 +15,6 @@ return {
                     "tsserver",
                     "pyright",
                     "bashls",
-                    "cmakelang",
                     "jsonls",
                     "yamlls",
                     "eslint",           -- added new eslint server, hopefully
