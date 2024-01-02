@@ -31,6 +31,7 @@ return {
         vim.api.nvim_del_keymap("n", "gpD")
         vim.api.nvim_del_keymap("n", "gP")
         vim.api.nvim_del_keymap("n", "gpr")
+        vim.api.nvim_del_keymap("n", "gpt")
     end
 }
 

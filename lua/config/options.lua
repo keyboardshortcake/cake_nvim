@@ -47,7 +47,7 @@ vim.opt.modifiable = true                       -- trying to fix this huge error
 vim.g.undotree_SetFocusWhenToggle = 1           -- focus undotree when i toggle it open
 -- vim.o.eol = "unix"                                        -- Ensure that files are saved with a newline at the end. (set eol=unix)
 vim.opt.fixeol = false                          -- Don't try to fix the EOL for files. Just let them remain however I found them. Equivalent to `set nofixeol` in Vimscript
-vim.o.fileformats = "dos"                                           -- because the d.ts file for angular are showing up with ^M characters all throughouts
+vim.o.fileformats = "unix,dos,mac"                                           -- because the d.ts file for angular are showing up with ^M characters all throughouts
 vim.opt.mousemodel= "extend"                 -- This kills the right click menu
 -- vim.lsp.inlay_hint.enable(0, true)
 

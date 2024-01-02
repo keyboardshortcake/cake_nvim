@@ -214,6 +214,6 @@ keymap("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 keymap('n', '<leader>u', vim.cmd.UndotreeToggle)
 
 -- this stuff is in the nightly version of nvim as of today
-keymap("n", '<leader>st', "<cmd>lua vim.lsp.inlay_hint.enable(0, true)<CR>")
-keymap("n", '<leader>ht', "<cmd>lua vim.lsp.inlay_hint.enable(0, false)<CR>")
+keymap("n", '<leader>ie', "<cmd>lua vim.lsp.inlay_hint.enable(0, true)<CR>")
+keymap("n", '<leader>id', "<cmd>lua vim.lsp.inlay_hint.enable(0, false)<CR>")
 
