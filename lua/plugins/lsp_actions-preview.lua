@@ -1,14 +1,15 @@
 return {
     "aznhe21/actions-preview.nvim",
     config = function()
-        vim.keymap.set({ "v", "n" }, "gf", require("actions-preview").code_actions)
+        -- vim.keymap.set({ "v", "n" }, "gf", require("actions-preview").code_actions)
+        vim.keymap.set({ "v", "n" }, "ga", require("actions-preview").code_actions)
         require("actions-preview").setup {
             -- options for vim.diff(): https://neovim.io/doc/user/lua.html#vim.diff()
             diff = {
                 ctxlen = 3,
             },
-            -- priority list of preferred backend
-            backend = { "telescope", "nui" },
+            -- -- priority list of preferred backend
+            -- backend = { "telescope", "nui" },
 
             -- options related to telescope.nvim
             -- telescope = vim.tbl_extend(

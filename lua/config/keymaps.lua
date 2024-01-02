@@ -54,6 +54,9 @@ keymap("n", "<leader>fl", ":Telescope lazy<CR>", opts)
 keymap("n", "<leader>fn", ":Telescope node_modules list<CR>", opts)
 
 
+-- preview justthis stuff1k
+keymap("n", "gp", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", opts)
+keymap("n", "q", "<cmd>lua require('goto-preview').close_all_win()<CR>", opts)
 
 -- local builtin = require('telescope.builtin')
 -- vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
@@ -205,11 +208,12 @@ keymap("n", "<leader>GB", "<cmd>:GitBlameToggle<cr>", opts)
 --
 
 -- this is for oil.nvim
-vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+keymap("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
 --
-vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
+keymap('n', '<leader>u', vim.cmd.UndotreeToggle)
 
 -- this stuff is in the nightly version of nvim as of today
-vim.keymap.set("n", '<leader>st', "<cmd>lua vim.lsp.inlay_hint.enable(0, true)<CR>")
-vim.keymap.set("n", '<leader>ht', "<cmd>lua vim.lsp.inlay_hint.enable(0, false)<CR>")
+keymap("n", '<leader>st', "<cmd>lua vim.lsp.inlay_hint.enable(0, true)<CR>")
+keymap("n", '<leader>ht', "<cmd>lua vim.lsp.inlay_hint.enable(0, false)<CR>")
+

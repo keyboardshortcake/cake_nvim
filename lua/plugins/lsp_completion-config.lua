@@ -54,6 +54,17 @@ return {
             local luasnip = require("luasnip")
             local cmp = require("cmp")
             return {
+                -- Disabling completion in comments and also not breaking telescope per:
+                -- https://github.com/hrsh7th/nvim-cmp/pull/676#issuecomment-1724981778
+                enabled = function()
+                    local context = require("cmp.config.context")
+                    local disabled = false
+                    disabled = disabled or (vim.api.nvim_buf_get_option(0, "buftype") == "prompt")
+                    disabled = disabled or (vim.fn.reg_recording() ~= "")
+                    disabled = disabled or (vim.fn.reg_executing() ~= "")
+                    disabled = disabled or context.in_treesitter_capture("comment")
+                    return not disabled
+                end,
                 snippet = {
                     -- REQUIRED - you must specify a snippet engine
                     expand = function(args)                      -- when you click on a snippet you want to expand, it runs this function
@@ -139,31 +150,31 @@ return {
             local cmp = require('cmp')
             cmp.setup(opts)
             -- Set configuration for specific filetype.
-            -- cmp.setup.filetype('gitcommit', {
-            --     sources = cmp.config.sources({
-            --         { name = 'git' }, -- You can specify the `git` source if [you were installed it](https://github.com/petertriho/cmp-git).
-            --     }, {
-            --         { name = 'buffer' },
-            --     })
-            -- })
+            cmp.setup.filetype('gitcommit', {
+                sources = cmp.config.sources({
+                    { name = 'git' }, -- You can specify the `git` source if [you were installed it](https://github.com/petertriho/cmp-git).
+                }, {
+                    { name = 'buffer' },
+                })
+            })
 
-            -- -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
-            -- cmp.setup.cmdline({ '/', '?' }, {
-            --     mapping = cmp.mapping.preset.cmdline(),
-            --     sources = {
-            --         { name = 'buffer' }
-            --     }
-            -- })
-            -- --
-            -- -- -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-            -- cmp.setup.cmdline(':', {
-            --     mapping = cmp.mapping.preset.cmdline(),
-            --     sources = cmp.config.sources({
-            --         { name = 'path' }
-            --     }, {
-            --         { name = 'cmdline' }
-            --     })
-            -- })
+            -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+            cmp.setup.cmdline({ '/', '?' }, {
+                mapping = cmp.mapping.preset.cmdline(),
+                sources = {
+                    { name = 'buffer' }
+                }
+            })
+            --
+            -- -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+            cmp.setup.cmdline(':', {
+                mapping = cmp.mapping.preset.cmdline(),
+                sources = cmp.config.sources({
+                    { name = 'path' }
+                }, {
+                    { name = 'cmdline' }
+                })
+            })
         end
     },
 }

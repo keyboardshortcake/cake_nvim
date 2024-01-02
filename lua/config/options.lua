@@ -31,23 +31,25 @@ vim.opt.laststatus = 2                          -- only the last window will alw
 vim.opt.showcmd = false                         -- hide (partial) command in the last line of the screen (for performance)
 vim.opt.ruler = false                           -- hide the line and column number of the cursor position
 vim.opt.numberwidth = 4                         -- minimal number of columns to use for the line number {default 4}
-vim.opt.signcolumn = "yes"                      -- always show the sign column, otherwise it would shift the text each time
-vim.opt.wrap = true                            -- display lines as one long line
+vim.opt.signcolumn ="yes"                                           -- always show the sign column, otherwise it would shift the text each time
+vim.opt.wrap = true                             -- display lines as one long line
 vim.opt.scrolloff = 8                           -- minimal number of screen lines to keep above and below the cursor
 vim.opt.sidescrolloff = 8                       -- minimal number of screen columns to keep to the left and right of the cursor if wrap is `false`
 vim.opt.guifont = "monospace:h17"               -- the font used in graphical neovim applications
-vim.opt.fillchars.eob=" "                       -- show empty lines at the end of a buffer as ` ` {default `~`}
+vim.opt.fillchars.eob = " "                     -- show empty lines at the end of a buffer as ` ` {default `~`}
 vim.opt.shortmess:append "c"                    -- hide all the completion messages, e.g. "-- XXX completion (YYY)", "match 1 of 2", "The only match", "Pattern not found"
 vim.opt.whichwrap:append("<,>,[,],h,l")         -- keys allowed to move to the previous/next line when the beginning/end of line is reached
-vim.opt.iskeyword:append("-,_")                   -- treats words with `-`, or `_` as single words
+vim.opt.iskeyword:append("-,_")                 -- treats words with `-`, or `_` as single words
 vim.opt.formatoptions:remove({ "c", "r", "o" }) -- This is a sequence of letters which describes how automatic formatting is to be done
 vim.opt.linebreak = true
 vim.opt.relativenumber = true
-vim.opt.modifiable = true                   -- trying to fix this huge error that pops up everytime i install a plugin
+vim.opt.modifiable = true                       -- trying to fix this huge error that pops up everytime i install a plugin
 vim.g.undotree_SetFocusWhenToggle = 1           -- focus undotree when i toggle it open
--- vim.o.eol = "unix"                              -- Ensure that files are saved with a newline at the end. (set eol=unix)
-vim.opt.fixeol = false                      -- Don't try to fix the EOL for files. Just let them remain however I found them. Equivalent to `set nofixeol` in Vimscript
--- vim.opt.mousemodel= "extend"                 -- This kills the right click menu
+-- vim.o.eol = "unix"                                        -- Ensure that files are saved with a newline at the end. (set eol=unix)
+vim.opt.fixeol = false                          -- Don't try to fix the EOL for files. Just let them remain however I found them. Equivalent to `set nofixeol` in Vimscript
+vim.o.fileformats = "dos"                                           -- because the d.ts file for angular are showing up with ^M characters all throughouts
+vim.opt.mousemodel= "extend"                 -- This kills the right click menu
+-- vim.lsp.inlay_hint.enable(0, true)
 
 -- vim.opt.completeopt = {'menu', 'menuone', 'noselect'} -- for nvim-cmp? per https://vonheikemen.github.io/devlog/tools/setup-nvim-lspconfig-plus-nvim-cmp/
 -- 						*default-mouse* *disable-mouse*
@@ -68,6 +70,6 @@ vim.opt.fixeol = false                      -- Don't try to fix the EOL for file
 --     \ echo 'mouse OFF until next cursor-move'<Bar>
 --     \ autocmd CursorMoved * ++once set mouse&<Bar>
 --     \ echo 'mouse ON'<CR>
---     
+--
 
 -- could also set settings with vim.cmd like this vim.cmd("set undofile = true")

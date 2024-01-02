@@ -1,6 +1,12 @@
 return {
     -- { 'ryanoasis/vim-devicons' },
     { 'sbdchd/neoformat' },
+    {
+        "farmergreg/vim-lastplace",
+    },
+    -- installing this actually to get rid of the red bars like here
+    -- https://github.com/neovim/neovim/issues/14720
+    { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
     -- { 'akinsho/org-bullets.nvim',                 config = true },
     -- { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
     -- { 'L2MON4D3/LuaSnip' },
@@ -76,7 +82,7 @@ return {
     -- {
     --     'maksimr/vim-jsbeautify',
     -- },
-    { 'rose-pine/neovim',      name = 'rose-pine' },
+    { 'rose-pine/neovim',    name = 'rose-pine' },
     { 'wincent/vim-clipper' },
     -- { 'mbbill/undotree' },
     -- {
@@ -117,6 +123,12 @@ return {
     -- },
     {
         'numToStr/Comment.nvim',
+        dependencies = {
+            {
+                "JoosepAlviste/nvim-ts-context-commentstring",
+                event = "BufRead",
+            },
+        },
         config = function()
             require('Comment').setup()
         end
@@ -536,7 +548,12 @@ return {
     --   'mbbill/undotree'
     -- },
     {
-        "f-person/git-blame.nvim"
+        "f-person/git-blame.nvim",
+        config = function()
+            require('gitblame').setup({
+                enabled = false;
+            })
+        end
     },
     {
         "roxma/vim-tmux-clipboard"

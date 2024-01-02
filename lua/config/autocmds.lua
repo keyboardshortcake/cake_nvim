@@ -92,3 +92,12 @@ au({ "BufNewFile", "BufRead" }, {
 	end,
 	group = disable_node_modules_eslint_group,
 })
+
+-- vim.api.nvim_exec([[
+--   autocmd BufReadPost * nested
+--         \ if not vim.b.reload_dos and not vim.bo.binary and vim.bo.fileformat == 'unix' and vim.fn.search('\r$', 'nc') > 0 then
+--         \   vim.b.reload_dos = 1
+--         \   execute 'edit ++ff=dos'
+--         \ end
+-- ]], false)
+

@@ -27,9 +27,25 @@ return {
         },
     },
     opts = {
+        close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
         enable_git_status = true,
         -- use_popups_for_input = false,
         enable_diagnostics = true,
+        filesystem = {
+            -- follow_current_file.enabled = true,
+            filtered_items = {
+                visible = true,
+                -- hide_dotfiles = false,
+                -- hide_gitignored = false,
+                -- hide_by_name = {
+                --     "node_modules"
+                -- },
+                -- never_show = {
+                --     ".DS_Store",
+                --     "thumbs.db"
+                -- },
+            },
+        },
         default_component_configs = {
             diagnostics = {
                 symbols = {

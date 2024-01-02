@@ -33,3 +33,5 @@ require("lazy").setup("plugins")
 --             version = "^1.0.0",
 --         },
 --     },
+-- enable inlay hints by default (v10 nvim)
+-- vim.lsp.inlay_hint.enable(0, true)
