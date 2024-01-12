@@ -6,6 +6,8 @@ local opts = { silent = true }
 -- this lets me see my diagnostics errors/etc or "virtual_text" in a popup as well
 -- ref: https://www.reddit.com/r/neovim/comments/og1cdv/neovim_lsp_how_do_you_get_diagnostic_mesages_to/
 vim.api.nvim_set_keymap('n', '<space>y', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+-- make leap search up and down at the same town instead of having to use S to search up
+vim.api.nvim_set_keymap('n', 's', '<cmd>lua require("leap").leap({ target_windows = { vim.api.nvim_get_current_win() } })<CR>', opts)
 
 --Remap space as leader key
 keymap("", "<Space>", "<Nop>", opts)
@@ -45,13 +47,24 @@ keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
 -- Telescope
 keymap("n", "<leader>ff", ":Telescope find_files<CR>", opts)
+keymap("n", "<leader>fd", ":Telescope file_browser<CR>", opts)
+-- Could've configured this in an easier way: https://github.com/nvim-telescope/telescope.nvim?tab=readme-ov-file#vim-commands
+keymap("n", "<leader>fhf", "<cmd>lua require('telescope.builtin').find_files { hidden = true, no_ignore = true }<CR>", opts)
+-- is it not a bulitin? cuz this doesn't work
+-- keymap("n", "<leader>fhd", "<cmd>lua require('telescope.builtin').file_browser { hidden = true, no_ignore = true }<CR>", opts)
 keymap("n", "<leader>ft", ":Telescope live_grep<CR>", opts)
+keymap("n", "<leader>fht", ":Telescope live_grep_args<CR>", opts)
+keymap("n", "<leader>fc", ":Telescope current_buffer_fuzzy_find<CR>", opts)
 keymap("n", "<leader>fp", ":Telescope projects<CR>", opts)
 keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)
 keymap("n", "<leader>fo", ":Telescope oldfiles<CR>", opts)
 keymap("n", "<leader>cc", ":Telescope keymaps<CR>", opts)
 keymap("n", "<leader>fl", ":Telescope lazy<CR>", opts)
 keymap("n", "<leader>fn", ":Telescope node_modules list<CR>", opts)
+
+
+-- ye
+keymap("n", "<leader>m", ":MaximizerToggle<CR>", opts)
 
 
 -- preview justthis stuff1k

@@ -5,7 +5,8 @@ return {
           detection_methods = { "pattern" },
           -- patterns used to detect root dir, when **"pattern"** is in detection_methods
           -- added by cake. added tsconfig for work angualr projects, some of them at least
-          patterns = { ".git", "Makefile", "package.json" , "tsconfig.app.json"},
+          -- added .npmrc for works custom thing
+          patterns = { ".npmrc", ".git", "Makefile", "package.json" , "tsconfig.app.json"},
         }
     end,
     config = function(_, opts)

@@ -2,9 +2,9 @@ return {
     {
         'L3MON4D3/LuaSnip',
         dependencies = {
-            {
-                "rafamadriz/friendly-snippets"
-            },
+            -- {
+            --     "rafamadriz/friendly-snippets"
+            -- },
             {
                 'saadparwaiz1/cmp_luasnip',
                 -- follow latest release.
@@ -17,19 +17,22 @@ return {
         config = function()
             require("luasnip.loaders.from_vscode").lazy_load()
             -- friendly-snippets - enable standardized comments snippets
-            require("luasnip").filetype_extend("typescript", { "tsdoc" })
-            require("luasnip").filetype_extend("javascript", { "jsdoc" })
-            require("luasnip").filetype_extend("lua", { "luadoc" })
-            require("luasnip").filetype_extend("python", { "pydoc" })
-            require("luasnip").filetype_extend("rust", { "rustdoc" })
-            require("luasnip").filetype_extend("cs", { "csharpdoc" })
-            require("luasnip").filetype_extend("java", { "javadoc" })
-            require("luasnip").filetype_extend("c", { "cdoc" })
-            require("luasnip").filetype_extend("cpp", { "cppdoc" })
-            require("luasnip").filetype_extend("php", { "phpdoc" })
-            require("luasnip").filetype_extend("kotlin", { "kdoc" })
-            require("luasnip").filetype_extend("ruby", { "rdoc" })
-            require("luasnip").filetype_extend("sh", { "shelldoc" })
+            -- are these actually snippets? i don't really use snippets :-/ 
+            -- on second thought, might just be my vm lol
+            -- hmm, are they slowing down nvim? not sure, maybe
+            -- require("luasnip").filetype_extend("typescript", { "tsdoc" })
+            -- require("luasnip").filetype_extend("javascript", { "jsdoc" })
+            -- require("luasnip").filetype_extend("lua", { "luadoc" })
+            -- require("luasnip").filetype_extend("python", { "pydoc" })
+            -- require("luasnip").filetype_extend("rust", { "rustdoc" })
+            -- require("luasnip").filetype_extend("cs", { "csharpdoc" })
+            -- require("luasnip").filetype_extend("java", { "javadoc" })
+            -- require("luasnip").filetype_extend("c", { "cdoc" })
+            -- require("luasnip").filetype_extend("cpp", { "cppdoc" })
+            -- require("luasnip").filetype_extend("php", { "phpdoc" })
+            -- require("luasnip").filetype_extend("kotlin", { "kdoc" })
+            -- require("luasnip").filetype_extend("ruby", { "rdoc" })
+            -- require("luasnip").filetype_extend("sh", { "shelldoc" })
         end
     },
     {
@@ -42,10 +45,14 @@ return {
             { 'hrsh7th/cmp-nvim-lsp-document-symbol' },
             { 'hrsh7th/cmp-nvim-lsp-signature-help' },
             { 'hrsh7th/cmp-cmdline' },
+            { 'dmitmel/cmp-cmdline-history' },
+            { "lukas-reineke/cmp-rg" },
+            { "hrsh7th/cmp-nvim-lua" },
         },
         opts = function()
             local has_words_before = function()
-                unpack = unpack or table.unpack
+                -- unpack = unpack or table.unpack
+                unpack = unpack
                 local line, col = unpack(vim.api.nvim_win_get_cursor(0))
                 return col ~= 0 and
                     vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
@@ -78,6 +85,11 @@ return {
                     completion = cmp.config.window.bordered(),
                     documentation = cmp.config.window.bordered(),
                 },
+                -- https://www.reddit.com/r/neovim/comments/1139ngo/how_to_make_nvimcmp_menu_selection_start_at_the/
+                -- preselect = cmp.PreselectMode.None,
+                -- completion = { completeopt = "noselect" },
+                -- https://github.com/pynappo/dotfiles/blob/ac8991f39b16da220b5fc582346c1583f4411348/.config/nvim/lua/pynappo/plugins/cmp.lua#L55
+                -- completion = { completeopt = 'menu,menuone,noinsert,noselect' },
                 mapping = cmp.mapping.preset.insert({
 
                     -- ... Your other mappings ...
@@ -122,6 +134,12 @@ return {
                     { name = 'luasnip' }, -- For luasnip users.
                     { name = 'nvim_lsp_document_symbol' },
                     { name = 'nvim_lsp_signature_help' },
+                    {
+                        name = "rg",
+                        -- Try it when you feel cmp performance is poor
+                        keyword_length = 3
+                    },
+                    { name = "nvim_lua" },
                 }, {
                     { name = 'buffer', keyword_length = 3 },
                 }),
@@ -143,7 +161,9 @@ return {
                         return item
                     end,
                 },
-
+                {
+                    view = "custom" -- or 'custom' or 'wildmenu' or 'native'
+                },
             }
         end,
         config = function(_, opts)
@@ -165,16 +185,45 @@ return {
                     { name = 'buffer' }
                 }
             })
+
+            -- https://www.reddit.com/r/neovim/comments/139s0a2/how_to_setup_nvimcmp_properly/
+            -- Basically if you have cmp.config.sources({ {1}, {2} }), you will first see suggestions from the source 1, then only after you run out of suggestions from 1 will you start to see suggestions from the source 2.
             --
             -- -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-            cmp.setup.cmdline(':', {
-                mapping = cmp.mapping.preset.cmdline(),
-                sources = cmp.config.sources({
-                    { name = 'path' }
-                }, {
-                    { name = 'cmdline' }
-                })
-            })
+            -- cmp.setup.cmdline(':', {
+            --     mapping = cmp.mapping.preset.cmdline(),
+            --     sources = cmp.config.sources({
+            --         { name = 'path' }
+            --     }, {
+            --         { name = 'cmdline' }
+            --     })
+            -- })
+
+            -- -- I keep running into annoyances using this, where I'm stuck trying to tab over to the next item but it wont
+            -- cmp.setup.cmdline(':', {
+            --     -- not sure if these actually work though: https://github.com/hrsh7th/nvim-cmp/issues/530
+            --     -- confirmation = { completeopt = 'menu,menuone,noinsert' },
+            --     confirmation = { completeopt = 'menu,menuone,noinsert,noselect' },
+            --     -- confirmation = { completeopt = 'noinsert, noselect' },
+            --     mapping = cmp.mapping.preset.cmdline(),
+            --     sources = cmp.config.sources({
+            --         { name = 'path' },
+            --     }, {
+            --         { name = 'cmdline' },
+            --         -- { name = 'cmdline_history' },
+            --     }, {
+            --         { name = 'cmdline_history' },
+            --     })
+            -- })
+            -- cmp.setup.cmdline(':', {
+            --     confirmation = { completeopt = 'menu,menuone,noinsert' },
+            --     mapping = cmp.mapping.preset.cmdline(),
+            --     sources = cmp.config.sources({
+            --         { name = 'cmdline' },
+            --         { name = 'cmdline_history' },
+            --         { name = 'path' },
+            --     })
+            -- })
         end
     },
 }

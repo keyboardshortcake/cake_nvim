@@ -1,6 +1,64 @@
 return {
     -- { 'ryanoasis/vim-devicons' },
-    { 'sbdchd/neoformat' },
+    -- { 'sbdchd/neoformat' },
+    -- {
+    --     'tpope/vim-repeat',
+    -- },
+    {
+        -- pretty good:
+        -- 'justinmk/vim-sneak',
+        -- this port seems like it does more:
+        'ggandor/leap.nvim',
+        config = function()
+            -- require('leap').create_default_mappings("true")
+            -- require('leap').add_repeat_mappings(';', ',', {
+            --     -- False by default. If set to true, the keys will work like the
+            --     -- native semicolon/comma, i.e., forward/backward is understood in
+            --     -- relation to the last motion.
+            --     relative_directions = true,
+            --     -- By default, all modes are included.
+            --     modes = { 'n', 'x', 'o' },
+            -- })
+        end
+    },
+    {
+        "szw/vim-maximizer",
+    },
+    {
+        'lewis6991/gitsigns.nvim',
+        config = function()
+            require('gitsigns').setup()
+        end
+    },
+    {
+        'nvim-lua/plenary.nvim',
+    },
+    {
+        'nvim-lualine/lualine.nvim',
+        dependencies = { 'nvim-tree/nvim-web-devicons' }
+    },
+    -- {
+    --     'mhartington/formatter.nvim',
+    -- },
+    {
+        'windwp/nvim-ts-autotag',
+        config = function()
+            require 'nvim-treesitter.configs'.setup {
+                autotag = {
+                    enable = true,
+                }
+            }
+        end
+    },
+    {
+        "sindrets/diffview.nvim",
+    },
+    {
+        "j-hui/fidget.nvim",
+        opts = {
+            -- options
+        },
+    },
     {
         "farmergreg/vim-lastplace",
     },
@@ -131,46 +189,46 @@ return {
         },
         config = function()
             require('Comment').setup({
-                    ---Add a space b/w comment and the line
-                    padding = true,
-                    ---Whether the cursor should stay at its position
-                    sticky = true,
-                    ---Lines to be ignored while (un)comment ignore = nil,
-                    ---LHS of toggle mappings in NORMAL mode
-                    toggler = {
-                        ---Line-comment toggle keymap
-                        line = 'gcc',
-                        ---Block-comment toggle keymap
-                        block = 'gbc',
-                    },
-                    ---LHS of operator-pending mappings in NORMAL and VISUAL mode
-                    opleader = {
-                        ---Line-comment keymap
-                        line = 'gc',
-                        ---Block-comment keymap
-                        block = 'gb',
-                    },
-                    ---LHS of extra mappings
-                    extra = {
-                        ---Add comment on the line above
-                        above = 'gcO',
-                        ---Add comment on the line below
-                        below = 'gco',
-                        ---Add comment at the end of line
-                        eol = 'gcA',
-                    },
-                    ---Enable keybindings
-                    ---NOTE: If given `false` then the plugin won't create any mappings
-                    mappings = {
-                        ---Operator-pending mapping; `gcc` `gbc` `gc[count]{motion}` `gb[count]{motion}`
-                        basic = false,
-                        ---Extra mapping; `gco`, `gcO`, `gcA`
-                        extra = false,
-                    },
-                    ---Function to call before (un)comment
-                    pre_hook = nil,
-                    ---Function to call after (un)comment
-                    post_hook = nil,
+                ---Add a space b/w comment and the line
+                padding = true,
+                ---Whether the cursor should stay at its position
+                sticky = true,
+                ---Lines to be ignored while (un)comment ignore = nil,
+                ---LHS of toggle mappings in NORMAL mode
+                toggler = {
+                    ---Line-comment toggle keymap
+                    line = 'gcc',
+                    ---Block-comment toggle keymap
+                    block = 'gbc',
+                },
+                ---LHS of operator-pending mappings in NORMAL and VISUAL mode
+                opleader = {
+                    ---Line-comment keymap
+                    line = 'gc',
+                    ---Block-comment keymap
+                    block = 'gb',
+                },
+                ---LHS of extra mappings
+                extra = {
+                    ---Add comment on the line above
+                    above = 'gcO',
+                    ---Add comment on the line below
+                    below = 'gco',
+                    ---Add comment at the end of line
+                    eol = 'gcA',
+                },
+                ---Enable keybindings
+                ---NOTE: If given `false` then the plugin won't create any mappings
+                mappings = {
+                    ---Operator-pending mapping; `gcc` `gbc` `gc[count]{motion}` `gb[count]{motion}`
+                    basic = false,
+                    ---Extra mapping; `gco`, `gcO`, `gcA`
+                    extra = false,
+                },
+                ---Function to call before (un)comment
+                pre_hook = nil,
+                ---Function to call after (un)comment
+                post_hook = nil,
             })
         end
     },
