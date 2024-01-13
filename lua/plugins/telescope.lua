@@ -58,6 +58,9 @@ return {
             "nvim-telescope/telescope-file-browser.nvim",
             dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
         },
+        {
+            "tom-anders/telescope-vim-bookmarks.nvim",
+        },
     },
     opts = function()
         -- perform a telescope action on multiple files instead of having to send stuff to quick fix list heh
@@ -214,7 +217,8 @@ return {
                 },
                 advanced_git_search = {
                     -- fugitive or diffview
-                    diff_plugin = "fugitive",
+                    -- diff_plugin = "fugitive",
+                    diff_plugin = "diffview",
                     -- customize git in previewer
                     -- e.g. flags such as { "--no-pager" }, or { "-c", "delta.side-by-side=false" }
                     git_flags = {},
@@ -301,6 +305,7 @@ return {
         require('telescope').load_extension "undo"
         require('telescope').load_extension "lazy"
         require('telescope').load_extension "file_browser"
+        require('telescope').load_extension "vim_bookmarks"
         -- telescope.load_extension "windowizer"
     end
     -- // interestingly, my mappsings shortcut (and probably that whole return block) doesn't work with this active

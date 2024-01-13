@@ -49,6 +49,14 @@ vim.g.undotree_SetFocusWhenToggle = 1           -- focus undotree when i toggle 
 vim.opt.fixeol = false                          -- Don't try to fix the EOL for files. Just let them remain however I found them. Equivalent to `set nofixeol` in Vimscript
 vim.o.fileformats = "unix,dos,mac"                                           -- because the d.ts file for angular are showing up with ^M characters all throughouts
 vim.opt.mousemodel= "extend"                 -- This kills the right click menu
+-- -- this stuff is for the folding plugin called "ufo"
+-- vim.o.foldcolumn = '1' -- '0' is not bad
+vim.o.foldcolumn = '0' -- '0' is not bad
+vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true
+
+-- /end ufo stuff
 -- vim.lsp.inlay_hint.enable(0, true)
 
 -- vim.opt.completeopt = {'menu', 'menuone', 'noselect'} -- for nvim-cmp? per https://vonheikemen.github.io/devlog/tools/setup-nvim-lspconfig-plus-nvim-cmp/
