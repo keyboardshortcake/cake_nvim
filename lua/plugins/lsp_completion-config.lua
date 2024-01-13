@@ -17,7 +17,7 @@ return {
         config = function()
             require("luasnip.loaders.from_vscode").lazy_load()
             -- friendly-snippets - enable standardized comments snippets
-            -- are these actually snippets? i don't really use snippets :-/ 
+            -- are these actually snippets? i don't really use snippets :-/
             -- on second thought, might just be my vm lol
             -- hmm, are they slowing down nvim? not sure, maybe
             -- require("luasnip").filetype_extend("typescript", { "tsdoc" })
@@ -185,6 +185,30 @@ return {
                     { name = 'buffer' }
                 }
             })
+
+            function setAutoCmp(mode)
+                if mode then
+                    cmp.setup({
+                        completion = {
+                            autocomplete = { require('cmp.types').cmp.TriggerEvent.TextChanged }
+                        }
+                    })
+                else
+                    cmp.setup({
+                        completion = {
+                            autocomplete = false
+                        }
+                    })
+                end
+            end
+
+            setAutoCmp(false)
+
+            -- enable automatic completion popup on typing
+            vim.cmd('command AutoCmpOn lua setAutoCmp(true)')
+
+            -- disable automatic competion popup on typing
+            vim.cmd('command AutoCmpOff lua setAutoCmp(false)')
 
             -- https://www.reddit.com/r/neovim/comments/139s0a2/how_to_setup_nvimcmp_properly/
             -- Basically if you have cmp.config.sources({ {1}, {2} }), you will first see suggestions from the source 1, then only after you run out of suggestions from 1 will you start to see suggestions from the source 2.

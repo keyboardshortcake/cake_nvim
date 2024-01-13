@@ -245,3 +245,11 @@ keymap('n', '<leader>u', vim.cmd.UndotreeToggle)
 keymap("n", '<leader>ie', "<cmd>lua vim.lsp.inlay_hint.enable(0, true)<CR>")
 keymap("n", '<leader>id', "<cmd>lua vim.lsp.inlay_hint.enable(0, false)<CR>")
 
+-- Toggle automatic completion
+
+-- Enable automatic completion
+vim.api.nvim_set_keymap('n', '<Space>ac', ':AutoCmpOn<CR>', opts)
+
+-- Disable automatic completion
+vim.api.nvim_set_keymap('n', '<Space>ad', ':AutoCmpOff<CR>', opts)
+
