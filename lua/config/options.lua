@@ -31,7 +31,8 @@ vim.opt.laststatus = 2                          -- only the last window will alw
 vim.opt.showcmd = false                         -- hide (partial) command in the last line of the screen (for performance)
 vim.opt.ruler = false                           -- hide the line and column number of the cursor position
 vim.opt.numberwidth = 4                         -- minimal number of columns to use for the line number {default 4}
-vim.opt.signcolumn ="yes"                                           -- always show the sign column, otherwise it would shift the text each time
+vim.opt.signcolumn =
+"yes"                                           -- always show the sign column, otherwise it would shift the text each time
 vim.opt.wrap = true                             -- display lines as one long line
 vim.opt.scrolloff = 8                           -- minimal number of screen lines to keep above and below the cursor
 vim.opt.sidescrolloff = 8                       -- minimal number of screen columns to keep to the left and right of the cursor if wrap is `false`
@@ -43,18 +44,20 @@ vim.opt.iskeyword:append("-,_")                 -- treats words with `-`, or `_`
 vim.opt.formatoptions:remove({ "c", "r", "o" }) -- This is a sequence of letters which describes how automatic formatting is to be done
 vim.opt.linebreak = true
 vim.opt.relativenumber = true
-vim.opt.modifiable = true                       -- trying to fix this huge error that pops up everytime i install a plugin
-vim.g.undotree_SetFocusWhenToggle = 1           -- focus undotree when i toggle it open
+vim.opt.modifiable = true             -- trying to fix this huge error that pops up everytime i install a plugin
+vim.g.undotree_SetFocusWhenToggle = 1 -- focus undotree when i toggle it open
 -- vim.o.eol = "unix"                                        -- Ensure that files are saved with a newline at the end. (set eol=unix)
-vim.opt.fixeol = false                          -- Don't try to fix the EOL for files. Just let them remain however I found them. Equivalent to `set nofixeol` in Vimscript
-vim.o.fileformats = "unix,dos,mac"                                           -- because the d.ts file for angular are showing up with ^M characters all throughouts
-vim.opt.mousemodel= "extend"                 -- This kills the right click menu
--- -- this stuff is for the folding plugin called "ufo"
+vim.opt.fixeol = false                -- Don't try to fix the EOL for files. Just let them remain however I found them. Equivalent to `set nofixeol` in Vimscript
+vim.o.fileformats =
+"unix,dos,mac"                        -- because the d.ts file for angular are showing up with ^M characters all throughouts
+vim.opt.mousemodel = "extend"         -- This kills the right click menu
+-- this stuff is for the folding plugin called "ufo"
 -- vim.o.foldcolumn = '1' -- '0' is not bad
 vim.o.foldcolumn = '0' -- '0' is not bad
-vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+vim.o.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
+vim.g.editorconfig = false -- Having some random editorconfig dictacting how my file gets formatted is pretty annoying. Turning it off.
 
 -- /end ufo stuff
 -- vim.lsp.inlay_hint.enable(0, true)
@@ -81,3 +84,38 @@ vim.o.foldenable = true
 --
 
 -- could also set settings with vim.cmd like this vim.cmd("set undofile = true")
+
+vim.g.bookmark_auto_close = 1
+-- let g:bookmark_auto_close = 1
+
+-- Bullets.vim
+-- vim.g:bullets_enabled_file_types = [
+--     \ 'markdown',
+--     \ 'text',
+--     \ 'gitcommit',
+--     \ 'scratch'
+--     \]
+
+-- vim.api.nvim_set_var('bullets_enabled_file_types', {
+--     'markdown',
+--     'text',
+--     'gitcommit',
+--     'scratch',
+--     'toggledo',
+-- })
+--
+-- vim.api.nvim_set_var('bullets_custom_mappings', {
+--     { "imap",     "<cr>",      "<Plug>(bullets-newline)" },
+--     { "inoremap", "<C-cr>",    "<cr>" },
+--     { "nmap",     "o",         "<Plug>(bullets-newline)" },
+--     { "vmap",     "gN",        "<Plug>(bullets-renumber)" },
+--     { "nmap",     "gN",        "<Plug>(bullets-renumber)" },
+--     { "nmap",     "<leader>x", "<Plug>(bullets-toggle-checkbox)" },
+--     -- { "imap",     "<C-t>",     "<Plug>(bullets-demote)" },
+--     { "imap",     "<Tab>",     "<Plug>(bullets-demote)" },
+--     { "nmap",     ">>",        "<Plug>(bullets-demote)" },
+--     { "vmap",     ">",         "<Plug>(bullets-demote)" },
+--     { "imap",     "<C-d>",     "<Plug>(bullets-promote)" },
+--     { "nmap",     "<<",        "<Plug>(bullets-promote)" },
+--     { "vmap",     "<",         "<Plug>(bullets-promote)" }
+-- })

@@ -19,6 +19,9 @@ return {
                     "yamlls",
                     "eslint",           -- added new eslint server, hopefully
                     "angularls@14.0.0", -- work project is on angular cli 13.3.9 and angular 13.3.11 :shrug:
+                    "phpactor",
+                    "intelephense",
+                    -- "vint",
                 },
                 automatic_installation = true,
 
@@ -77,6 +80,21 @@ return {
             local lspconfig = require('lspconfig')
             local lsp = vim.lsp
             local handlers = lsp.handlers
+            -- LSP settings (for overriding per client)
+            local border = {
+                { '┌', 'FloatBorder' },
+                { '─', 'FloatBorder' },
+                { '┐', 'FloatBorder' },
+                { '│', 'FloatBorder' },
+                { '┘', 'FloatBorder' },
+                { '─', 'FloatBorder' },
+                { '└', 'FloatBorder' },
+                { '│', 'FloatBorder' },
+            }
+            -- local handlers = {
+            --     ['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = border }),
+            --     ['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border }),
+            -- }
             -- local servers = {
             --     "tsserver",
             --     "html",
@@ -127,6 +145,22 @@ return {
                 }
             }
             lspconfig.html.setup {
+                capabilities = capabilities,
+                on_attach = on_attach,
+            }
+            lspconfig.phpactor.setup {
+                capabilities = capabilities,
+                on_attach = on_attach,
+            }
+            lspconfig.intelephense.setup {
+                capabilities = capabilities,
+                on_attach = on_attach,
+            }
+            -- lspconfig.vint.setup {
+            --     capabilities = capabilities,
+            --     on_attach = on_attach,
+            -- }
+            lspconfig.vimls.setup {
                 capabilities = capabilities,
                 on_attach = on_attach,
             }
@@ -345,16 +379,16 @@ return {
             --     { "🭼", "FloatBorder" },
             --     { "▏", "FloatBorder" },
             -- }
-            local border = {
-                { "#", "FloatBorder" },
-                { "─", "FloatBorder" },
-                { "┐", "FloatBorder" },
-                { "│", "FloatBorder" },
-                { "┘", "FloatBorder" },
-                { "─", "FloatBorder" },
-                { "└", "FloatBorder" },
-                { "│", "FloatBorder" },
-            }
+            -- local border = {
+            --     { "#", "FloatBorder" },
+            --     { "─", "FloatBorder" },
+            --     { "┐", "FloatBorder" },
+            --     { "│", "FloatBorder" },
+            --     { "┘", "FloatBorder" },
+            --     { "─", "FloatBorder" },
+            --     { "└", "FloatBorder" },
+            --     { "│", "FloatBorder" },
+            -- }
 
             -- border = { "│", "─", "┐", "│", "┘", "─", "└", "│" }, -- Border characters of the floating window
             -- -- LSP settings (for overriding per client)
@@ -463,6 +497,14 @@ return {
                     vim.keymap.set('n', '<space>f', function()
                         vim.lsp.buf.format { async = true }
                     end, opts)
+
+                    -- Inlay Hints
+                    local client = vim.lsp.get_client_by_id(ev.data.client_id)
+                    if client.server_capabilities.inlayHintProvider then
+                        vim.lsp.inlay_hint.enable(ev.buf, true)
+                    else
+                        vim.lsp.inlay_hint.enable(ev.buf, false)
+                    end
                 end,
             })
         end

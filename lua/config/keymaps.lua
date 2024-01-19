@@ -7,7 +7,8 @@ local opts = { silent = true }
 -- ref: https://www.reddit.com/r/neovim/comments/og1cdv/neovim_lsp_how_do_you_get_diagnostic_mesages_to/
 vim.api.nvim_set_keymap('n', '<space>y', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
 -- make leap search up and down at the same town instead of having to use S to search up
-vim.api.nvim_set_keymap('n', 's', '<cmd>lua require("leap").leap({ target_windows = { vim.api.nvim_get_current_win() } })<CR>', opts)
+vim.api.nvim_set_keymap('n', 's',
+    '<cmd>lua require("leap").leap({ target_windows = { vim.api.nvim_get_current_win() } })<CR>', opts)
 
 --Remap space as leader key
 keymap("", "<Space>", "<Nop>", opts)
@@ -49,7 +50,8 @@ keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 keymap("n", "<leader>ff", ":Telescope find_files<CR>", opts)
 keymap("n", "<leader>fd", ":Telescope file_browser<CR>", opts)
 -- Could've configured this in an easier way: https://github.com/nvim-telescope/telescope.nvim?tab=readme-ov-file#vim-commands
-keymap("n", "<leader>fhf", "<cmd>lua require('telescope.builtin').find_files { hidden = true, no_ignore = true }<CR>", opts)
+keymap("n", "<leader>fhf", "<cmd>lua require('telescope.builtin').find_files { hidden = true, no_ignore = true }<CR>",
+    opts)
 -- is it not a bulitin? cuz this doesn't work
 -- keymap("n", "<leader>fhd", "<cmd>lua require('telescope.builtin').file_browser { hidden = true, no_ignore = true }<CR>", opts)
 keymap("n", "<leader>ft", ":Telescope live_grep<CR>", opts)
@@ -253,3 +255,29 @@ vim.api.nvim_set_keymap('n', '<Space>ac', ':AutoCmpOn<CR>', opts)
 -- Disable automatic completion
 vim.api.nvim_set_keymap('n', '<Space>ad', ':AutoCmpOff<CR>', opts)
 
+-- vim.keymap.set('n', 'tj', require('treesj').toggle())
+keymap("n", "<Space>tj", ":TSJToggle<CR>", opts)
+
+
+-- I don't really use this,  Iuse my own thing
+-- keymap("n", "<Space>p", ":ScratchPad<CR>", opts)
+
+-- welp, I need this xdg thing for this but it's not doing it :(
+-- keymap("n", "<Space>md", "require('browse.mdn').search()", opts)
+
+-- keymap("n", "<leader>p", "<CMD>:lua require('quicknote').NewNoteAtGlobalAndOpen()<CR>", opts)
+-- keymap("n", "<leader>sp", "<CMD>:Telescope quicknote<CR>", opts)
+-- Define the key mappings using Lua
+-- vim.api.nvim_set_keymap('i', '<cr>', '<Plug>(bullets-newline)', { noremap = false })
+-- vim.api.nvim_set_keymap('i', '<C-cr>', '<cr>', { noremap = true })
+-- vim.api.nvim_set_keymap('n', 'o', '<Plug>(bullets-newline)', { noremap = false })
+-- vim.api.nvim_set_keymap('v', 'gN', '<Plug>(bullets-renumber)', { noremap = false })
+-- vim.api.nvim_set_keymap('n', 'gN', '<Plug>(bullets-renumber)', { noremap = false })
+-- vim.api.nvim_set_keymap('n', '<leader>x', '<Plug>(bullets-toggle-checkbox)', { noremap = false })
+-- vim.api.nvim_set_keymap('i', '<C-t>', '<Plug>(bullets-demote)', { noremap = false })
+-- vim.api.nvim_set_keymap('n', '>>', '<Plug>(bullets-demote)', { noremap = false })
+-- vim.api.nvim_set_keymap('v', '>', '<Plug>(bullets-demote)', { noremap = false })
+-- vim.api.nvim_set_keymap('i', '<C-d>', '<Plug>(bullets-promote)', { noremap = false })
+-- vim.api.nvim_set_keymap('n', '<<', '<Plug>(bullets-promote)', { noremap = false })
+-- vim.api.nvim_set_keymap('v', '<', '<Plug>(bullets-promote)', { noremap = false })
+--

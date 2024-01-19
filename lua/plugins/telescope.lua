@@ -191,6 +191,9 @@ return {
 
             },
             extensions = {
+                -- quicknote = {
+                --     defaultScope = "Global",
+                -- },
                 fzf                 = {
                     fuzzy = true,                   -- false will only do exact matching
                     override_generic_sorter = true, -- override the generic sorter
@@ -212,6 +215,7 @@ return {
                     mappings = {
                         i = {
                             ["<CR>"] = select_one_or_multi,
+                            ["<C-l>"] = select_dir_for_grep,
                         }
                     },
                 },
@@ -262,7 +266,9 @@ return {
                         'rg',
                         -- this makes sure we're ignoring git -ignores and looking through hidden files too
                         -- it's a ripgrep flag
-                        '-uu',
+                        -- '-uu',
+                        -- well, i guess I only want to look through hidden files but not .gitignore stuff afterall heh
+                        '--hidden',
                         '--no-heading',
                         '--with-filename',
                         '--line-number',
@@ -306,6 +312,7 @@ return {
         require('telescope').load_extension "lazy"
         require('telescope').load_extension "file_browser"
         require('telescope').load_extension "vim_bookmarks"
+        -- require("telescope").load_extension("quicknote")
         -- telescope.load_extension "windowizer"
     end
     -- // interestingly, my mappsings shortcut (and probably that whole return block) doesn't work with this active

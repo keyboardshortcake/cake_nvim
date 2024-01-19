@@ -124,5 +124,5 @@ require("tokyonight").setup({
 })
 
 
-vim.cmd('colorscheme tokyonight-storm')
+-- vim.cmd('colorscheme tokyonight-storm')
 -- vim.cmd('colorscheme tokyonight')

@@ -1,9 +1,122 @@
 return {
+    -- {
+    --     { "atelierbram/Base4Tone-nvim" } -- colorscheme
+    -- },
+    -- {
+    --     "dzfrias/noir.nvim",
+    -- },
+    -- {
+    --     'NLKNguyen/papercolor-theme',
+    -- },
+    -- {
+    --     "no-clown-fiesta/no-clown-fiesta.nvim",
+    -- },
     -- { 'ryanoasis/vim-devicons' },
     -- { 'sbdchd/neoformat' },
     -- {
     --     'tpope/vim-repeat',
     -- },
+    -- {
+    --     'vim-pandoc/vim-pandoc-syntax',
+    --     -- config = function()
+    --         -- require("pandoc-syntax").setup({})
+    --     -- end
+    -- },
+    {
+        "lalitmee/browse.nvim",
+        dependencies = { "nvim-telescope/telescope.nvim" },
+        config = function()
+            require('browse').setup({
+                -- default values for the setup
+                require('browse').setup({
+                    -- search provider you want to use
+                    provider = "google", -- duckduckgo, bing
+
+                    -- either pass it here or just pass the table to the functions
+                    -- see below for more
+                    bookmarks = {},
+                    icons = {
+                        bookmark_alias = "", -- if you have nerd fonts, you can set this to ""
+                        bookmarks_prompt = "󰂺 ", -- if you have nerd fonts, you can set this to "󰂺 "
+                        grouped_bookmarks = "", -- if you have nerd fonts, you can set this to 
+                    }
+                })
+            })
+        end
+    },
+    {
+        -- couldn't get this to work :-/ meh
+        -- have to install this command line tool for this to do anything I think?
+        -- https://github.com/chrisdickinson/mdn-cli
+        'mklabs/mdn.vim',
+        config = function()
+            -- require('mdn.vim').setup()
+        end
+    },
+    {
+        'gsuuon/note.nvim',
+        opts = {
+            -- Spaces are note roots. These directories should contain a `./notes` directory (will be made if not).
+            -- Defaults to { '~' }.
+            spaces = {
+                '~',
+                -- '~/projects/foo'
+            },
+
+            -- Set keymap = false to disable keymapping
+            -- keymap = {
+            --   prefix = '<leader>n'
+            -- }
+        },
+        cmd = 'Note',
+        ft = 'note'
+    },
+    {
+        'metakirby5/codi.vim',
+    },
+    { -- actually have no idea what this does
+        "lukas-reineke/virt-column.nvim",
+        config = function()
+            require("virt-column").setup({})
+        end
+    },
+    -- {
+    --     'FraserLee/ScratchPad',
+    --     config = function()
+    --         require('virt-column').setup {
+    --             char = '|',
+    --         }
+    --         vim.g.scratchpad_autostart = 0
+    --         vim.g.scratchpad_autofocus = 1
+    --         -- vim.api.nvim_set_hl(0, "Scratchpad", { ctermfg=White })
+    --         -- vim.api.nvim_set_hl(0, "Scratchpad", { ctermfg="Red", ctermbg="Blue" })
+    --         -- vim.api.nvim_set_hl(0, "Scratchpad", { ctermfg=10, ctermbg=0, guifg=Green, guibg=Black })
+    --         vim.api.nvim_set_hl(0, "Scratchpad", { ctermfg = 10 })
+    --         -- vim.cmd.hi("Scratchpad", "ctermfg=red", "ctermbg=black", "guifg=blue");
+    --         -- require('scratchpad').setup({})
+    --     end
+    -- },
+    {
+        -- oldie but goodie. very sweet, just <leader>tt to add/toggle checkbox on a line
+        "jkramer/vim-checkbox",
+    },
+    {
+        'Wansmer/treesj',
+        dependencies = { 'nvim-treesitter/nvim-treesitter' },
+        config = function()
+            require('treesj').setup(
+                {
+                    use_default_keymaps = false,
+                }
+            )
+        end,
+    },
+    {
+        "HiPhish/rainbow-delimiters.nvim",
+        config = function()
+            require('rainbow-delimiters.setup').setup {}
+        end
+    },
     {
         -- pretty good:
         -- 'justinmk/vim-sneak',
@@ -26,6 +139,17 @@ return {
     },
     {
         'MattesGroeger/vim-bookmarks',
+        -- config = function()
+        --     require("bookmarks").setup({
+        --         bookmark_auto_close = 1,
+        --     })
+        -- end
+    },
+    -- {
+    --     "Shougo/unite.vim",
+    -- },
+    {
+        "dkarter/bullets.vim",
     },
     -- {
     --
@@ -36,6 +160,25 @@ return {
     --         -- require('vim-bujo').setup()
     --     end
     -- },
+    -- {
+    --     "RutaTang/quicknote.nvim",
+    --     config = function()
+    --         require("quicknote").setup({
+    --             mode = "resident", -- "portable" | "resident", default to "portable"
+    --             sign = "N",        -- This is used for the signs on the left side (refer to ShowNoteSigns() api).
+    --             -- You can change it to whatever you want (eg. some nerd fonts icon), 'N' is default
+    --             filetype = "md",
+    --             -- git_branch_recognizable = true, -- If true, quicknote will separate notes by git branch
+    --             -- But it should only be used with resident mode,  it has not effect used with portable mode
+    --         })
+    --     end,
+    --     dependencies = { "nvim-lua/plenary.nvim" },
+    -- },
+    {                          -- maybe this should be a dependency of nvim-ufo cuz ... i need them folds to stay lol
+        "chrisgrieser/nvim-origami",
+        event = "BufReadPost", -- later or on keypress would prevent saving folds
+        opts = true,           -- needed even when using default config
+    },
     {
         'kevinhwang91/nvim-ufo',
         dependencies = {
@@ -166,7 +309,35 @@ return {
     {
         "lukas-reineke/indent-blankline.nvim",
         main = "ibl",
-        opts = {}
+        opts = {},
+        config = function()
+            local highlight = {
+                "RainbowRed",
+                "RainbowYellow",
+                "RainbowBlue",
+                "RainbowOrange",
+                "RainbowGreen",
+                "RainbowViolet",
+                "RainbowCyan",
+            }
+            local hooks = require "ibl.hooks"
+            -- create the highlight groups in the highlight setup hook, so they are reset
+            -- every time the colorscheme changes
+            hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+                vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
+                vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
+                vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF" })
+                vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66" })
+                vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
+                vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
+                vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
+            end)
+
+            vim.g.rainbow_delimiters = { highlight = highlight }
+            require("ibl").setup { scope = { highlight = highlight } }
+
+            hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
+        end
     },
     -- { 'akinsho/org-bullets.nvim',                 config = true },
     -- { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
