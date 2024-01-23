@@ -22,6 +22,14 @@ return {
     --         -- require("pandoc-syntax").setup({})
     --     -- end
     -- },
+    -- {
+    --     "preservim/vim-markdown",
+    -- },
+    {
+        "lukas-reineke/headlines.nvim",
+        dependencies = "nvim-treesitter/nvim-treesitter",
+        config = true, -- or `opts = {}`
+    },
     {
         "lalitmee/browse.nvim",
         dependencies = { "nvim-telescope/telescope.nvim" },
@@ -96,10 +104,10 @@ return {
     --         -- require('scratchpad').setup({})
     --     end
     -- },
-    {
-        -- oldie but goodie. very sweet, just <leader>tt to add/toggle checkbox on a line
-        "jkramer/vim-checkbox",
-    },
+    -- {
+    --     -- oldie but goodie. very sweet, just <leader>tt to add/toggle checkbox on a line
+    --     "jkramer/vim-checkbox",
+    -- },
     {
         'Wansmer/treesj',
         dependencies = { 'nvim-treesitter/nvim-treesitter' },

@@ -96,26 +96,32 @@ vim.g.bookmark_auto_close = 1
 --     \ 'scratch'
 --     \]
 
--- vim.api.nvim_set_var('bullets_enabled_file_types', {
---     'markdown',
---     'text',
---     'gitcommit',
---     'scratch',
---     'toggledo',
--- })
+vim.api.nvim_set_var('bullets_enabled_file_types', {
+    'markdown',
+    'text',
+    'gitcommit',
+    'scratch',
+    -- 'toggledo',
+})
 --
--- vim.api.nvim_set_var('bullets_custom_mappings', {
---     { "imap",     "<cr>",      "<Plug>(bullets-newline)" },
---     { "inoremap", "<C-cr>",    "<cr>" },
---     { "nmap",     "o",         "<Plug>(bullets-newline)" },
---     { "vmap",     "gN",        "<Plug>(bullets-renumber)" },
---     { "nmap",     "gN",        "<Plug>(bullets-renumber)" },
---     { "nmap",     "<leader>x", "<Plug>(bullets-toggle-checkbox)" },
---     -- { "imap",     "<C-t>",     "<Plug>(bullets-demote)" },
---     { "imap",     "<Tab>",     "<Plug>(bullets-demote)" },
---     { "nmap",     ">>",        "<Plug>(bullets-demote)" },
---     { "vmap",     ">",         "<Plug>(bullets-demote)" },
---     { "imap",     "<C-d>",     "<Plug>(bullets-promote)" },
---     { "nmap",     "<<",        "<Plug>(bullets-promote)" },
---     { "vmap",     "<",         "<Plug>(bullets-promote)" }
--- })
+vim.api.nvim_set_var('bullets_custom_mappings', {
+    { "imap",     "<cr>",      "<Plug>(bullets-newline)" },
+    { "inoremap", "<C-cr>",    "<cr>" },
+    { "nmap",     "o",         "<Plug>(bullets-newline)" },
+    { "vmap",     "gN",        "<Plug>(bullets-renumber)" },
+    { "nmap",     "gN",        "<Plug>(bullets-renumber)" },
+    { "nmap",     "<leader>x", "<Plug>(bullets-toggle-checkbox)" },
+    -- { "imap",     "<S-t>",     "<Plug>(bullets-demote)" },
+    -- { "imap",     "<C-t>",     "<Plug>(bullets-demote)" },
+    -- { "imap",     "<D-t>",     "<Plug>(bullets-demote)" },
+    { "imap",     "<Tab>",     "<Plug>(bullets-demote)" },
+    { "nmap",     "<Tab>",     "<Plug>(bullets-demote)" },
+    -- { "imap",     "<S-Tab>",     "<Plug>(bullets-demote)" },
+    { "nmap",     ">>",        "<Plug>(bullets-demote)" },
+    { "vmap",     ">",         "<Plug>(bullets-demote)" },
+    { "imap",     "<C-d>",     "<Plug>(bullets-promote)" },
+    { "imap",     "<S-Tab>",     "<Plug>(bullets-promote)" },
+    { "nmap",     "<S-Tab>",     "<Plug>(bullets-promote)" },
+    { "nmap",     "<<",        "<Plug>(bullets-promote)" },
+    { "vmap",     "<",         "<Plug>(bullets-promote)" }
+})

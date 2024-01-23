@@ -21,6 +21,7 @@ return {
                     "angularls@14.0.0", -- work project is on angular cli 13.3.9 and angular 13.3.11 :shrug:
                     "phpactor",
                     "intelephense",
+                    "marksman",
                     -- "vint",
                 },
                 automatic_installation = true,
@@ -149,6 +150,10 @@ return {
                 on_attach = on_attach,
             }
             lspconfig.phpactor.setup {
+                capabilities = capabilities,
+                on_attach = on_attach,
+            }
+            lspconfig.marksman.setup {
                 capabilities = capabilities,
                 on_attach = on_attach,
             }

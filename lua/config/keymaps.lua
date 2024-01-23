@@ -258,6 +258,15 @@ vim.api.nvim_set_keymap('n', '<Space>ad', ':AutoCmpOff<CR>', opts)
 -- vim.keymap.set('n', 'tj', require('treesj').toggle())
 keymap("n", "<Space>tj", ":TSJToggle<CR>", opts)
 
+-- another way to get out of insert mode
+vim.o.timeoutlen = 500
+keymap('i', 'jj', '<Esc>', opts)
+
+-- another way to exit terminal mode
+    -- :tnoremap <Esc> <C-\><C-n>
+-- Terminal mode mapping to exit insert mode in terminals
+vim.api.nvim_set_keymap('t', '<Esc>', '<C-\\><C-n>', { noremap = true })
+
 
 -- I don't really use this,  Iuse my own thing
 -- keymap("n", "<Space>p", ":ScratchPad<CR>", opts)

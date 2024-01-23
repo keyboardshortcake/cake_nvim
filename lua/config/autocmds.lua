@@ -76,6 +76,7 @@ vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
 
 
 -- force shift tab to act right
+-- disabling to see if I notice it's not there. maybe i don't need it anymore?
 vim.api.nvim_set_keymap('i', '<S-Tab>', '<C-d>', { noremap = true, silent = true })
 local ag = vim.api.nvim_create_augroup
 local au = vim.api.nvim_create_autocmd
@@ -91,6 +92,16 @@ au({ "BufNewFile", "BufRead" }, {
         vim.diagnostic.disable(0)
     end,
     group = disable_node_modules_eslint_group,
+})
+
+au({ "BufNewFile", "BufFilePre", "BufRead" }, {
+    pattern = {
+        "*.md", ".markdown",
+    },
+    callback = function()
+        vim.bo.filetype = 'markdown'
+        vim.bo.syntax = "markdown"
+    end
 })
 
 local function checkboxing(mark)

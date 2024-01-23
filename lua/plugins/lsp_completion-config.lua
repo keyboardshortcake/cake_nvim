@@ -93,6 +93,7 @@ return {
                 mapping = cmp.mapping.preset.insert({
 
                     -- ... Your other mappings ...
+                    -- TEMPORARILY disabling to see if I don't need it anymore
 
                     ["<Tab>"] = cmp.mapping(function(fallback)
                         if cmp.visible() then
