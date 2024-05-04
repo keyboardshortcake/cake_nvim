@@ -104,6 +104,16 @@ au({ "BufNewFile", "BufFilePre", "BufRead" }, {
     end
 })
 
+-- au({ "BufNewFile", "BufFilePre", "BufRead" }, {
+--     pattern = {
+--         "*.diff",
+--     },
+--     callback = function()
+--         vim.bo.filetype = 'diff'
+--         vim.bo.syntax = "diff"
+--     end
+-- })
+--
 local function checkboxing(mark)
     return function()
         local line = vim.fn.getline('.')
@@ -164,3 +174,54 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost' }, {
         vim.api.nvim_buf_set_keymap(0, 'n', '<leader>;', ':CheckboxToggle<CR>', opts)
     end,
 })
+
+-- local fancy = function()
+--     vim.bo.filetype = "diff"
+--     vim.bo.syntax = "diff"
+-- end
+
+-- vim.api.nvim_create_autocmd({ "BufNewFile", "BufFilePost", "BufRead", "BufEnter", "BufWritePost", "BufRead" }, {
+--     pattern = "*.diff",
+--     callback = fancy,
+-- })
+
+vim.api.nvim_create_autocmd({ 'BufEnter', }, {
+-- vim.api.nvim_create_autocmd({ 'FileType', }, {
+    pattern = { "*.diff" },
+    -- pattern = { "diff" },
+    callback = function()
+        vim.bo.syntax = "diff"
+    end,
+})
+--
+-- vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead', 'BufReadPost'}, {
+-- vim.api.nvim_create_autocmd({ 'BufRead' }, {
+-- -- au({ 'BufNewFile', 'BufRead'}, {
+--     pattern = { "*.diff" },
+--     callback = function()
+--         -- vim.cmd("syntax enable")
+--         -- vim.cmd("set syntax='diff'")
+--         vim.cmd("syntax=diff")
+--         -- vim.fn.execute("setlocal syntax=diff")
+--         -- vim.bo.filetype = "diff"
+--         -- vim.bo.syntax = "enable"
+--         -- vim.bo.syntax = "diff"
+--         -- vim.bo.syntax = "on"
+--     end,
+-- })
+
+-- vim.cmd[[
+--   augroup SetDiffSyntax
+--     autocmd!
+--     autocmd BufRead,BufNewFile *.diff setlocal syntax=diff
+--   augroup END
+-- ]]
+-- au({ "BufNewFile", "BufFilePre", "BufRead" }, {
+--     pattern = {
+--         "*.md", ".markdown",
+--     },
+--     callback = function()
+--         vim.bo.filetype = 'markdown'
+--         vim.bo.syntax = "markdown"
+--     end
+-- })

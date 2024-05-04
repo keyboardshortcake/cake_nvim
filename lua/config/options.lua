@@ -86,6 +86,8 @@ vim.g.editorconfig = false -- Having some random editorconfig dictacting how my 
 -- could also set settings with vim.cmd like this vim.cmd("set undofile = true")
 
 vim.g.bookmark_auto_close = 1
+vim.g.bookmark_display_annotation = 1
+
 -- let g:bookmark_auto_close = 1
 
 -- Bullets.vim

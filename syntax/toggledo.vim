@@ -31,7 +31,9 @@ hi def link toggledotodotext CurSearch
 hi def link toggledodone NonText "this one is super dark
 " hi def link toggledocurrent CurSearch
 " hi def link toggledocurrent WindowPickerWinBar
-hi def link toggledocurrent String
+" hi def link toggledocurrent String " I like this one but trying the one
+" below for now so I can see it more urgently
+hi def link toggledocurrent TodoBgFIX
 
 " old experiments below
 " syn keyword toggledoimportant @important 

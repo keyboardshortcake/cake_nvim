@@ -4,7 +4,7 @@ require("config.keymaps")
 require("config.autocmds")
 
 -- Add the syntax directory to the runtimepath
-vim.o.runtimepath = vim.o.runtimepath .. ',' .. vim.fn.stdpath('config') .. '/syntax'
+-- vim.o.runtimepath = vim.o.runtimepath .. ',' .. vim.fn.stdpath('config') .. '/syntax'
 
 -- Enable syntax highlighting
 vim.cmd('syntax enable')

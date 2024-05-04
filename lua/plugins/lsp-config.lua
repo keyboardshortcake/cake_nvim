@@ -17,9 +17,13 @@ return {
                     "bashls",
                     "jsonls",
                     "yamlls",
-                    "eslint",           -- added new eslint server, hopefully
+                    "eslint", -- added new eslint server, hopefully
+                    "vtsls",
+                    -- "eslintls",
+                    -- "eslintlsp",
                     "angularls@14.0.0", -- work project is on angular cli 13.3.9 and angular 13.3.11 :shrug:
                     "phpactor",
+                    "vuels",
                     "intelephense",
                     "marksman",
                     -- "vint",
@@ -173,12 +177,34 @@ return {
                 capabilities = capabilities,
                 on_attach = on_attach,
             }
+            -- lspconfig.biome.setup {
+            --     capabilities = capabilities,
+            --     on_attach = on_attach,
+            -- }
+            lspconfig.vtsls.setup {
+                capabilities = capabilities,
+                on_attach = on_attach,
+            }
+            lspconfig.eslint.setup {
+                capabilities = capabilities,
+                on_attach = on_attach,
+                -- default_config = {
+                root_dir = lspconfig.util.root_pattern("Makefile"),
+                -- }
+                -- settings = {
+                -- -- root_dir = root_pattern("Makefile"),
+                -- }
+            }
             -- lol mmkay worth a shot, but apparently this is not something that works lol
             -- lspconfig.cmakelang.setup {
             --     capabilities = capabilities,
             --     on_attach = on_attach,
             -- }
             lspconfig.vimls.setup {
+                capabilities = capabilities,
+                on_attach = on_attach,
+            }
+            lspconfig.vuels.setup {
                 capabilities = capabilities,
                 on_attach = on_attach,
             }

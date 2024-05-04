@@ -21,7 +21,8 @@ return {
                 "tpope/vim-fugitive",
                 -- alternative to fugitive, can I use both?
                 {
-                    "sindrets/diffview.nvim",
+                    -- "sindrets/diffview.nvim",
+                    "tpope/vim-fugitive",
                     event = "BufRead",
                 },
                 -- to open commits in browser with fugitive
@@ -132,6 +133,7 @@ return {
                         ["<C-s>"] = actions.toggle_selection + actions.move_selection_worse,
                         ["<C-j>"] = actions.move_selection_next,
                         ["<C-k>"] = actions.move_selection_previous,
+                        ["<C-o>"] = actions.send_selected_to_qflist + actions.open_qflist,
                     },
                 },
 
@@ -221,8 +223,8 @@ return {
                 },
                 advanced_git_search = {
                     -- fugitive or diffview
-                    -- diff_plugin = "fugitive",
-                    diff_plugin = "diffview",
+                    diff_plugin = "fugitive",
+                    -- diff_plugin = "diffview",
                     -- customize git in previewer
                     -- e.g. flags such as { "--no-pager" }, or { "-c", "delta.side-by-side=false" }
                     git_flags = {},
@@ -266,9 +268,9 @@ return {
                         'rg',
                         -- this makes sure we're ignoring git -ignores and looking through hidden files too
                         -- it's a ripgrep flag
-                        -- '-uu',
+                        '-uu',
                         -- well, i guess I only want to look through hidden files but not .gitignore stuff afterall heh
-                        '--hidden',
+                        -- '--hidden',
                         '--no-heading',
                         '--with-filename',
                         '--line-number',

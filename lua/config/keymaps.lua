@@ -56,6 +56,7 @@ keymap("n", "<leader>fhf", "<cmd>lua require('telescope.builtin').find_files { h
 -- keymap("n", "<leader>fhd", "<cmd>lua require('telescope.builtin').file_browser { hidden = true, no_ignore = true }<CR>", opts)
 keymap("n", "<leader>ft", ":Telescope live_grep<CR>", opts)
 keymap("n", "<leader>fht", ":Telescope live_grep_args<CR>", opts)
+-- keymap("n", "<leader>fht", "<cmd>lua require('telescope.builtin').live_grep { hidden = true, no_ignore = true }<CR>", opts)
 keymap("n", "<leader>fc", ":Telescope current_buffer_fuzzy_find<CR>", opts)
 keymap("n", "<leader>fp", ":Telescope projects<CR>", opts)
 keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)
@@ -257,6 +258,9 @@ vim.api.nvim_set_keymap('n', '<Space>ad', ':AutoCmpOff<CR>', opts)
 
 -- vim.keymap.set('n', 'tj', require('treesj').toggle())
 keymap("n", "<Space>tj", ":TSJToggle<CR>", opts)
+
+-- copy the file path with cmd (from mac) + f
+keymap("n", "<Space>cp", ':lua vim.fn.setreg("+", vim.fn.expand("%:p"))<CR>', opts)
 
 -- another way to get out of insert mode
 vim.o.timeoutlen = 500
