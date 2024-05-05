@@ -1,5 +1,40 @@
 return {
     -- {
+    --     "Asheq/close-buffers.vim",
+    -- },
+    {
+        'nvim-lualine/lualine.nvim',
+        dependencies = { 'nvim-tree/nvim-web-devicons' },
+        config = function()
+            require('lualine').setup()
+        end
+    },
+    -- {
+    --     "nvim-tree/nvim-tree.lua",
+    --     dependencies = {
+    --
+    --     },
+    --     opts = function()
+    --     end,
+    --     config = function()
+    --         require("nvim-tree").setup()
+    --     end
+    -- },
+    -- {
+    --     "lambdalisue/fern.vim",
+    --     dependencies = {
+    --         "lambdalisue/fern-renderer-nerdfont.vim",
+    --         "andreafrancia/trash-cli",
+    --         "yuki-yano/fern-preview.vim",
+    --     }
+    -- },
+    -- {
+    --     "luukvbaal/nnn.nvim",
+    --     config = function()
+    --         require('nnn').setup()
+    --     end
+    -- },
+    -- {
     --     { "atelierbram/Base4Tone-nvim" } -- colorscheme
     -- },
     -- {

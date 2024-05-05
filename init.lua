@@ -1,3 +1,6 @@
+-- i don't use netrw
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 -- configs -- this should be loaded before lazy.nvim
 require("config.options")
 require("config.keymaps")

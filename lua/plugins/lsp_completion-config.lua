@@ -203,26 +203,27 @@ return {
                 end
             end
 
-            setAutoCmp(false)
+            -- setAutoCmp(false)
+            setAutoCmp(true)
 
             -- enable automatic completion popup on typing
-            vim.cmd('command AutoCmpOn lua setAutoCmp(true)')
+            -- vim.cmd('command AutoCmpOn lua setAutoCmp(true)')
 
             -- disable automatic competion popup on typing
-            vim.cmd('command AutoCmpOff lua setAutoCmp(false)')
+            -- vim.cmd('command AutoCmpOff lua setAutoCmp(false)')
 
             -- https://www.reddit.com/r/neovim/comments/139s0a2/how_to_setup_nvimcmp_properly/
             -- Basically if you have cmp.config.sources({ {1}, {2} }), you will first see suggestions from the source 1, then only after you run out of suggestions from 1 will you start to see suggestions from the source 2.
             --
             -- -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-            -- cmp.setup.cmdline(':', {
-            --     mapping = cmp.mapping.preset.cmdline(),
-            --     sources = cmp.config.sources({
-            --         { name = 'path' }
-            --     }, {
-            --         { name = 'cmdline' }
-            --     })
-            -- })
+            cmp.setup.cmdline(':', {
+                mapping = cmp.mapping.preset.cmdline(),
+                sources = cmp.config.sources({
+                    { name = 'cmdline' }
+                }, {
+                    { name = 'path' }
+                })
+            })
 
             -- -- I keep running into annoyances using this, where I'm stuck trying to tab over to the next item but it wont
             -- cmp.setup.cmdline(':', {

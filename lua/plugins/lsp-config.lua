@@ -18,7 +18,7 @@ return {
                     "jsonls",
                     "yamlls",
                     "eslint", -- added new eslint server, hopefully
-                    "vtsls",
+                    -- "vtsls",
                     -- "eslintls",
                     -- "eslintlsp",
                     "angularls@14.0.0", -- work project is on angular cli 13.3.9 and angular 13.3.11 :shrug:
@@ -181,10 +181,10 @@ return {
             --     capabilities = capabilities,
             --     on_attach = on_attach,
             -- }
-            lspconfig.vtsls.setup {
-                capabilities = capabilities,
-                on_attach = on_attach,
-            }
+            -- lspconfig.vtsls.setup {
+            --     capabilities = capabilities,
+            --     on_attach = on_attach,
+            -- }
             lspconfig.eslint.setup {
                 capabilities = capabilities,
                 on_attach = on_attach,
@@ -680,17 +680,18 @@ return {
     --     event = "BufRead",
     --     config = function() require "lsp_signature".on_attach() end,
     -- },
-    { --lazy specific setup
-        "ray-x/lsp_signature.nvim",
-        event = "VeryLazy",
-        opts = {
-            hint_inline = function() return true end, -- should the hint be inline(nvim 0.10 only)?  default false
-            hint_enable = false,                      -- virtual hint enable
-        },
-        config = function(_, opts)
-            require 'lsp_signature'.setup(opts)
-        end
-    },
+        -- This shows the function signature as I'm typing it, cool addon
+    -- { --lazy specific setup
+    --     "ray-x/lsp_signature.nvim",
+    --     event = "VeryLazy",
+    --     opts = {
+    --         hint_inline = function() return true end, -- should the hint be inline(nvim 0.10 only)?  default false
+    --         hint_enable = false,                      -- virtual hint enable
+    --     },
+    --     config = function(_, opts)
+    --         require 'lsp_signature'.setup(opts)
+    --     end
+    -- },
     {
         "tpope/vim-apathy",
     },
