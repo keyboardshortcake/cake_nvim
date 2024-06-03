@@ -188,8 +188,14 @@ return {
             lspconfig.eslint.setup {
                 capabilities = capabilities,
                 on_attach = on_attach,
+                -- on_attach = function(client, bufnr)
+                --     vim.api.nvim_create_autocmd("BufWritePre", {
+                --         buffer = bufnr,
+                --         command = "EslintFixAll",
+                --     })
+                -- end,
                 -- default_config = {
-                root_dir = lspconfig.util.root_pattern("Makefile"),
+                root_dir = lspconfig.util.root_pattern("eslint.config.js"),
                 -- }
                 -- settings = {
                 -- -- root_dir = root_pattern("Makefile"),
@@ -680,7 +686,7 @@ return {
     --     event = "BufRead",
     --     config = function() require "lsp_signature".on_attach() end,
     -- },
-        -- This shows the function signature as I'm typing it, cool addon
+    -- This shows the function signature as I'm typing it, cool addon
     -- { --lazy specific setup
     --     "ray-x/lsp_signature.nvim",
     --     event = "VeryLazy",
