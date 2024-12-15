@@ -1,4 +1,46 @@
 return {
+    -- { "junegunn/fzf", build = "./install --bin" },
+    {
+  "ibhagwan/fzf-lua",
+  -- optional for icon support
+  dependencies = { "nvim-tree/nvim-web-devicons" },
+  config = function()
+    -- calling `setup` is optional for customization
+    require("fzf-lua").setup({})
+  end
+},
+    {
+  "vhyrro/luarocks.nvim",
+  priority = 1000, -- Very high priority is required, luarocks.nvim should run as the first plugin in your config.
+  config = true,
+},
+    { "LudoPinelli/comment-box.nvim", },
+    {
+    "danymat/neogen",
+    config = true,
+    -- Uncomment next line if you want to follow only stable versions
+    -- version = "*" 
+},
+    {
+        'nvim-treesitter/nvim-tree-docs'
+    },
+    {
+        'heavenshell/vim-jsdoc',
+    },
+    {
+      "kkoomen/vim-doge",
+    },
+    {
+        'github/copilot.vim'
+    },
+    {
+        'jsongerber/nvim-px-to-rem',
+        config = true,
+        --If you need to set some options replace the line above with:
+        -- config = function()
+        --     require('nvim-px-to-rem').setup()
+        -- end,
+    },
     {
         "kkoomen/vim-doge",
     },
@@ -7,6 +49,7 @@ return {
         -- optional = true,
         opts = {
             formatters_by_ft = {
+                lua = { "stylua" },
                 ["javascript"] = { "prettier" },
                 ["javascriptreact"] = { "prettier" },
                 ["typescript"] = { "prettier" },
@@ -15,7 +58,7 @@ return {
                 ["css"] = { "prettier" },
                 ["scss"] = { "prettier" },
                 ["less"] = { "prettier" },
-                ["html"] = { "prettier" },
+                ["html"] = { { "htmlbeautifier", "djlint", "prettier" } },
                 ["json"] = { "prettier" },
                 ["jsonc"] = { "prettier" },
                 ["yaml"] = { "prettier" },
@@ -27,11 +70,11 @@ return {
         },
         config = function()
             require("conform").setup({
-                format_on_save = {
-                    -- These options will be passed to conform.format()
-                    timeout_ms = 500,
-                    lsp_fallback = true,
-                },
+                -- format_on_save = {
+                --     -- These options will be passed to conform.format()
+                --     timeout_ms = 500,
+                --     lsp_fallback = true,
+                -- },
             })
         end
     },
@@ -83,7 +126,7 @@ return {
     --     "no-clown-fiesta/no-clown-fiesta.nvim",
     -- },
     -- { 'ryanoasis/vim-devicons' },
-    -- { 'sbdchd/neoformat' },
+    { 'sbdchd/neoformat' },
     -- {
     --     'tpope/vim-repeat',
     -- },
@@ -159,12 +202,12 @@ return {
     {
         'metakirby5/codi.vim',
     },
-    { -- actually have no idea what this does
-        "lukas-reineke/virt-column.nvim",
-        config = function()
-            require("virt-column").setup({})
-        end
-    },
+    -- { -- actually have no idea what this does
+    --     "lukas-reineke/virt-column.nvim",
+    --     config = function()
+    --         require("virt-column").setup({})
+    --     end
+    -- },
     -- {
     --     'FraserLee/ScratchPad',
     --     config = function()
@@ -199,7 +242,31 @@ return {
     {
         "HiPhish/rainbow-delimiters.nvim",
         config = function()
-            require('rainbow-delimiters.setup').setup {}
+            local rainbow_delimiters = require 'rainbow-delimiters'
+
+            require('rainbow-delimiters.setup').setup {
+                strategy = {
+                    [''] = rainbow_delimiters.strategy['global'],
+                    vim = rainbow_delimiters.strategy['local'],
+                },
+                query = {
+                    [''] = 'rainbow-delimiters',
+                    lua = 'rainbow-blocks',
+                },
+                priority = {
+                    [''] = 110,
+                    lua = 210,
+                },
+                highlight = {
+                    'RainbowDelimiterRed',
+                    'RainbowDelimiterYellow',
+                    'RainbowDelimiterBlue',
+                    'RainbowDelimiterOrange',
+                    'RainbowDelimiterGreen',
+                    'RainbowDelimiterViolet',
+                    'RainbowDelimiterCyan',
+                },
+            }
         end
     },
     {
@@ -317,7 +384,22 @@ return {
         'kevinhwang91/nvim-ufo',
         dependencies = {
             'kevinhwang91/promise-async',
+                  {
+        "luukvbaal/statuscol.nvim",
+        config = function()
+          local builtin = require("statuscol.builtin")
+          require("statuscol").setup({
+            relculright = true,
+            segments = {
+              { text = { builtin.foldfunc }, click = "v:lua.ScFa" },
+              { text = { "%s" }, click = "v:lua.ScSa" },
+              { text = { builtin.lnumfunc, " " }, click = "v:lua.ScLa" },
+            },
+          })
+        end,
+      },
         },
+            event = "BufReadPost",
         config = function()
             local handler = function(virtText, lnum, endLnum, width, truncate)
                 local newVirtText = {}
@@ -348,8 +430,9 @@ return {
             end
             require('ufo').setup({
                 open_fold_hl_timeout = 150,
-                -- close_fold_kinds = { 'imports', 'comment' }, -- deprecated
-                close_fold_kinds_for_ft = { 'imports', 'comment' }, -- deprecated
+                -- open_fold_hl_timeout = 400,
+                close_fold_kinds = { 'imports', 'comment' }, -- deprecated
+                -- close_fold_kinds_for_ft = { 'imports', 'comment' }, -- deprecated
 
                 preview = {
                     win_config = {
@@ -445,7 +528,9 @@ return {
     {
         "lukas-reineke/indent-blankline.nvim",
         main = "ibl",
-        opts = {},
+        -- tag = "v2.20.8",
+        commit = "29be0919b91fb59eca9e90690d76014233392bef",
+        -- opts = {},
         config = function()
             local highlight = {
                 "RainbowRed",

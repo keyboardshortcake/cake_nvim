@@ -7,13 +7,23 @@ return {
         'williamboman/mason-lspconfig.nvim',
         opts = function()
             return {
+                highlight = {
+enable = true,
+disable = "help"
+},
                 ensure_installed = {
+                    -- "vimdoc",
+                    -- "luadoc",
+                    -- "vim",
+                    -- "lua",
+                    -- "markdown",
                     "lua_ls",
                     "cssls",
                     "vimls",
                     "html",
-                    "tsserver",
-                    "pyright",
+                    -- "tsserver",
+                    "ts_ls",
+                    -- "pyright",
                     "bashls",
                     "jsonls",
                     "yamlls",
@@ -114,7 +124,11 @@ return {
             -- -- https://www.reddit.com/r/neovim/comments/14em0f8/how_to_use_the_new_lsp_inlay_hints/
             local on_attach = function(client, bufnr)
                 if client.server_capabilities.inlayHintProvider then
-                    vim.lsp.inlay_hint.enable(bufnr, true)
+                    -- vim.lsp.inlay_hint.enable(bufnr)
+                    -- vim.lsp.inlay_hint.enable()
+                    vim.lsp.inlay_hint.enable(true)
+                    -- vim.lsp.inlay_hint.enable(true, nil)
+                    -- vim.lsp.inlay_hint.enable(true, bufnr)
                     -- vim.lsp.buf.inlay_hint(bufnr, true)
                 end
             end
@@ -133,23 +147,49 @@ return {
             handlers["textDocument/hover"] = lsp.with(handlers.hover, pop_opts)
             handlers["textDocument/signatureHelp"] = lsp.with(handlers.signature_help, pop_opts)
 
-            -- lspconfig.pyright.setup {}
-            lspconfig.lua_ls.setup {
-                capabilities = capabilities,
-                on_attach = on_attach,
-                settings = {
-                    Lua = {
-                        runtime = {
-                            version = "Lua 5.1"
-                        },
-                        ["completion.enable"] = false,
-                        diagnostics = {
-                            globals = { 'vim' }
-                        }
-                    }
-                }
-            }
+            lspconfig.pyright.setup {}
+              lspconfig.lua_ls.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+    settings = {
+      Lua = {
+        runtime = {
+          -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+          version = "LuaJIT",
+          path = vim.split(package.path, ";"),
+        },
+        diagnostics = {
+          -- Get the language server to recognize the `vim` global
+          globals = { "vim" },
+        },
+        workspace = {
+          -- Make the server aware of Neovim runtime files and plugins
+          library = { vim.env.VIMRUNTIME },
+          checkThirdParty = false,
+        },
+        telemetry = {
+          enable = false,
+        },
+      },
+    },
+  })
+            -- lspconfig.lua_ls.setup {
+            --     capabilities = capabilities,
+            --     on_attach = on_attach,
+            --     settings = {
+            --         Lua = {
+            --             runtime = {
+            --                 version = "Lua 5.1"
+            --             },
+            --             ["completion.enable"] = false,
+            --             diagnostics = {
+            --                 globals = { 'vim' }
+            --             }
+            --         }
+            --     }
+            -- }
             lspconfig.html.setup {
+                filetypes = { "html", ".html" },
                 capabilities = capabilities,
                 on_attach = on_attach,
             }
@@ -173,6 +213,11 @@ return {
                 capabilities = capabilities,
                 on_attach = on_attach,
             }
+            lspconfig.stylelint_lsp.setup {
+                filetypes = { "css", "scss", ".css" },
+                capabilities = capabilities,
+                on_attach = on_attach,
+            }
             lspconfig.cssls.setup {
                 capabilities = capabilities,
                 on_attach = on_attach,
@@ -186,16 +231,18 @@ return {
             --     on_attach = on_attach,
             -- }
             lspconfig.eslint.setup {
+                filetypes = { "*" },
                 capabilities = capabilities,
-                on_attach = on_attach,
-                -- on_attach = function(client, bufnr)
-                --     vim.api.nvim_create_autocmd("BufWritePre", {
-                --         buffer = bufnr,
-                --         command = "EslintFixAll",
-                --     })
-                -- end,
+                -- on_attach = on_attach,
+                on_attach = function(client, bufnr)
+                    vim.api.nvim_create_autocmd("BufWritePre", {
+                        buffer = bufnr,
+                        command = "EslintFixAll",
+                    })
+                end,
                 -- default_config = {
-                root_dir = lspconfig.util.root_pattern("eslint.config.js"),
+                root_dir = lspconfig.util.root_pattern("eslint.config.js", ".eslintrc.json"),
+                -- root_dir = lspconfig.util.root_pattern("eslint.config.js"),
                 -- }
                 -- settings = {
                 -- -- root_dir = root_pattern("Makefile"),
@@ -248,7 +295,8 @@ return {
             --     return string.match(value.filename, '%.d.ts') == nil
             -- end
 
-            lspconfig.tsserver.setup {
+            -- lspconfig.tsserver.setup {
+            lspconfig.ts_ls.setup {
                 capabilities = capabilities,
                 on_attach = on_attach,
                 filetypes = { "typescript", "typescriptreact", "typescript.tsx", "ts", "typescript.ts", "component.ts" },
@@ -263,6 +311,8 @@ return {
                 --     end
                 -- },
                 settings = {
+                    checkJs = true,
+                    allowJs = true,
                     diagnostics = true,
                     preferences = {
                         allowIncompleteCompletions = false,
@@ -387,7 +437,8 @@ return {
                     source = false,
                 },
                 float = {
-                    source = "always", -- Or "if_many"
+                    -- source = "always", -- Or "if_many"
+                    source = "if_many", -- Or "if_many"
                 },
             })
 
@@ -396,7 +447,8 @@ return {
             vim.diagnostic.config({
                 -- virtual_text = true,
                 signs = {
-                    severity = { "Error", "Warn" },
+                    -- severity = { "Error", "Warn" },
+                    severity = { "ERROR", "WARN"},
                 },
                 -- underline = true,
                 -- update_in_insert = false,
@@ -533,14 +585,19 @@ return {
                     vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
                     vim.keymap.set('n', '<space>f', function()
                         vim.lsp.buf.format { async = true }
+                        -- require("conform").format({ buffnr = ev.buf })
                     end, opts)
 
                     -- Inlay Hints
                     local client = vim.lsp.get_client_by_id(ev.data.client_id)
+                    ---@cast client -nil
                     if client.server_capabilities.inlayHintProvider then
-                        vim.lsp.inlay_hint.enable(ev.buf, true)
+                        -- vim.lsp.inlay_hint.enable(ev.buf, true)
+                        vim.lsp.inlay_hint.enable(true)
+                        -- vim.lsp.inlay_hint.enable()
                     else
-                        vim.lsp.inlay_hint.enable(ev.buf, false)
+                        -- vim.lsp.inlay_hint.enable(ev.buf, false)
+                        vim.lsp.inlay_hint.enable(false)
                     end
                 end,
             })

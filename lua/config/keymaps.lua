@@ -55,6 +55,7 @@ keymap("n", "<leader>fhf", "<cmd>lua require('telescope.builtin').find_files { h
 -- is it not a bulitin? cuz this doesn't work
 -- keymap("n", "<leader>fhd", "<cmd>lua require('telescope.builtin').file_browser { hidden = true, no_ignore = true }<CR>", opts)
 keymap("n", "<leader>ft", ":Telescope live_grep<CR>", opts)
+keymap("n", "<leader>FB", "<cmd>lua require('telescope.builtin').live_grep { grep_open_files = true }<CR>", opts)
 keymap("n", "<leader>fht", ":Telescope live_grep_args<CR>", opts)
 -- keymap("n", "<leader>fht", "<cmd>lua require('telescope.builtin').live_grep { hidden = true, no_ignore = true }<CR>", opts)
 keymap("n", "<leader>fc", ":Telescope current_buffer_fuzzy_find<CR>", opts)
@@ -62,6 +63,7 @@ keymap("n", "<leader>fp", ":Telescope projects<CR>", opts)
 keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)
 keymap("n", "<leader>fo", ":Telescope oldfiles<CR>", opts)
 keymap("n", "<leader>cc", ":Telescope keymaps<CR>", opts)
+-- search the plugins I have
 keymap("n", "<leader>fl", ":Telescope lazy<CR>", opts)
 keymap("n", "<leader>fn", ":Telescope node_modules list<CR>", opts)
 
@@ -245,8 +247,10 @@ keymap("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 keymap('n', '<leader>u', vim.cmd.UndotreeToggle)
 
 -- this stuff is in the nightly version of nvim as of today
-keymap("n", '<leader>ie', "<cmd>lua vim.lsp.inlay_hint.enable(0, true)<CR>")
-keymap("n", '<leader>id', "<cmd>lua vim.lsp.inlay_hint.enable(0, false)<CR>")
+keymap("n", '<leader>ie', "<cmd>lua vim.lsp.inlay_hint.enable(true)<CR>")
+keymap("n", '<leader>id', "<cmd>lua vim.lsp.inlay_hint.enable(false)<CR>")
+-- keymap("n", '<leader>ie', "<cmd>lua vim.lsp.inlay_hint.enable(0, true)<CR>")
+-- keymap("n", '<leader>id', "<cmd>lua vim.lsp.inlay_hint.enable(0, false)<CR>")
 
 -- Toggle automatic completion
 
@@ -267,7 +271,7 @@ vim.o.timeoutlen = 500
 keymap('i', 'jj', '<Esc>', opts)
 
 -- another way to exit terminal mode
-    -- :tnoremap <Esc> <C-\><C-n>
+-- :tnoremap <Esc> <C-\><C-n>
 -- Terminal mode mapping to exit insert mode in terminals
 vim.api.nvim_set_keymap('t', '<Esc>', '<C-\\><C-n>', { noremap = true })
 
@@ -293,4 +297,5 @@ vim.api.nvim_set_keymap('t', '<Esc>', '<C-\\><C-n>', { noremap = true })
 -- vim.api.nvim_set_keymap('i', '<C-d>', '<Plug>(bullets-promote)', { noremap = false })
 -- vim.api.nvim_set_keymap('n', '<<', '<Plug>(bullets-promote)', { noremap = false })
 -- vim.api.nvim_set_keymap('v', '<', '<Plug>(bullets-promote)', { noremap = false })
+--
 --

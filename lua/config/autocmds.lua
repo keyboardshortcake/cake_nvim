@@ -89,7 +89,8 @@ local disable_node_modules_eslint_group =
 au({ "BufNewFile", "BufRead" }, {
     pattern = { "**/node_modules/**", "node_modules", "/node_modules/*" },
     callback = function()
-        vim.diagnostic.disable(0)
+        -- vim.diagnostic.disable(0)
+        vim.diagnostic.enable(false, nil)
     end,
     group = disable_node_modules_eslint_group,
 })
@@ -186,7 +187,7 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost' }, {
 -- })
 
 vim.api.nvim_create_autocmd({ 'BufEnter', }, {
--- vim.api.nvim_create_autocmd({ 'FileType', }, {
+    -- vim.api.nvim_create_autocmd({ 'FileType', }, {
     pattern = { "*.diff" },
     -- pattern = { "diff" },
     callback = function()

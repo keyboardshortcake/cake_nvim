@@ -5,7 +5,8 @@ return {
     dependencies = {
         { 'nvim-lua/plenary.nvim' },
         { "debugloop/telescope-undo.nvim" },
-        -- {'junegunn/fzf'},
+        {'junegunn/fzf'},
+        -- { "junegunn/fzf", build = "./install --bin" }
         -- { 'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }, -- don't need, just for fun
         -- { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
         { 'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' },

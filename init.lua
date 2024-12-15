@@ -55,7 +55,7 @@ function ToggleDo()
         vim.cmd('vsplit | wincmd H')
         vim.cmd('edit ~/.toggle.do')
         vim.cmd('vertical resize 50')
-        vim.cmd('setlocal number! relativenumber!')  -- Hide the gutter for this buffer
+        vim.cmd('setlocal number! relativenumber!') -- Hide the gutter for this buffer
         -- vim.cmd('setlocal winwidth=30')
         -- Set up automatic saving without needing :w
         vim.fn.execute("augroup AutoSaveToggleDo")

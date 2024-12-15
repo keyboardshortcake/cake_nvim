@@ -27,6 +27,10 @@
     "typescript.suggest.jsdoc.generateReturns": true,
     "typescript.suggest.paths": true,
     "workspace.rootPatterns": [
+        ".npmrc",
+        ".nvimrc",
+        "eslint.config.js",
+        "prettier.config.js",
         ".git",
         ".angular",
         ".vscode"
