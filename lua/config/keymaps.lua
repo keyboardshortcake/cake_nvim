@@ -239,6 +239,11 @@ keymap("n", "<leader>GB", "<cmd>:GitBlameToggle<cr>", opts)
 --         vim.lsp.buf.hover()
 --     end
 -- end)
+-- keymap to open Todotelescope
+keymap("n", "<leader>tt", "<cmd>TodoTelescope<CR>", opts)
+
+-- -- keymap to toggle CopilotChatToggle
+-- keymap("n", "<leader>co", "<cmd>CopilotChatToggle<CR>", opts)
 
 -- this is for oil.nvim
 keymap("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
@@ -299,3 +304,7 @@ vim.api.nvim_set_keymap('t', '<Esc>', '<C-\\><C-n>', { noremap = true })
 -- vim.api.nvim_set_keymap('v', '<', '<Plug>(bullets-promote)', { noremap = false })
 --
 --
+-- vim.api.nvim_set_keymap('v', '<leader>ce', ":<C-u>lua require('copilot.explain').explain_selection()<CR>", {noremap = true, silent = true})
+
+-- Visual mode mapping to explain selected code
+-- vim.api.nvim_set_keymap('v', '<leader>ce', ":<C-u>lua require('explain_code')(vim.fn.getreg('\"'))<CR>", {noremap = true, silent = true})

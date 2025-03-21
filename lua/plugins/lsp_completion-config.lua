@@ -130,6 +130,9 @@ return {
                     ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
                 }),
                 sources = cmp.config.sources({
+                    -- Copilot Source
+                    { name = "copilot", group_index = 2 },
+                    -- Other sources
                     { name = 'nvim_lsp' },
                     { name = "path" },
                     { name = 'luasnip' }, -- For luasnip users.
@@ -156,6 +159,7 @@ return {
                             buffer = 'Ω',
                             path = '🖫',
                             nvim_lua = 'Π',
+                            Copilot = "",
                         }
 
                         item.menu = menu_icon[entry.source.name]

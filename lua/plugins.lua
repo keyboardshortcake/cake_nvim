@@ -1,4 +1,27 @@
 return {
+    {
+        "zbirenbaum/copilot.lua",
+        cmd = "Copilot",
+        event = "InsertEnter",
+        config = function()
+            require("copilot").setup({
+                suggestion = { enabled = false },
+                panel = { enabled = false },
+            })
+        end,
+    },
+    {
+      "zbirenbaum/copilot-cmp",
+      config = function ()
+        require("copilot_cmp").setup()
+      end
+    },
+    {
+        'github/copilot.vim'
+    },
+    {
+        "ntpeters/vim-better-whitespace"
+    },
     -- { "junegunn/fzf", build = "./install --bin" },
     {
   "ibhagwan/fzf-lua",
@@ -8,6 +31,11 @@ return {
     -- calling `setup` is optional for customization
     require("fzf-lua").setup({})
   end
+},
+{
+  "davidmh/mdx.nvim",
+  config = true,
+  dependencies = {"nvim-treesitter/nvim-treesitter"}
 },
     {
   "vhyrro/luarocks.nvim",
@@ -19,7 +47,7 @@ return {
     "danymat/neogen",
     config = true,
     -- Uncomment next line if you want to follow only stable versions
-    -- version = "*" 
+    -- version = "*"
 },
     {
         'nvim-treesitter/nvim-tree-docs'
@@ -30,9 +58,9 @@ return {
     {
       "kkoomen/vim-doge",
     },
-    {
-        'github/copilot.vim'
-    },
+    -- {
+    --     'github/copilot.vim'
+    -- },
     {
         'jsongerber/nvim-px-to-rem',
         config = true,

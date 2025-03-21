@@ -89,6 +89,28 @@ vim.g.editorconfig = false -- Having some random editorconfig dictacting how my 
 vim.g.bookmark_auto_close = 1
 vim.g.bookmark_display_annotation = 1
 
+-- vim.g.copilot_filetypes = {
+--     gitcommit = true,
+--     markdown = true,
+--     text = true,
+--     scratch = true,
+--     toggledo = true,
+--     -- xml = false,
+-- }
+
+
+-- vim.g.copilot_filetypes = {
+--     gitcommit = 1,
+-- }
+
+-- vim.g.copilot_filetypes = {
+--     \ gitcommit: v:true,
+-- }
+
+-- let g:copilot_filetypes = {
+--       'xml': v:false,
+-- }
+
 -- let g:bookmark_auto_close = 1
 
 -- Bullets.vim
