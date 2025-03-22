@@ -142,14 +142,14 @@ return {
     --     end
     -- },
     -- {
-    --     { "atelierbram/Base4Tone-nvim" } -- colorscheme
+        { "atelierbram/Base4Tone-nvim" }, -- colorscheme
     -- },
     -- {
     --     "dzfrias/noir.nvim",
     -- },
-    -- {
-    --     'NLKNguyen/papercolor-theme',
-    -- },
+    {
+        'NLKNguyen/papercolor-theme',
+    },
     -- {
     --     "no-clown-fiesta/no-clown-fiesta.nvim",
     -- },
@@ -408,97 +408,98 @@ return {
     --     event = "BufReadPost", -- later or on keypress would prevent saving folds
     --     opts = true,           -- needed even when using default config
     -- },
-    {
-        'kevinhwang91/nvim-ufo',
-        dependencies = {
-            'kevinhwang91/promise-async',
-                  {
-        "luukvbaal/statuscol.nvim",
-        config = function()
-          local builtin = require("statuscol.builtin")
-          require("statuscol").setup({
-            relculright = true,
-            segments = {
-              { text = { builtin.foldfunc }, click = "v:lua.ScFa" },
-              { text = { "%s" }, click = "v:lua.ScSa" },
-              { text = { builtin.lnumfunc, " " }, click = "v:lua.ScLa" },
-            },
-          })
-        end,
-      },
-        },
-            event = "BufReadPost",
-        config = function()
-            local handler = function(virtText, lnum, endLnum, width, truncate)
-                local newVirtText = {}
-                local suffix = (' 󰁂 %d '):format(endLnum - lnum)
-                local sufWidth = vim.fn.strdisplaywidth(suffix)
-                local targetWidth = width - sufWidth
-                local curWidth = 0
-                for _, chunk in ipairs(virtText) do
-                    local chunkText = chunk[1]
-                    local chunkWidth = vim.fn.strdisplaywidth(chunkText)
-                    if targetWidth > curWidth + chunkWidth then
-                        table.insert(newVirtText, chunk)
-                    else
-                        chunkText = truncate(chunkText, targetWidth - curWidth)
-                        local hlGroup = chunk[2]
-                        table.insert(newVirtText, { chunkText, hlGroup })
-                        chunkWidth = vim.fn.strdisplaywidth(chunkText)
-                        -- str width returned from truncate() may less than 2nd argument, need padding
-                        if curWidth + chunkWidth < targetWidth then
-                            suffix = suffix .. (' '):rep(targetWidth - curWidth - chunkWidth)
-                        end
-                        break
-                    end
-                    curWidth = curWidth + chunkWidth
-                end
-                table.insert(newVirtText, { suffix, 'MoreMsg' })
-                return newVirtText
-            end
-            require('ufo').setup({
-                open_fold_hl_timeout = 150,
-                -- open_fold_hl_timeout = 400,
-                close_fold_kinds = { 'imports', 'comment' }, -- deprecated
-                -- close_fold_kinds_for_ft = { 'imports', 'comment' }, -- deprecated
-
-                preview = {
-                    win_config = {
-                        border = { '', '─', '', '', '', '─', '', '' },
-                        winhighlight = 'Normal:Folded',
-                        winblend = 0
-                    },
-                    mappings = {
-                        scrollU = '<C-u>',
-                        scrollD = '<C-d>',
-                        jumpTop = '[',
-                        jumpBot = ']'
-                    }
-                },
-                provider_selector = function(bufnr, filetype, buftype)
-                    -- if you prefer treesitter provider rather than lsp,
-                    -- return ftMap[filetype] or {'treesitter', 'indent'}
-                    -- return ftMap[filetype]
-                    return { 'treesitter', 'indent' }
-
-                    -- refer to ./doc/example.lua for detail
-                end,
-                fold_virt_text_handler = handler,
-            })
-            vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
-            vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
-            vim.keymap.set('n', 'zr', require('ufo').openFoldsExceptKinds)
-            vim.keymap.set('n', 'zm', require('ufo').closeFoldsWith) -- closeAllFolds == closeFoldsWith(0)
-            vim.keymap.set('n', 'K', function()
-                local winid = require('ufo').peekFoldedLinesUnderCursor()
-                if not winid then
-                    -- choose one of coc.nvim and nvim lsp
-                    vim.fn.CocActionAsync('definitionHover') -- coc.nvim
-                    vim.lsp.buf.hover()
-                end
-            end)
-        end
-    },
+    -- {
+    --     'kevinhwang91/nvim-ufo',
+    --     dependencies = {
+    --         'kevinhwang91/promise-async',
+    --         {
+    --             "luukvbaal/statuscol.nvim",
+    --             config = function()
+    --               local builtin = require("statuscol.builtin")
+    --               require("statuscol").setup({
+    --                 relculright = true,
+    --                 segments = {
+    --                   { text = { builtin.foldfunc }, click = "v:lua.ScFa" },
+    --                   { text = { "%s" }, click = "v:lua.ScSa" },
+    --                   { text = { builtin.lnumfunc, " " }, click = "v:lua.ScLa" },
+    --                 },
+    --               })
+    --             end,
+    --         },
+    --     },
+    --     -- event = "BufReadPost",
+    --     config = function()
+    --         -- local handler = function(virtText, lnum, endLnum, width, truncate)
+    --         --     local newVirtText = {}
+    --         --     local suffix = (' 󰁂 %d '):format(endLnum - lnum)
+    --         --     local sufWidth = vim.fn.strdisplaywidth(suffix)
+    --         --     local targetWidth = width - sufWidth
+    --         --     local curWidth = 0
+    --         --     for _, chunk in ipairs(virtText) do
+    --         --         local chunkText = chunk[1]
+    --         --         local chunkWidth = vim.fn.strdisplaywidth(chunkText)
+    --         --         if targetWidth > curWidth + chunkWidth then
+    --         --             table.insert(newVirtText, chunk)
+    --         --         else
+    --         --             chunkText = truncate(chunkText, targetWidth - curWidth)
+    --         --             local hlGroup = chunk[2]
+    --         --             table.insert(newVirtText, { chunkText, hlGroup })
+    --         --             chunkWidth = vim.fn.strdisplaywidth(chunkText)
+    --         --             -- str width returned from truncate() may less than 2nd argument, need padding
+    --         --             if curWidth + chunkWidth < targetWidth then
+    --         --                 suffix = suffix .. (' '):rep(targetWidth - curWidth - chunkWidth)
+    --         --             end
+    --         --             break
+    --         --         end
+    --         --         curWidth = curWidth + chunkWidth
+    --         --     end
+    --         --     table.insert(newVirtText, { suffix, 'MoreMsg' })
+    --         --     return newVirtText
+    --         -- end
+    --         require('ufo').setup({
+    --             -- open_fold_hl_timeout = 150,
+    --             open_fold_hl_timeout = 400,
+    --             -- close_fold_kinds = { 'imports', 'comment' }, -- deprecated
+    --             close_fold_kinds_for_ft = { 'imports', 'comment' }, -- deprecated
+    --
+    --             preview = {
+    --                 win_config = {
+    --                     border = { '', '─', '', '', '', '─', '', '' },
+    --                     winhighlight = 'Normal:Folded',
+    --                     winblend = 0
+    --                 },
+    --                 mappings = {
+    --                     scrollU = '<C-u>',
+    --                     scrollD = '<C-d>',
+    --                     jumpTop = '[',
+    --                     jumpBot = ']'
+    --                 }
+    --             },
+    --             provider_selector = function(bufnr, filetype, buftype)
+    --                 -- if you prefer treesitter provider rather than lsp,
+    --                 -- return ftMap[filetype] or {'treesitter', 'indent'}
+    --                 -- return ftMap[filetype]
+    --                 return { 'treesitter', 'indent' }
+    --
+    --                 -- refer to ./doc/example.lua for detail
+    --             end,
+    --             -- fold_virt_text_handler = handler,
+    --         })
+    --
+    --         vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
+    --         vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
+    --         vim.keymap.set('n', 'zr', require('ufo').openFoldsExceptKinds)
+    --         vim.keymap.set('n', 'zm', require('ufo').closeFoldsWith) -- closeAllFolds == closeFoldsWith(0)
+    --         vim.keymap.set('n', 'K', function()
+    --             local winid = require('ufo').peekFoldedLinesUnderCursor()
+    --             if not winid then
+    --                 -- choose one of coc.nvim and nvim lsp
+    --                 vim.fn.CocActionAsync('definitionHover') -- coc.nvim
+    --                 vim.lsp.buf.hover()
+    --             end
+    --         end)
+    --     end
+    -- },
     {
         'toppair/reach.nvim',
         config = function()
@@ -639,7 +640,7 @@ return {
     -- 	'nvim-treesitter/nvim-treesitter',
     -- 	run = ':TSUpdate'
     --  },
-    -- { 'folke/tokyonight.nvim'},
+    { 'folke/tokyonight.nvim'},
     { 'rcarriga/nvim-notify' },
     -- {
     --   "amitds1997/remote-nvim.nvim",
@@ -677,17 +678,35 @@ return {
     --   end,
     -- },
     {
-        "folke/which-key.nvim",
-        config = function()
-            vim.o.timeout = true
-            vim.o.timeoutlen = 300
-            require("which-key").setup({
-                -- your configuration comes here
-                -- or leave it empty to use the default settings
-                -- refer to the configuration section below
-            })
-        end,
+  "folke/which-key.nvim",
+  event = "VeryLazy",
+  opts = {
+    -- your configuration comes here
+    -- or leave it empty to use the default settings
+    -- refer to the configuration section below
+  },
+  keys = {
+    {
+      "<leader>?",
+      function()
+        require("which-key").show({ global = false })
+      end,
+      desc = "Buffer Local Keymaps (which-key)",
     },
+  },
+},
+    -- {
+    --     "folke/which-key.nvim",
+    --     config = function()
+    --         vim.o.timeout = true
+    --         vim.o.timeoutlen = 300
+    --         require("which-key").setup({
+    --             -- your configuration comes here
+    --             -- or leave it empty to use the default settings
+    --             -- refer to the configuration section below
+    --         })
+    --     end,
+    -- },
     -- {
     --   "folke/trouble.nvim",
     --   dependencies = "nvim-tree/nvim-web-devicons",

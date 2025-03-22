@@ -37,8 +37,8 @@ function M.explain_selection()
   })
   
   -- Set buffer options
-  vim.api.nvim_buf_set_option(buf, 'bufhidden', 'wipe')
-  vim.api.nvim_buf_set_option(buf, 'filetype', 'markdown')
+  -- vim.api.nvim_buf_set_option(buf, 'bufhidden', 'wipe')
+  -- vim.api.nvim_buf_set_option(buf, 'filetype', 'markdown')
   
   -- Add loading message
   vim.api.nvim_buf_set_lines(buf, 0, -1, false, {"Loading explanation from GitHub Copilot..."})

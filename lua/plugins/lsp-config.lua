@@ -22,7 +22,7 @@ disable = "help"
                     "vimls",
                     "html",
                     -- "tsserver",
-                    "ts_ls",
+                    -- "ts_ls",
                     -- "pyright",
                     "bashls",
                     "jsonls",
@@ -31,11 +31,11 @@ disable = "help"
                     -- "vtsls",
                     -- "eslintls",
                     -- "eslintlsp",
-                    "angularls@14.0.0", -- work project is on angular cli 13.3.9 and angular 13.3.11 :shrug:
+                    -- "angularls@14.0.0", -- work project is on angular cli 13.3.9 and angular 13.3.11 :shrug:
                     -- "phpactor",
                     "vuels",
                     "intelephense",
-                    "marksman",
+                    -- "marksman",
                     -- "vint",
                 },
                 automatic_installation = true,
@@ -127,6 +127,8 @@ disable = "help"
                     -- vim.lsp.inlay_hint.enable(bufnr)
                     -- vim.lsp.inlay_hint.enable()
                     vim.lsp.inlay_hint.enable(true)
+                    -- vim.lsp.inlay_hint.enable(bufnr, true)
+                    -- vim.lsp.inlay_hint.enable(bufnr, true)
                     -- vim.lsp.inlay_hint.enable(true, nil)
                     -- vim.lsp.inlay_hint.enable(true, bufnr)
                     -- vim.lsp.buf.inlay_hint(bufnr, true)
@@ -142,6 +144,9 @@ disable = "help"
             --     }
             -- end
 
+            -- opts = {
+            --     inlay_hints = { enabled = true },
+            -- }
             -- Hover doc popup
             local pop_opts = { border = "rounded", max_width = 80 }
             handlers["textDocument/hover"] = lsp.with(handlers.hover, pop_opts)
@@ -149,30 +154,31 @@ disable = "help"
 
             lspconfig.pyright.setup {}
               lspconfig.lua_ls.setup({
-    on_attach = on_attach,
-    capabilities = capabilities,
-    settings = {
-      Lua = {
-        runtime = {
-          -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-          version = "LuaJIT",
-          path = vim.split(package.path, ";"),
-        },
-        diagnostics = {
-          -- Get the language server to recognize the `vim` global
-          globals = { "vim" },
-        },
-        workspace = {
-          -- Make the server aware of Neovim runtime files and plugins
-          library = { vim.env.VIMRUNTIME },
-          checkThirdParty = false,
-        },
-        telemetry = {
-          enable = false,
-        },
-      },
-    },
-  })
+                on_attach = on_attach,
+                capabilities = capabilities,
+                settings = {
+                  Lua = {
+                    runtime = {
+                      -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+                      version = "LuaJIT",
+                      path = vim.split(package.path, ";"),
+                    },
+                    diagnostics = {
+                      -- Get the language server to recognize the `vim` global
+                      globals = { "vim" },
+                    },
+                    workspace = {
+                      -- Make the server aware of Neovim runtime files and plugins
+                      library = { vim.env.VIMRUNTIME },
+                      checkThirdParty = false,
+                    },
+                    telemetry = {
+                      enable = false,
+                    },
+                    ["completion.enable"] = false,
+                  },
+                },
+              })
             -- lspconfig.lua_ls.setup {
             --     capabilities = capabilities,
             --     on_attach = on_attach,
@@ -197,10 +203,10 @@ disable = "help"
             --     capabilities = capabilities,
             --     on_attach = on_attach,
             -- }
-            lspconfig.marksman.setup {
-                capabilities = capabilities,
-                on_attach = on_attach,
-            }
+            -- lspconfig.marksman.setup {
+            --     capabilities = capabilities,
+            --     on_attach = on_attach,
+            -- }
             lspconfig.intelephense.setup {
                 capabilities = capabilities,
                 on_attach = on_attach,
@@ -222,14 +228,14 @@ disable = "help"
                 capabilities = capabilities,
                 on_attach = on_attach,
             }
-            -- lspconfig.biome.setup {
-            --     capabilities = capabilities,
-            --     on_attach = on_attach,
-            -- }
-            -- lspconfig.vtsls.setup {
-            --     capabilities = capabilities,
-            --     on_attach = on_attach,
-            -- }
+            lspconfig.biome.setup {
+                capabilities = capabilities,
+                on_attach = on_attach,
+            }
+            lspconfig.vtsls.setup {
+                capabilities = capabilities,
+                on_attach = on_attach,
+            }
             lspconfig.eslint.setup {
                 filetypes = { "*" },
                 capabilities = capabilities,
@@ -567,7 +573,8 @@ disable = "help"
 
                     -- Buffer local mappings.
                     -- See `:help vim.lsp.*` for documentation on any of the below functions
-                    local opts = { buffer = ev.buf }
+                    -- local opts = { buffer = ev.buf }
+                    opts = { buffer = ev.buf }
                     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
                     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
                     vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
@@ -594,10 +601,12 @@ disable = "help"
                     if client.server_capabilities.inlayHintProvider then
                         -- vim.lsp.inlay_hint.enable(ev.buf, true)
                         vim.lsp.inlay_hint.enable(true)
+                        -- vim.lsp.inlay_hint.enable(0, true)
                         -- vim.lsp.inlay_hint.enable()
                     else
                         -- vim.lsp.inlay_hint.enable(ev.buf, false)
                         vim.lsp.inlay_hint.enable(false)
+                        -- vim.lsp.inlay_hint.enable(0, false)
                     end
                 end,
             })

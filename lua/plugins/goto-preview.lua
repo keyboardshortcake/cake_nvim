@@ -1,5 +1,6 @@
 return {
     'rmagatti/goto-preview',
+    dependencies = 'rmagatti/logger.nvim',
     config = function()
         require('goto-preview').setup {
             vim.keymap.set("n", "gp", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", { noremap = true }),
@@ -34,7 +35,6 @@ return {
         vim.api.nvim_del_keymap("n", "gpt")
     end
 }
-
 --[[
 nnoremap gpd <cmd>lua require('goto-preview').goto_preview_definition()<CR>
 nnoremap gpt <cmd>lua require('goto-preview').goto_preview_type_definition()<CR>
