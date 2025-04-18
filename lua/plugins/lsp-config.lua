@@ -252,6 +252,15 @@ return {
 				-- settings = {
 				-- -- root_dir = root_pattern("Makefile"),
 				-- }
+				-- Add args to always include your overrides
+				cmd = {
+					"eslint",
+					"--stdin",
+					"--stdin-filename",
+					"%filepath",
+					"--config",
+					os.getenv("HOME") .. "/.eslintrc-overrides.js",
+				},
 			})
 			-- lol mmkay worth a shot, but apparently this is not something that works lol
 			-- lspconfig.cmakelang.setup {
@@ -587,7 +596,7 @@ return {
 					vim.keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, opts)
 					vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
 					vim.keymap.set("n", "<space>f", function()
-						vim.lsp.buf.format({ async = true })
+						-- vim.lsp.buf.format({ async = true })
 						-- require("conform").format({ buffnr = ev.buf })
 					end, opts)
 

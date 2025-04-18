@@ -89,14 +89,14 @@ vim.g.editorconfig = false -- Having some random editorconfig dictacting how my 
 vim.g.bookmark_auto_close = 1
 vim.g.bookmark_display_annotation = 1
 
--- vim.g.copilot_filetypes = {
---     gitcommit = true,
---     markdown = true,
---     text = true,
---     scratch = true,
---     toggledo = true,
---     -- xml = false,
--- }
+vim.g.copilot_filetypes = {
+    gitcommit = true,
+    markdown = true,
+    text = true,
+    scratch = true,
+    toggledo = true,
+    -- xml = false,
+}
 
 
 -- vim.g.copilot_filetypes = {
@@ -145,8 +145,8 @@ vim.api.nvim_set_var('bullets_custom_mappings', {
     { "nmap",     ">>",        "<Plug>(bullets-demote)" },
     { "vmap",     ">",         "<Plug>(bullets-demote)" },
     { "imap",     "<C-d>",     "<Plug>(bullets-promote)" },
-    { "imap",     "<S-Tab>",     "<Plug>(bullets-promote)" },
-    { "nmap",     "<S-Tab>",     "<Plug>(bullets-promote)" },
+    { "imap",     "<S-Tab>",   "<Plug>(bullets-promote)" },
+    { "nmap",     "<S-Tab>",   "<Plug>(bullets-promote)" },
     { "nmap",     "<<",        "<Plug>(bullets-promote)" },
     { "vmap",     "<",         "<Plug>(bullets-promote)" }
 })

@@ -22,6 +22,22 @@ return {
 	{
 		"ntpeters/vim-better-whitespace",
 	},
+	{
+		"mistweaverco/kulala.nvim",
+		keys = {
+			{ "<leader>gs", desc = "Send request" },
+			{ "<leader>gl", desc = "Send all requests" },
+			{ "<leader>gb", desc = "Open scratchpad" },
+		},
+		ft = { "http", "rest" },
+		opts = {
+			-- your configuration comes here
+			global_keymaps = false,
+		},
+	},
+	{
+		"vim-perl/vim-perl",
+	},
 	-- { "junegunn/fzf", build = "./install --bin" },
 	{
 		"ibhagwan/fzf-lua",
@@ -86,7 +102,7 @@ return {
 				["css"] = { "prettier" },
 				["scss"] = { "prettier" },
 				["less"] = { "prettier" },
-				["html"] = { { "htmlbeautifier", "djlint", "prettier" } },
+				["html"] = { "prettier" },
 				["json"] = { "prettier" },
 				["jsonc"] = { "prettier" },
 				["yaml"] = { "prettier" },
@@ -94,6 +110,7 @@ return {
 				["markdown.mdx"] = { "prettier" },
 				["graphql"] = { "prettier" },
 				["handlebars"] = { "prettier" },
+				["_"] = { "trim_whitespace" },
 			},
 		},
 		config = function()
@@ -101,11 +118,129 @@ return {
 				-- format_on_save = {
 				--     -- These options will be passed to conform.format()
 				--     timeout_ms = 500,
-				--     lsp_fallback = true,
+				--     -- lsp_fallback = true,
+				--     lsp_format = "fallback"
 				-- },
 			})
 		end,
 	},
+	-- {
+	-- 	"esmuellert/nvim-eslint",
+	-- 	config = function()
+	-- 		require("nvim-eslint").setup({
+	-- 			-- Toggle debug mode for ESLint language server, see debugging part
+	-- 			-- debug = false,
+	--
+	-- 			-- Command to launch language server. You might hardly want to change this setting
+	-- 			-- cmd = M.create_cmd(),
+	--
+	-- 			-- root_dir is used by Neovim LSP client API to determine if to attach or launch new LSP
+	-- 			-- The default configuration uses the git root folder as the root_dir
+	-- 			-- For monorepo it can have many projects, so launching too many LSP for one workspace is not efficient
+	-- 			-- You can override it with passing function(bufnr)
+	-- 			-- It should receive active buffer number and return root_dir
+	-- 			-- root_dir = M.resolve_git_dir(args.buf),
+	--
+	-- 			-- A table used to determine what filetypes trigger the start of LSP
+	-- 			-- filetypes = {
+	-- 			-- 	"javascript",
+	-- 			-- 	"javascriptreact",
+	-- 			-- 	"javascript.jsx",
+	-- 			-- 	"typescript",
+	-- 			-- 	"typescriptreact",
+	-- 			-- 	"typescript.tsx",
+	-- 			-- 	"vue",
+	-- 			-- 	"svelte",
+	-- 			-- 	"astro",
+	-- 			-- },
+	--
+	-- 			-- The client capabilities for LSP Protocol. See Nvim LSP docs for details
+	-- 			-- It uses the default Nvim LSP client capabilities. Adding the capability to dynamically change configs
+	-- 			-- capabilities = M.make_client_capabilities(),
+	--
+	-- 			handlers = {
+	-- 				-- The handlers handles language server responses. See Nvim LSP docs for details
+	-- 				-- The default handlers only has a rewrite of default "workspace/configuration" handler of Nvim LSP
+	-- 				-- Basically, when you load a new buffer, ESLint LSP requests the settings with this request
+	-- 				-- To make it work with monorepo, the workingDirectory setting needs to be calculated at runtime
+	-- 				-- This is the main reaason for rewriting, and it also works if you have a simple structure repo
+	-- 				-- You might add more custom handler with reference to LSP protocol spec and vscode-eslint code
+	-- 			},
+	--
+	-- 			-- The settings send to ESLint LSP. See below part for details.
+	-- 			settings = {
+	-- 				-- validate = "on",
+	-- 				-- -- packageManager = 'pnpm',
+	-- 				-- useESLintClass = true,
+	-- 				-- useFlatConfig = function(bufnr)
+	-- 				-- 	return M.use_flat_config(bufnr)
+	-- 				-- end,
+	-- 				-- experimental = { useFlatConfig = false },
+	-- 				-- codeAction = {
+	-- 				-- 	disableRuleComment = {
+	-- 				-- 		enable = true,
+	-- 				-- 		location = "separateLine",
+	-- 				-- 	},
+	-- 				-- 	showDocumentation = {
+	-- 				-- 		enable = true,
+	-- 				-- 	},
+	-- 				-- },
+	-- 				-- codeActionOnSave = { mode = "all" },
+	-- 				-- format = false,
+	-- 				-- quiet = false,
+	-- 				-- onIgnoredFiles = "off",
+	-- 				-- options = {},
+	-- 				rulesCustomizations = {
+	--                        { rule = "no-debugger"},
+	--                        { rule = "no-console"},
+	--                        -- { rule = "no-unused-vars", severity = "warn", fixable = true },
+	--                        -- { rule = "no-undef", severity = "warn", fixable = true },
+	--                        -- { rule = "no-extra-semi", severity = "warn", fixable = true },
+	--                        -- { rule = "quotes", severity = "warn", fixable = true },
+	--                        -- { rule = "semi", severity = "warn", fixable = true },
+	--                        -- { rule = "indent", severity = "warn", fixable = true },
+	--                        -- { rule = "space-in-parens", severity = "warn", fixable = true },
+	--                        -- { rule = "space-infix-ops", severity = "warn", fixable = true },
+	--                        -- { rule = "space-unary-ops", severity = "warn", fixable = true },
+	--                        -- { rule = "space-before-function-paren", severity = "warn", fixable = true },
+	-- 					-- { rule = "style/*", severity = "off", fixable = true },
+	-- 					-- { rule = "format/*", severity = "off", fixable = true },
+	-- 					-- { rule = "*-indent", severity = "off", fixable = true },
+	-- 					-- { rule = "*-spacing", severity = "off", fixable = true },
+	-- 					-- { rule = "*-spaces", severity = "off", fixable = true },
+	-- 					-- { rule = "*-order", severity = "off", fixable = true },
+	-- 					-- { rule = "*-dangle", severity = "off", fixable = true },
+	-- 					-- { rule = "*-nehline", severity = "off", fixable = true },
+	-- 					-- { rule = "*quotes", severity = "off", fixable = true },
+	-- 					-- { rule = "*semi", severity = "off", fixable = true },
+	-- 					--                             "react-hooks/exhaustive-deps": "off",
+	-- 					--                             -- "no-console": "off",
+	-- 					--                             -- "no-debugger": "off",
+	-- 					--                         },"
+	-- 					--
+	-- 					-- -- 			"no-unused-vars": "warn",
+	-- 					--                         -- "no-debugger":"off"
+	-- 					--                              -- "react-hooks/exhaustive-deps": "off",
+	-- 					--                              -- "no-console": "off",
+	-- 					--                              -- "no-debugger":"off",
+	-- 				},
+	-- 				-- run = "onType",
+	-- 				-- problems = { shortenToSingleLine = false },
+	-- 				-- nodePath = function(bufnr)
+	-- 				-- 	return M.resolve_node_path()
+	-- 				-- end,
+	-- 				-- workingDirectory = { mode = "location" },
+	-- 				-- workspaceFolder = function(bufnr)
+	-- 				-- 	local git_dir = M.resolve_git_dir(bufnr)
+	-- 				-- 	return {
+	-- 				-- 		uri = vim.uri_from_fname(git_dir),
+	-- 				-- 		name = vim.fn.fnamemodify(git_dir, ":t"),
+	-- 				-- 	}
+	-- 				-- end,
+	-- 			},
+	-- 		})
+	-- 	end,
+	-- },
 	-- {
 	--     "Asheq/close-buffers.vim",
 	-- },
@@ -265,53 +400,107 @@ return {
 			})
 		end,
 	},
+	-- {
+	-- 	"HiPhish/rainbow-delimiters.nvim",
+	-- 	config = function()
+	-- 		local rainbow_delimiters = require("rainbow-delimiters")
+	--
+	-- 		require("rainbow-delimiters.setup").setup({
+	-- 			strategy = {
+	-- 				[""] = rainbow_delimiters.strategy["global"],
+	-- 				vim = rainbow_delimiters.strategy["local"],
+	-- 			},
+	-- 			query = {
+	-- 				[""] = "rainbow-delimiters",
+	-- 				lua = "rainbow-blocks",
+	-- 			},
+	-- 			priority = {
+	-- 				[""] = 110,
+	-- 				lua = 210,
+	-- 			},
+	-- 			highlight = {
+	-- 				"RainbowDelimiterRed",
+	-- 				"RainbowDelimiterYellow",
+	-- 				"RainbowDelimiterBlue",
+	-- 				"RainbowDelimiterOrange",
+	-- 				"RainbowDelimiterGreen",
+	-- 				"RainbowDelimiterViolet",
+	-- 				"RainbowDelimiterCyan",
+	-- 			},
+	-- 		})
+	-- 	end,
+	-- },
 	{
-		"HiPhish/rainbow-delimiters.nvim",
-		config = function()
-			local rainbow_delimiters = require("rainbow-delimiters")
-
-			require("rainbow-delimiters.setup").setup({
-				strategy = {
-					[""] = rainbow_delimiters.strategy["global"],
-					vim = rainbow_delimiters.strategy["local"],
-				},
-				query = {
-					[""] = "rainbow-delimiters",
-					lua = "rainbow-blocks",
-				},
-				priority = {
-					[""] = 110,
-					lua = 210,
-				},
-				highlight = {
-					"RainbowDelimiterRed",
-					"RainbowDelimiterYellow",
-					"RainbowDelimiterBlue",
-					"RainbowDelimiterOrange",
-					"RainbowDelimiterGreen",
-					"RainbowDelimiterViolet",
-					"RainbowDelimiterCyan",
-				},
-			})
-		end,
+		"folke/ts-comments.nvim",
+		opts = {},
+		event = "VeryLazy",
+		enabled = vim.fn.has("nvim-0.10.0") == 1,
 	},
 	{
-		-- pretty good:
-		-- 'justinmk/vim-sneak',
-		-- this port seems like it does more:
-		"ggandor/leap.nvim",
-		config = function()
-			-- require('leap').create_default_mappings("true")
-			-- require('leap').add_repeat_mappings(';', ',', {
-			--     -- False by default. If set to true, the keys will work like the
-			--     -- native semicolon/comma, i.e., forward/backward is understood in
-			--     -- relation to the last motion.
-			--     relative_directions = true,
-			--     -- By default, all modes are included.
-			--     modes = { 'n', 'x', 'o' },
-			-- })
-		end,
+		"folke/flash.nvim",
+		event = "VeryLazy",
+		---@type Flash.Config
+		opts = {},
+		keys = {
+			{
+				"s",
+				mode = { "n", "x", "o" },
+				function()
+					require("flash").jump()
+				end,
+				desc = "Flash",
+			},
+			{
+				"S",
+				mode = { "n", "x", "o" },
+				function()
+					require("flash").treesitter()
+				end,
+				desc = "Flash Treesitter",
+			},
+			{
+				"r",
+				mode = "o",
+				function()
+					require("flash").remote()
+				end,
+				desc = "Remote Flash",
+			},
+			{
+				"R",
+				mode = { "o", "x" },
+				function()
+					require("flash").treesitter_search()
+				end,
+				desc = "Treesitter Search",
+			},
+			{
+				"<c-s>",
+				mode = { "c" },
+				function()
+					require("flash").toggle()
+				end,
+				desc = "Toggle Flash Search",
+			},
+		},
 	},
+	-- {
+	-- 	-- pretty good:
+	-- 	-- 'justinmk/vim-sneak',
+	-- 	-- this port seems like it does more:
+	-- 	"ggandor/leap.nvim",
+	-- 	config = function()
+	-- 		-- require('leap').create_default_mappings("true")
+	-- 		-- require('leap').add_repeat_mappings(';', ',', {
+	-- 		--     -- False by default. If set to true, the keys will work like the
+	-- 		--     -- native semicolon/comma, i.e., forward/backward is understood in
+	-- 		--     -- relation to the last motion.
+	-- 		--     relative_directions = true,
+	-- 		--     -- By default, all modes are included.
+	-- 		--     modes = { 'n', 'x', 'o' },
+	-- 		-- })
+	-- 	end,
+	-- },
 	{
 		"szw/vim-maximizer",
 	},
