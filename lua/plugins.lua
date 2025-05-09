@@ -7,6 +7,12 @@ return {
 			require("copilot").setup({
 				suggestion = { enabled = false },
 				panel = { enabled = false },
+				filetypes = {
+					["*"] = true,
+					["markdown"] = false,
+					["toggledo"] = false,
+					["*md"] = false,
+				},
 			})
 		end,
 	},
@@ -20,34 +26,43 @@ return {
 		"github/copilot.vim",
 	},
 	{
-		"ntpeters/vim-better-whitespace",
+		"nfrid/markdown-togglecheck",
+		dependencies = { "nfrid/treesitter-utils" },
+		ft = { "markdown" },
 	},
+	-- {
+	-- 	"ntpeters/vim-better-whitespace",
+	-- },
+	-- {
+	-- 	"mistweaverco/kulala.nvim",
+	-- 	keys = {
+	-- 		{ "<leader>gs", desc = "Send request" },
+	-- 		{ "<leader>gl", desc = "Send all requests" },
+	-- 		{ "<leader>gb", desc = "Open scratchpad" },
+	-- 	},
+	-- 	ft = { "http", "rest" },
+	-- 	opts = {
+	-- 		-- your configuration comes here
+	-- 		global_keymaps = false,
+	-- 	},
+	-- },
 	{
-		"mistweaverco/kulala.nvim",
-		keys = {
-			{ "<leader>gs", desc = "Send request" },
-			{ "<leader>gl", desc = "Send all requests" },
-			{ "<leader>gb", desc = "Open scratchpad" },
-		},
-		ft = { "http", "rest" },
-		opts = {
-			-- your configuration comes here
-			global_keymaps = false,
-		},
+		"mhinz/vim-signify",
 	},
 	{
 		"vim-perl/vim-perl",
 	},
+	{ "EdenEast/nightfox.nvim" },
 	-- { "junegunn/fzf", build = "./install --bin" },
-	{
-		"ibhagwan/fzf-lua",
-		-- optional for icon support
-		dependencies = { "nvim-tree/nvim-web-devicons" },
-		config = function()
-			-- calling `setup` is optional for customization
-			require("fzf-lua").setup({})
-		end,
-	},
+	-- {
+	-- 	"ibhagwan/fzf-lua",
+	-- 	-- optional for icon support
+	-- 	dependencies = { "nvim-tree/nvim-web-devicons" },
+	-- 	config = function()
+	-- 		-- calling `setup` is optional for customization
+	-- 		require("fzf-lua").setup({})
+	-- 	end,
+	-- },
 	{
 		"davidmh/mdx.nvim",
 		config = true,
@@ -115,12 +130,12 @@ return {
 		},
 		config = function()
 			require("conform").setup({
-				-- format_on_save = {
-				--     -- These options will be passed to conform.format()
-				--     timeout_ms = 500,
-				--     -- lsp_fallback = true,
-				--     lsp_format = "fallback"
-				-- },
+				format_on_save = {
+					-- -- These options will be passed to conform.format()
+					-- timeout_ms = 500,
+					-- -- lsp_fallback = true,
+					-- lsp_format = "fallback"
+				},
 			})
 		end,
 	},
@@ -313,28 +328,28 @@ return {
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		config = true, -- or `opts = {}`
 	},
-	{
-		"lalitmee/browse.nvim",
-		dependencies = { "nvim-telescope/telescope.nvim" },
-		config = function()
-			require("browse").setup({
-				-- default values for the setup
-				require("browse").setup({
-					-- search provider you want to use
-					provider = "google", -- duckduckgo, bing
-
-					-- either pass it here or just pass the table to the functions
-					-- see below for more
-					bookmarks = {},
-					icons = {
-						bookmark_alias = "", -- if you have nerd fonts, you can set this to ""
-						bookmarks_prompt = "󰂺 ", -- if you have nerd fonts, you can set this to "󰂺 "
-						grouped_bookmarks = "", -- if you have nerd fonts, you can set this to 
-					},
-				}),
-			})
-		end,
-	},
+	-- {
+	-- 	"lalitmee/browse.nvim",
+	-- 	-- dependencies = { "nvim-telescope/telescope.nvim" },
+	-- 	config = function()
+	-- 		require("browse").setup({
+	-- 			-- default values for the setup
+	-- 			require("browse").setup({
+	-- 				-- search provider you want to use
+	-- 				provider = "google", -- duckduckgo, bing
+	--
+	-- 				-- either pass it here or just pass the table to the functions
+	-- 				-- see below for more
+	-- 				bookmarks = {},
+	-- 				icons = {
+	-- 					bookmark_alias = "", -- if you have nerd fonts, you can set this to ""
+	-- 					bookmarks_prompt = "󰂺 ", -- if you have nerd fonts, you can set this to "󰂺 "
+	-- 					grouped_bookmarks = "", -- if you have nerd fonts, you can set this to 
+	-- 				},
+	-- 			}),
+	-- 		})
+	-- 	end,
+	-- },
 	{
 		-- couldn't get this to work :-/ meh
 		-- have to install this command line tool for this to do anything I think?
@@ -343,6 +358,9 @@ return {
 		config = function()
 			-- require('mdn.vim').setup()
 		end,
+	},
+	{
+		"neovim/node-host",
 	},
 	{
 		"gsuuon/note.nvim",
@@ -430,6 +448,7 @@ return {
 	-- 		})
 	-- 	end,
 	-- },
+	-- { "wfxr/minimap.vim" },
 	{
 		"folke/ts-comments.nvim",
 		opts = {},
@@ -440,7 +459,13 @@ return {
 		"folke/flash.nvim",
 		event = "VeryLazy",
 		---@type Flash.Config
-		opts = {},
+		opts = {
+			modes = {
+				char = {
+					keys = { "f", "F", "t", "T" }, -- excluding ; and , symbols
+				},
+			},
+		},
 		keys = {
 			{
 				"s",
@@ -564,9 +589,10 @@ return {
 	--         })
 	--     end
 	-- },
-	{
-		"dkarter/bullets.vim",
-	},
+	-- {
+	-- 	"dkarter/bullets.vim",
+	-- },
+	{ "bullets-vim/bullets.vim" },
 	-- {
 	--
 	-- },

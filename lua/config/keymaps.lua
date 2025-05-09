@@ -13,6 +13,7 @@ vim.api.nvim_set_keymap('n', 's',
 --Remap space as leader key
 keymap("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
+vim.g.maplocalleader = ";"
 
 -- Modes
 --   normal_mode = "n",
@@ -51,22 +52,32 @@ keymap("n", '<leader>st', "<cmd>lua require('stay-centered').toggle", opts)
 --keymap.set({ 'n', 'v' }, '<leader>st', require('stay-centered').toggle, { desc = 'Toggle stay-centered.nvim' })
 
 -- Telescope
-keymap("n", "<leader>ff", ":Telescope find_files<CR>", opts)
-keymap("n", "<leader>fd", ":Telescope file_browser<CR>", opts)
+-- keymap("n", "<leader>ff", ":Telescope find_files<CR>", opts)
+keymap("n", "<leader>ff", ":FzfLua files<CR>", opts)
+-- keymap("n", "<leader>fd", ":Telescope file_browser<CR>", opts)
+-- keymap("n", "<leader>fd", ":FzfLua files<CR>", opts)
 -- Could've configured this in an easier way: https://github.com/nvim-telescope/telescope.nvim?tab=readme-ov-file#vim-commands
 keymap("n", "<leader>fhf", "<cmd>lua require('telescope.builtin').find_files { hidden = true, no_ignore = true }<CR>",
     opts)
 -- is it not a bulitin? cuz this doesn't work
 -- keymap("n", "<leader>fhd", "<cmd>lua require('telescope.builtin').file_browser { hidden = true, no_ignore = true }<CR>", opts)
-keymap("n", "<leader>ft", ":Telescope live_grep<CR>", opts)
-keymap("n", "<leader>FB", "<cmd>lua require('telescope.builtin').live_grep { grep_open_files = true }<CR>", opts)
-keymap("n", "<leader>fht", ":Telescope live_grep_args<CR>", opts)
+-- keymap("n", "<leader>ft", ":Telescope live_grep<CR>", opts)
+keymap("n", "<leader>ft", ":FzfLua grep_visual<CR>", opts)
+-- keymap("n", "<leader>FB", "<cmd>lua require('telescope.builtin').live_grep { grep_open_files = true }<CR>", opts)
+keymap("n", "<leader>FB", ":FzfLua grep_curbuf<CR>", opts)
+-- keymap("n", "<leader>fht", ":Telescope live_grep_args<CR>", opts)
 -- keymap("n", "<leader>fht", "<cmd>lua require('telescope.builtin').live_grep { hidden = true, no_ignore = true }<CR>", opts)
-keymap("n", "<leader>fc", ":Telescope current_buffer_fuzzy_find<CR>", opts)
-keymap("n", "<leader>fp", ":Telescope projects<CR>", opts)
-keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)
-keymap("n", "<leader>fo", ":Telescope oldfiles<CR>", opts)
-keymap("n", "<leader>cc", ":Telescope keymaps<CR>", opts)
+-- keymap("n", "<leader>fc", ":Telescope current_buffer_fuzzy_find<CR>", opts)
+-- keymap("n", "<leader>fc", ":FzfLua current_buffer_fuzzy_find<CR>", opts)
+keymap("n", "<leader>FB", ":FzfLua grep_curbuf<CR>", opts)
+-- keymap("n", "<leader>fp", ":Telescope projects<CR>", opts)
+keymap("n", "<leader>fp", ":FzfLua zoxide<CR>", opts)
+-- keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)
+keymap("n", "<leader>fb", ":FzfLua buffers<CR>", opts)
+-- keymap("n", "<leader>fo", ":Telescope oldfiles<CR>", opts)
+keymap("n", "<leader>fo", ":FzfLua oldfiles<CR>", opts)
+-- keymap("n", "<leader>cc", ":Telescope keymaps<CR>", opts)
+keymap("n", "<leader>cc", ":FzfLua keymaps<CR>", opts)
 -- search the plugins I have
 keymap("n", "<leader>fl", ":Telescope lazy<CR>", opts)
 keymap("n", "<leader>fn", ":Telescope node_modules list<CR>", opts)
@@ -127,7 +138,8 @@ keymap("v", ">", ">gv", opts)
 
 -- To search git commits! But ... I think there's another option called
 -- search_log_content_files, not sure what the difference is yet
-keymap("n", "<leader>tc", ":Telescope advanced_git_search search_log_content_file<cr>", opts)
+-- keymap("n", "<leader>tc", ":Telescope advanced_git_search search_log_content_file<cr>", opts)
+keymap("n", "<leader>tc", ":FzfLua git_bcommits<cr>", opts)
 keymap("n", "<leader>tl", "V:AdvancedGitSearch diff_commit_line<CR>", opts)
 -- keymap("n", "<leader>lv", ":Telescope advanced_git_search diff_commit_line <cr>", opts)
 -- keymap("v", "<leader>tl", ':AdvancedGitSearch diff_commit_line<CR>', opts)
@@ -244,10 +256,23 @@ keymap("n", "<leader>GB", "<cmd>:GitBlameToggle<cr>", opts)
 --     end
 -- end)
 -- keymap to open Todotelescope
-keymap("n", "<leader>tt", "<cmd>TodoTelescope<CR>", opts)
+-- keymap("n", "<leader>tt", "<cmd>TodoTelescope<CR>", opts)
+keymap("n", "<leader>tt", "<cmd>TodoQuickFix<CR>", opts)
 
 -- -- keymap to toggle CopilotChatToggle
 -- keymap("n", "<leader>co", "<cmd>CopilotChatToggle<CR>", opts)
+-- disable by default
+vim.g.copilot_filetypes = {
+    -- ["*"] = false,
+    ["*"] = true,
+    ["markdown"] = false,
+    ["toggledo"] = false,
+    ["*md"] = false,
+}
+-- explicitly request for copilot suggestions on Ctrl-Enter
+vim.keymap.set('i', '<C-cr>', '<Plug>(copilot-suggest)')
+
+
 
 -- this is for oil.nvim
 keymap("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })

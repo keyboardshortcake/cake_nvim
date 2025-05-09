@@ -35,6 +35,7 @@ require("lazy").setup("plugins", {
 })
 
 -- Set colorscheme after options
+vim.cmd('colorscheme dayfox')
 -- vim.cmd('colorscheme habamax')
 -- Place the ToggleDo function after lazy-loaded plugins are set up
 vim.api.nvim_set_keymap('n', '<leader>td', ':lua ToggleDo()<CR>', { noremap = true, silent = true })

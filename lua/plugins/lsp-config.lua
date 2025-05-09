@@ -152,6 +152,33 @@ return {
 			handlers["textDocument/signatureHelp"] = lsp.with(handlers.signature_help, pop_opts)
 
 			lspconfig.pyright.setup({})
+			-- lspconfig.sumneko_lua.setup({
+			-- 	on_attach = on_attach,
+			-- 	capabilities = capabilities,
+			-- 	settings = {
+			-- 		Lua = {
+			-- 			runtime = {
+			-- 				-- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+			-- 				version = "LuaJIT",
+			-- 				path = vim.split(package.path, ";"),
+			-- 			},
+			-- 			diagnostics = {
+			-- 				-- Get the language server to recognize the `vim` global
+			-- 				globals = { "vim" },
+			-- 			},
+			-- 			workspace = {
+   --                          library = vim.api.nvim_get_runtime_file('', true),
+			-- 				-- Make the server aware of Neovim runtime files and plugins
+			-- 				-- library = { vim.env.VIMRUNTIME },
+			-- 				-- checkThirdParty = false,
+			-- 			},
+			-- 			telemetry = {
+			-- 				enable = false,
+			-- 			},
+			-- 			["completion.enable"] = false,
+			-- 		},
+			-- 	},
+			-- })
 			lspconfig.lua_ls.setup({
 				on_attach = on_attach,
 				capabilities = capabilities,
@@ -227,10 +254,10 @@ return {
 				capabilities = capabilities,
 				on_attach = on_attach,
 			})
-			lspconfig.biome.setup({
-				capabilities = capabilities,
-				on_attach = on_attach,
-			})
+			-- lspconfig.biome.setup({
+			-- 	capabilities = capabilities,
+			-- 	on_attach = on_attach,
+			-- })
 			lspconfig.vtsls.setup({
 				capabilities = capabilities,
 				on_attach = on_attach,
@@ -238,13 +265,13 @@ return {
 			lspconfig.eslint.setup({
 				filetypes = { "*" },
 				capabilities = capabilities,
-				-- on_attach = on_attach,
-				on_attach = function(client, bufnr)
-					vim.api.nvim_create_autocmd("BufWritePre", {
-						buffer = bufnr,
-						command = "EslintFixAll",
-					})
-				end,
+				on_attach = on_attach,
+				-- on_attach = function(client, bufnr)
+				-- 	vim.api.nvim_create_autocmd("BufWritePre", {
+				-- 		buffer = bufnr,
+				-- 		command = "EslintFixAll",
+				-- 	})
+				-- end,
 				-- default_config = {
 				root_dir = lspconfig.util.root_pattern("eslint.config.js", ".eslintrc.json"),
 				-- root_dir = lspconfig.util.root_pattern("eslint.config.js"),
@@ -308,105 +335,105 @@ return {
 			-- local function filterReactDTS(value)
 			--     return string.match(value.filename, '%.d.ts') == nil
 			-- end
-
+			-- lspconfig.vtsls.setup({
 			-- lspconfig.tsserver.setup {
-			lspconfig.ts_ls.setup({
-				capabilities = capabilities,
-				on_attach = on_attach,
-				filetypes = { "typescript", "typescriptreact", "typescript.tsx", "ts", "typescript.ts", "component.ts" },
-				-- handlers = {
-				--     ['textDocument/definition'] = function(err, result, method, ...)
-				--         if vim.tbl_islist(result) and #result > 0 then
-				--             local filtered_result = filter(result, filterReactDTS)
-				--             return vim.lsp.handlers['textDocument/definition'](err, filtered_result, method, ...)
-				--         end
-				--
-				--         vim.lsp.handlers['textDocument/definition'](err, result, method, ...)
-				--     end
-				-- },
-				settings = {
-					checkJs = true,
-					allowJs = true,
-					diagnostics = true,
-					preferences = {
-						allowIncompleteCompletions = false,
-						allowRenameOfImportPath = false,
-						quotePreference = "auto",
-						includeInlayParameterNameHints = true,
-						includeInlayPropertyDeclarationTypeHints = true,
-						displayPartsForJSDoc = true,
-						generateReturnInDocTemplate = true,
-						includeInlayVariableTypeHints = true,
-						includeCompletionsForImportStatements = true,
-					},
-					typescript = {
-						hint = {
-							enable = true,
-						},
-						inlayHints = {
-							includeInlayParameterNameHints = "all",
-							includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-							includeInlayFunctionParameterTypeHints = true,
-							includeInlayVariableTypeHints = true,
-							includeInlayVariableTypeHintsWhenTypeMatchesName = false,
-							includeInlayPropertyDeclarationTypeHints = true,
-							includeInlayFunctionLikeReturnTypeHints = true,
-							includeInlayEnumMemberValueHints = true,
-						},
-						format = {
-							allowIncompleteCompletions = false,
-							allowRenameOfImportPath = false,
-							insertSpaceAfterCommaDelimiter = true,
-							semicolons = "insert",
-							trimTrailingWhitespace = true,
-							-- newLineCharacter = 'swag';
-						},
-					},
-					javascript = {
-						hint = {
-							enable = true,
-						},
-						inlayHints = {
-							includeInlayParameterNameHints = "all",
-							includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-							includeInlayFunctionParameterTypeHints = true,
-							includeInlayVariableTypeHints = true,
-							includeInlayVariableTypeHintsWhenTypeMatchesName = false,
-							includeInlayPropertyDeclarationTypeHints = true,
-							includeInlayFunctionLikeReturnTypeHints = true,
-							includeInlayEnumMemberValueHints = true,
-						},
-						format = {
-							allowIncompleteCompletions = false,
-							allowRenameOfImportPath = false,
-							insertSpaceAfterCommaDelimiter = true,
-							semicolons = "insert",
-							trimTrailingWhitespace = true,
-							-- newLineCharacter = 'swag';
-						},
-					},
-					completions = {
-						completeFunctionCalls = true,
-					},
-				},
-				-- handlers = {
-				--     ['textDocument/definition'] = function(err, result, method, ...)
-				--         local function dump(o)
-				--             if type(o) == 'table' then
-				--                 local s = '{ '
-				--                 for k, v in pairs(o) do
-				--                     if type(k) ~= 'number' then k = '"' .. k .. '"' end
-				--                     s = s .. '[' .. k .. '] = ' .. dump(v) .. ','
-				--                 end
-				--                 return s .. '} '
-				--             else
-				--                 return tostring(o)
-				--             end
-				--         end
-				--         vim.notify(dump(result))
-				--     end
-				-- },
-			})
+			-- lspconfig.ts_ls.setup({
+			-- 	capabilities = capabilities,
+			-- 	on_attach = on_attach,
+			-- 	filetypes = { "typescript", "typescriptreact", "typescript.tsx", "ts", "typescript.ts", "component.ts" },
+			-- 	-- handlers = {
+			-- 	--     ['textDocument/definition'] = function(err, result, method, ...)
+			-- 	--         if vim.tbl_islist(result) and #result > 0 then
+			-- 	--             local filtered_result = filter(result, filterReactDTS)
+			-- 	--             return vim.lsp.handlers['textDocument/definition'](err, filtered_result, method, ...)
+			-- 	--         end
+			-- 	--
+			-- 	--         vim.lsp.handlers['textDocument/definition'](err, result, method, ...)
+			-- 	--     end
+			-- 	-- },
+			-- 	settings = {
+			-- 		checkJs = true,
+			-- 		allowJs = true,
+			-- 		diagnostics = true,
+			-- 		preferences = {
+			-- 			allowIncompleteCompletions = false,
+			-- 			allowRenameOfImportPath = false,
+			-- 			quotePreference = "auto",
+			-- 			includeInlayParameterNameHints = true,
+			-- 			includeInlayPropertyDeclarationTypeHints = true,
+			-- 			displayPartsForJSDoc = true,
+			-- 			generateReturnInDocTemplate = true,
+			-- 			includeInlayVariableTypeHints = true,
+			-- 			includeCompletionsForImportStatements = true,
+			-- 		},
+			-- 		typescript = {
+			-- 			hint = {
+			-- 				enable = true,
+			-- 			},
+			-- 			inlayHints = {
+			-- 				includeInlayParameterNameHints = "all",
+			-- 				includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+			-- 				includeInlayFunctionParameterTypeHints = true,
+			-- 				includeInlayVariableTypeHints = true,
+			-- 				includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+			-- 				includeInlayPropertyDeclarationTypeHints = true,
+			-- 				includeInlayFunctionLikeReturnTypeHints = true,
+			-- 				includeInlayEnumMemberValueHints = true,
+			-- 			},
+			-- 			format = {
+			-- 				allowIncompleteCompletions = false,
+			-- 				allowRenameOfImportPath = false,
+			-- 				insertSpaceAfterCommaDelimiter = true,
+			-- 				semicolons = "insert",
+			-- 				trimTrailingWhitespace = true,
+			-- 				-- newLineCharacter = 'swag';
+			-- 			},
+			-- 		},
+			-- 		javascript = {
+			-- 			hint = {
+			-- 				enable = true,
+			-- 			},
+			-- 			inlayHints = {
+			-- 				includeInlayParameterNameHints = "all",
+			-- 				includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+			-- 				includeInlayFunctionParameterTypeHints = true,
+			-- 				includeInlayVariableTypeHints = true,
+			-- 				includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+			-- 				includeInlayPropertyDeclarationTypeHints = true,
+			-- 				includeInlayFunctionLikeReturnTypeHints = true,
+			-- 				includeInlayEnumMemberValueHints = true,
+			-- 			},
+			-- 			format = {
+			-- 				allowIncompleteCompletions = false,
+			-- 				allowRenameOfImportPath = false,
+			-- 				insertSpaceAfterCommaDelimiter = true,
+			-- 				semicolons = "insert",
+			-- 				trimTrailingWhitespace = true,
+			-- 				-- newLineCharacter = 'swag';
+			-- 			},
+			-- 		},
+			-- 		completions = {
+			-- 			completeFunctionCalls = true,
+			-- 		},
+			-- 	},
+			-- 	-- handlers = {
+			-- 	--     ['textDocument/definition'] = function(err, result, method, ...)
+			-- 	--         local function dump(o)
+			-- 	--             if type(o) == 'table' then
+			-- 	--                 local s = '{ '
+			-- 	--                 for k, v in pairs(o) do
+			-- 	--                     if type(k) ~= 'number' then k = '"' .. k .. '"' end
+			-- 	--                     s = s .. '[' .. k .. '] = ' .. dump(v) .. ','
+			-- 	--                 end
+			-- 	--                 return s .. '} '
+			-- 	--             else
+			-- 	--                 return tostring(o)
+			-- 	--             end
+			-- 	--         end
+			-- 	--         vim.notify(dump(result))
+			-- 	--     end
+			-- 	-- },
+			-- })
 			-- lspconfig.rust_analyzer.setup {
 			--   -- Server-specific settings. See `:help lspconfig-setup`
 			--   settings = {

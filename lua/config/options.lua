@@ -60,6 +60,16 @@ vim.o.foldlevelstart = 99
 vim.o.foldenable = true
 vim.g.editorconfig = false -- Having some random editorconfig dictacting how my file gets formatted is pretty annoying. Turning it off.
 
+-- copilot stuff
+
+-- -- disable by default
+-- vim.g.copilot_filetypes = {
+--     ["*"] = false,
+-- }
+-- -- explicitly request for copilot suggestions on Ctrl-Enter
+-- vim.keymap.set('i', '<C-CR>', '<Plug>(copilot-suggest)')
+
+
 -- /end ufo stuff
 -- vim.lsp.inlay_hint.enable(0, true)
 
@@ -98,6 +108,36 @@ vim.g.copilot_filetypes = {
     -- xml = false,
 }
 
+-- let g:better_whitespace_filetypes_blacklist = ['diff', 'git', 'gitcommit', 'unite', 'qf', 'help', 'markdown', 'fugitive', 'snacks', 'vimwiki', 'snacks_dashboard']
+-- vim.g.better_whitespace_filetypes_blacklist = ['diff', 'git', 'gitcommit', 'unite', 'qf', 'help', 'markdown', 'fugitive', 'snacks', 'vimwiki', 'snacks_dashboard']
+
+vim.g.better_whitespace_filetypes_blacklist = {
+    'snacks',
+    'diff',
+    'git',
+    'gitcommit',
+    'unite',
+    'qf',
+    'help',
+    'markdown',
+    'fugitive',
+    'snacks',
+    'vimwiki',
+    'snacks_dashboard',
+}
+
+-- vim.g.better_whitespace_filetypes_blacklist = {
+--     "terminal",
+--     "nofile",
+--     "markdown",
+--     "help",
+--     "startify",
+--     "dashboard",
+--     "packer",
+--     "neogitstatus",
+--     "NvimTree",
+--     "Trouble",
+-- }
 
 -- vim.g.copilot_filetypes = {
 --     gitcommit = 1,
@@ -121,14 +161,28 @@ vim.g.copilot_filetypes = {
 --     \ 'scratch'
 --     \]
 
+-- vim.api.nvim_set_var('better_whitespace_filetypes_blacklist', {
+--     'diff',
+--     'git',
+--     'gitcommit',
+--     'unite',
+--     'qf',
+--     'help',
+--     'markdown',
+--     'fugitive',
+--     'snacks',
+--     'vimwiki',
+--     'snacks_dashboard'
+-- })
+
 vim.api.nvim_set_var('bullets_enabled_file_types', {
     'markdown',
     'text',
     'gitcommit',
     'scratch',
-    -- 'toggledo',
+    'toggledo',
 })
---
+
 vim.api.nvim_set_var('bullets_custom_mappings', {
     { "imap",     "<cr>",      "<Plug>(bullets-newline)" },
     { "inoremap", "<C-cr>",    "<cr>" },
