@@ -1,30 +1,52 @@
 return {
-	{
-		"zbirenbaum/copilot.lua",
-		cmd = "Copilot",
-		event = "InsertEnter",
-		config = function()
-			require("copilot").setup({
-				suggestion = { enabled = false },
-				panel = { enabled = false },
-				filetypes = {
-					["*"] = true,
-					["markdown"] = false,
-					["toggledo"] = false,
-					["*md"] = false,
-				},
-			})
-		end,
-	},
-	{
-		"zbirenbaum/copilot-cmp",
-		config = function()
-			require("copilot_cmp").setup()
-		end,
-	},
-	{
-		"github/copilot.vim",
-	},
+	-- {
+	-- 	"zbirenbaum/copilot.lua",
+	-- 	cmd = "Copilot",
+	-- 	event = "InsertEnter",
+	-- 	config = function()
+	-- 		require("copilot").setup({
+	-- 			suggestion = {
+	-- 				enabled = true,
+	-- 				auto_trigger = false,
+	-- 				auto_refresh = true,
+	-- 				hide_during_completion = true,
+	-- 				debounce = 75,
+	-- 				trigger_on_accept = true,
+	-- 				keymap = {
+	-- 					accept = "<M-l>",
+	-- 					accept_word = false,
+	-- 					-- accept_line = false,
+	-- 					accept_line = "<localleader>l",
+	-- 					-- next = "<M-]>",
+	-- 					-- next = "<C-]>",
+	-- 					next = "<localleader>n",
+	-- 					-- prev = "<M-[>",
+	-- 					prev = "<localleader>p",
+	-- 					-- dismiss = "<C-]>",
+	-- 					dismiss = "<localleader>d",
+	-- 				},
+	-- 			},
+	-- 			-- suggestion = { enabled = false },
+	-- 			panel = { enabled = false },
+	-- 			filetypes = {
+	-- 				toggledo = false,
+	-- 				["*"] = true,
+	-- 				["markdown"] = false,
+	-- 				-- ["toggledo"] = false,
+	-- 				["*md"] = false,
+	-- 			},
+	-- 		})
+	-- 	end,
+	-- },
+	-- {
+	-- 	"zbirenbaum/copilot-cmp",
+	-- 	config = function()
+	-- 		require("copilot_cmp").setup()
+	-- 	end,
+	-- },
+	-- {
+	-- 	"github/copilot.vim",
+	-- },
 	{
 		"nfrid/markdown-togglecheck",
 		dependencies = { "nfrid/treesitter-utils" },
@@ -48,6 +70,7 @@ return {
 	-- },
 	{
 		"mhinz/vim-signify",
+		-- config = function()
 	},
 	{
 		"vim-perl/vim-perl",
@@ -206,18 +229,18 @@ return {
 	-- 				-- onIgnoredFiles = "off",
 	-- 				-- options = {},
 	-- 				rulesCustomizations = {
-	--                        { rule = "no-debugger"},
-	--                        { rule = "no-console"},
-	--                        -- { rule = "no-unused-vars", severity = "warn", fixable = true },
-	--                        -- { rule = "no-undef", severity = "warn", fixable = true },
-	--                        -- { rule = "no-extra-semi", severity = "warn", fixable = true },
-	--                        -- { rule = "quotes", severity = "warn", fixable = true },
-	--                        -- { rule = "semi", severity = "warn", fixable = true },
-	--                        -- { rule = "indent", severity = "warn", fixable = true },
-	--                        -- { rule = "space-in-parens", severity = "warn", fixable = true },
-	--                        -- { rule = "space-infix-ops", severity = "warn", fixable = true },
-	--                        -- { rule = "space-unary-ops", severity = "warn", fixable = true },
-	--                        -- { rule = "space-before-function-paren", severity = "warn", fixable = true },
+	-- 					{ rule = "no-debugger" },
+	-- 					{ rule = "no-console" },
+	-- 					-- { rule = "no-unused-vars", severity = "warn", fixable = true },
+	-- 					-- { rule = "no-undef", severity = "warn", fixable = true },
+	-- 					-- { rule = "no-extra-semi", severity = "warn", fixable = true },
+	-- 					-- { rule = "quotes", severity = "warn", fixable = true },
+	-- 					-- { rule = "semi", severity = "warn", fixable = true },
+	-- 					-- { rule = "indent", severity = "warn", fixable = true },
+	-- 					-- { rule = "space-in-parens", severity = "warn", fixable = true },
+	-- 					-- { rule = "space-infix-ops", severity = "warn", fixable = true },
+	-- 					-- { rule = "space-unary-ops", severity = "warn", fixable = true },
+	-- 					-- { rule = "space-before-function-paren", severity = "warn", fixable = true },
 	-- 					-- { rule = "style/*", severity = "off", fixable = true },
 	-- 					-- { rule = "format/*", severity = "off", fixable = true },
 	-- 					-- { rule = "*-indent", severity = "off", fixable = true },

@@ -62,14 +62,16 @@ keymap("n", "<leader>fhf", "<cmd>lua require('telescope.builtin').find_files { h
 -- is it not a bulitin? cuz this doesn't work
 -- keymap("n", "<leader>fhd", "<cmd>lua require('telescope.builtin').file_browser { hidden = true, no_ignore = true }<CR>", opts)
 -- keymap("n", "<leader>ft", ":Telescope live_grep<CR>", opts)
-keymap("n", "<leader>ft", ":FzfLua grep_visual<CR>", opts)
+-- keymap("n", "<leader>ft", ":FzfLua grep_visual<CR>", opts)
+keymap("n", "<leader>ft", ":FzfLua live_grep<CR>", opts)
 -- keymap("n", "<leader>FB", "<cmd>lua require('telescope.builtin').live_grep { grep_open_files = true }<CR>", opts)
-keymap("n", "<leader>FB", ":FzfLua grep_curbuf<CR>", opts)
+-- keymap("n", "<leader>FB", ":FzfLua grep_curbuf<CR>", opts)
+keymap("n", "<leader>fc", ":FzfLua lgrep_curbuf<CR>", opts)
 -- keymap("n", "<leader>fht", ":Telescope live_grep_args<CR>", opts)
 -- keymap("n", "<leader>fht", "<cmd>lua require('telescope.builtin').live_grep { hidden = true, no_ignore = true }<CR>", opts)
 -- keymap("n", "<leader>fc", ":Telescope current_buffer_fuzzy_find<CR>", opts)
 -- keymap("n", "<leader>fc", ":FzfLua current_buffer_fuzzy_find<CR>", opts)
-keymap("n", "<leader>FB", ":FzfLua grep_curbuf<CR>", opts)
+-- keymap("n", "<leader>FB", ":FzfLua grep_curbuf<CR>", opts)
 -- keymap("n", "<leader>fp", ":Telescope projects<CR>", opts)
 keymap("n", "<leader>fp", ":FzfLua zoxide<CR>", opts)
 -- keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)
@@ -259,18 +261,20 @@ keymap("n", "<leader>GB", "<cmd>:GitBlameToggle<cr>", opts)
 -- keymap("n", "<leader>tt", "<cmd>TodoTelescope<CR>", opts)
 keymap("n", "<leader>tt", "<cmd>TodoQuickFix<CR>", opts)
 
--- -- keymap to toggle CopilotChatToggle
--- keymap("n", "<leader>co", "<cmd>CopilotChatToggle<CR>", opts)
+-- What would you do to improve my layout?
+-- keymap to toggle CopilotChatToggle
+keymap("n", "<leader>co", "<cmd>CopilotChatToggle<CR>", opts)
 -- disable by default
 vim.g.copilot_filetypes = {
-    -- ["*"] = false,
-    ["*"] = true,
-    ["markdown"] = false,
-    ["toggledo"] = false,
-    ["*md"] = false,
+    ["*"] = false,
+    -- ["*"] = true,
+    -- ["markdown"] = false,
+    -- ["toggledo"] = false,
+    -- ["*md"] = false,
+    -- ["copilot-chat"] = false,
 }
 -- explicitly request for copilot suggestions on Ctrl-Enter
-vim.keymap.set('i', '<C-cr>', '<Plug>(copilot-suggest)')
+-- vim.keymap.set('i', '<C-cr>', '<Plug>(copilot-suggest)')
 
 
 
@@ -309,7 +313,6 @@ keymap('i', 'jj', '<Esc>', opts)
 -- Terminal mode mapping to exit insert mode in terminals
 vim.api.nvim_set_keymap('t', '<Esc>', '<C-\\><C-n>', { noremap = true })
 
-
 -- I don't really use this,  Iuse my own thing
 -- keymap("n", "<Space>p", ":ScratchPad<CR>", opts)
 
@@ -337,3 +340,8 @@ vim.api.nvim_set_keymap('t', '<Esc>', '<C-\\><C-n>', { noremap = true })
 
 -- Visual mode mapping to explain selected code
 -- vim.api.nvim_set_keymap('v', '<leader>ce', ":<C-u>lua require('explain_code')(vim.fn.getreg('\"'))<CR>", {noremap = true, silent = true})
+
+-- --- Begin Augment generated code ---
+-- View Neovim log for debugging
+keymap("n", "<leader>vl", "<cmd>lua ViewNvimLog()<CR>", opts)
+-- --- End Augment generated code ---

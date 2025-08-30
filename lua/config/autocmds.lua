@@ -16,6 +16,14 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
     end,
 })
 
+vim.api.nvim_create_autocmd({ "FileType" }, {
+    pattern = { "gitcommit" },
+    callback = function()
+        vim.opt_local.textwidth = 72
+        vim.opt_local.colorcolumn = '+1,51'
+    end,
+})
+
 vim.cmd("autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif")
 
 vim.api.nvim_create_autocmd({ "VimResized" }, {

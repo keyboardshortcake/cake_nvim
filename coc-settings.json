@@ -30,6 +30,8 @@
         ".npmrc",
         ".nvimrc",
         "eslint.config.js",
+        "eslintignore",
+        "Makefile",
         "prettier.config.js",
         ".git",
         ".angular",
