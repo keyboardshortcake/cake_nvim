@@ -265,14 +265,14 @@ keymap("n", "<leader>tt", "<cmd>TodoQuickFix<CR>", opts)
 -- keymap to toggle CopilotChatToggle
 keymap("n", "<leader>co", "<cmd>CopilotChatToggle<CR>", opts)
 -- disable by default
-vim.g.copilot_filetypes = {
-    ["*"] = false,
+-- vim.g.copilot_filetypes = {
+    -- ["*"] = false,
     -- ["*"] = true,
     -- ["markdown"] = false,
     -- ["toggledo"] = false,
     -- ["*md"] = false,
     -- ["copilot-chat"] = false,
-}
+-- }
 -- explicitly request for copilot suggestions on Ctrl-Enter
 -- vim.keymap.set('i', '<C-cr>', '<Plug>(copilot-suggest)')
 

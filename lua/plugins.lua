@@ -112,9 +112,6 @@ return {
 	{
 		"kkoomen/vim-doge",
 	},
-	-- {
-	--     'github/copilot.vim'
-	-- },
 	{
 		"jsongerber/nvim-px-to-rem",
 		config = true,

@@ -167,7 +167,7 @@ return {
 			-- 				globals = { "vim" },
 			-- 			},
 			-- 			workspace = {
-   --                          library = vim.api.nvim_get_runtime_file('', true),
+			--                          library = vim.api.nvim_get_runtime_file('', true),
 			-- 				-- Make the server aware of Neovim runtime files and plugins
 			-- 				-- library = { vim.env.VIMRUNTIME },
 			-- 				-- checkThirdParty = false,
@@ -179,6 +179,21 @@ return {
 			-- 		},
 			-- 	},
 			-- })
+			lspconfig.copilot.setup({
+				-- -- If the copilot LSP binary is globally installed, this may suffice
+				-- cmd = { "copilot-ls" },  -- or the executable name (check your install)
+				-- -- Optionally, configure settings or root detection
+				-- filetypes = { "javascript", "typescript", "lua", "python", "go", "rust", "c", "cpp", "java" },
+				-- -- You can also augment on_attach, capabilities etc.
+				-- on_attach = function(client, bufnr)
+				--   -- You might want to disable some capabilities or enable Sidekick only with this client
+				--   -- For example, mark that this buffer has Copilot LSP attached
+				--   if client.name == "copilot" or client.name:match("copilot") then
+				--     vim.b.sidekick_nes = true
+				--   end
+				-- end,
+				-- -- settings, capabilities, etc. if needed
+			})
 			lspconfig.lua_ls.setup({
 				on_attach = on_attach,
 				capabilities = capabilities,
@@ -273,7 +288,13 @@ return {
 				-- 	})
 				-- end,
 				-- default_config = {
-				root_dir = lspconfig.util.root_pattern("eslint.config.js", ".eslintrc.json", ".eslintrc.js", ".eslintrc", ".eslintrc.cjs"),
+				root_dir = lspconfig.util.root_pattern(
+					"eslint.config.js",
+					".eslintrc.json",
+					".eslintrc.js",
+					".eslintrc",
+					".eslintrc.cjs"
+				),
 				-- root_dir = lspconfig.util.root_pattern("eslint.config.js"),
 				-- }
 				-- settings = {

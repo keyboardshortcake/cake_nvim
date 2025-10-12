@@ -1,7 +1,6 @@
 -- i don't use netrw
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
--- vim.g.augment_workspace_folders = {'~/.config/nvim/'}
 -- configs -- this should be loaded before lazy.nvim
 require("config.options")
 require("config.keymaps")
@@ -14,6 +13,10 @@ require("config.autocmds")
 vim.cmd('syntax enable')
 
 -- autocmd BufNewFile,BufRead *.blurb set filetype=blurb
+-- lsp
+-- vim.lsp.enable('foo')
+vim.lsp.enable('copilot')
+-- vim.lsp.set_log_level("info")
 
 -- plugins
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -76,7 +79,6 @@ function ToggleDo()
     end
 end
 
--- -- --- Begin Augment generated code ---
 -- function ViewNvimLog()
 --     -- Create a new buffer for the log viewer
 --     local buf = vim.api.nvim_create_buf(false, true)
@@ -150,4 +152,3 @@ end
 --         print("Log file not found")
 --     end
 -- end
--- -- --- End Augment generated code ---

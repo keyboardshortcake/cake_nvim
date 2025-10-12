@@ -99,6 +99,9 @@ vim.g.editorconfig = false -- Having some random editorconfig dictacting how my 
 vim.g.bookmark_auto_close = 1
 vim.g.bookmark_display_annotation = 1
 
+-- Native inline completions don't support being shown as regular completions
+-- vim.g.ai_cmp = false
+-- Enable copilot in the following filetypes
 vim.g.copilot_filetypes = {
     gitcommit = true,
     markdown = true,
